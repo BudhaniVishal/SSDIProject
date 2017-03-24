@@ -240,7 +240,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-
-
-/SSDI_SPILELApplication/SSDI_SPILELApplication/obj/[Dd]ebug
-/TestingApp
+/SSDI_SPILELApplication/SSDI_SPILELApplication/Content/images
