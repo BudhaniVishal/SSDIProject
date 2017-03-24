@@ -3,3 +3,6 @@
 ################################################################################
 
 /SSDI_SPILELApplication/SSDI_SPILELApplication/bin
+/SSDI_SPILELApplication/SSDI_SPILELApplication/.vs
+*.config
+

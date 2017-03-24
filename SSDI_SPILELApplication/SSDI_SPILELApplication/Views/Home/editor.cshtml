@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/app/editor.js"></script>
+</head>
+
+<body ng-app="myapp">
+    <div ng-controller="EditorController">
+        <form>
+            <input type="text" id="title" ng-model="mydata.Title" ng-minlength="5" ng-maxlength="12"> Title <br />
+            <button ng-click="mydata.doClick()">Submit Form</button>
+        </form>
+        <div>
+            {{mydata.Title}}
+        </div>
+    </div>
+</body>
+</html>

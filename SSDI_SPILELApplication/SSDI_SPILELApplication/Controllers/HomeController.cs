@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SSDI_SPILELApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,6 +26,22 @@ namespace SSDI_SPILELApplication.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult editor()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+        [HttpPost]
+        public JsonResult AjaxMethod(StoryModel data)
+        {
+            StoryModel story = new StoryModel
+            {
+                Title = data.Title,
+                //DateTime = DateTime.Now.ToString()
+            };
+            return Json(story.Title);
         }
     }
 }
