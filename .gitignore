@@ -6,3 +6,5 @@
 /SSDI_SPILELApplication/SSDI_SPILELApplication/.vs
 *.config
 
+/SSDI_SPILELApplication/DataBaseAccessLayer/bin/Debug
+/SSDI_SPILELApplication/DataBaseAccessLayer/obj/Debug
