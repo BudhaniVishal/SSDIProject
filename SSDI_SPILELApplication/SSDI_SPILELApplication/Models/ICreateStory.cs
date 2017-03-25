@@ -8,6 +8,6 @@ namespace SSDI_SPILELApplication.Models
 {
      interface ICreateStory
     {
-          bool CreateEditorStory(StoryModel story);
+        bool CreateEditorStory(StoryModel story);
     }
 }

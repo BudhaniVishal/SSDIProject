@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DataBaseAccessLayer.ConnectionClass;
+using System.Threading.Tasks;
 
 namespace SSDI_SPILELApplication.Models
 {
@@ -10,20 +11,21 @@ namespace SSDI_SPILELApplication.Models
     {
         public bool CreateEditorStory(StoryModel story)
         {
-            var result = false;
+            //var result = false;
             ConnStoryTable obj = new ConnStoryTable();
             obj.Content = story.Content;
-            obj.from = story.from;
+            obj.From = Convert.ToString(story.from);
             obj.Scenario = story.Scenario;
             obj.StoryID = story.StoryID;
             obj.Title = story.Title;
-            obj.to = story.to;
+            obj.To = Convert.ToString(story.to);
             obj.Type = story.Type;
-            obj.genre = story.genre;
+            obj.Genre = story.genre;
 
-            result=DataBaseAccessLayer.DatabaseAccess.CreateStory(obj);
+            var test = DataBaseAccessLayer.DatabaseAccess.CreateStory(obj);
 
-            return result;
+
+            return true;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace SSDI_SPILELApplication.Controllers
         {
             var result = true;
             CreateStory story = new CreateStory();
-            story.CreateEditorStory(data);
+            var task = story.CreateEditorStory(data);
             return Json(result);
         }
 
