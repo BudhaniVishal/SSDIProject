@@ -36,12 +36,10 @@ namespace SSDI_SPILELApplication.Controllers
         [HttpPost]
         public JsonResult AjaxMethod(StoryModel data)
         {
-            StoryModel story = new StoryModel
-            {
-                Title = data.Title,
-                //DateTime = DateTime.Now.ToString()
-            };
-            return Json(story.Title);
+            var result = true;
+            CreateStory story = new CreateStory();
+            story.CreateEditorStory(data);
+            return Json(result);
         }
     }
 }
