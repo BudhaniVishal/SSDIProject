@@ -43,5 +43,11 @@ namespace SSDI_SPILELApplication.Controllers
             };
             return Json(story.Title);
         }
+
+        [HttpPost]
+        public JsonResult UserRegistration(UserRegistrationModel data)
+        {
+            return null;
+        }
     }
 }

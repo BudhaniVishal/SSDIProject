@@ -240,3 +240,5 @@ ModelManifest.xml
 
 /SSDI_SPILELApplication/DataBaseAccessLayer/bin/Debug
 /SSDI_SPILELApplication/DataBaseAccessLayer/obj/Debug
+/TestingApp
+/.gitattributes
