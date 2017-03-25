@@ -32,14 +32,5 @@ namespace DataBaseAccessLayer
             return true;
         }
 
-        private static async Task<ConnStoryTable> GetResult(IMongoCollection<BsonDocument> collec)
-        {
-            var bsonObject = await collec.Find(new BsonDocument()).Sort(Builders<BsonDocument>.Sort.Descending("StoryID")).Limit(1).FirstOrDefaultAsync();
-            var result = BsonSerializer.Deserialize<ConnStoryTable>(bsonObject);
-            //bsonObject.
-
-            return result;
-        }
-
     }
 }

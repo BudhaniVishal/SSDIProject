@@ -34,7 +34,7 @@ namespace SSDI_SPILELApplication.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult AjaxMethod(StoryModel data)
+        public JsonResult CreateEditorStory(StoryModel data)
         {
             var result = true;
             CreateStory story = new CreateStory();

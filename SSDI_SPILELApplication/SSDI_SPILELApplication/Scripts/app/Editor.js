@@ -11,7 +11,7 @@
              //});
              var post = $http({
                  method: "POST",
-                 url: "/Home/AjaxMethod",
+                 url: "/Home/CreateEditorStory",
                  dataType: 'json/text',
                  data: myobj,
                  headers: { "Content-Type": "application/json" }
