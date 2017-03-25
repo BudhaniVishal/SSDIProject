@@ -8,8 +8,11 @@ using MongoDB;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Driver.Linq;
+<<<<<<< HEAD
 using MongoDB.Bson.Serialization;
 using System.Threading;
+=======
+>>>>>>> Coomiting Login Model , View and Controller
 
 namespace DataBaseAccessLayer
 {
@@ -21,6 +24,7 @@ namespace DataBaseAccessLayer
 
             var Client = new MongoClient();
             var MongoDB = Client.GetDatabase("spielDB");
+<<<<<<< HEAD
             var collection = MongoDB.GetCollection<BsonDocument>("StoryTable");
             BsonDocument task = null;
             task =  collection.Find(new BsonDocument()).Sort(Builders<BsonDocument>.Sort.Descending("StoryID")).Limit(1).FirstOrDefault();
@@ -29,8 +33,36 @@ namespace DataBaseAccessLayer
             story.StoryID = StoryID;
             var documnt = story.ToBsonDocument();
             collection.InsertOne(documnt);
+=======
+            var Collec = MongoDB.GetCollection<BsonDocument>("StoryTable");
+            var documnt = story.ToBsonDocument();
+            Collec.InsertOneAsync(documnt);
+            //Console.ReadLine();
+>>>>>>> Coomiting Login Model , View and Controller
             return true;
         }
+<<<<<<< HEAD
 
+=======
+        public static bool CheckUserExists(LoginCheckDLLModel user)
+        {
+            //var client = new MongoClient();
+            //var mongoDb = client.GetDatabase("spielDB");
+            //var collection = mongoDb.GetCollection<BsonDocument>("Users").ToBsonDocument();
+            //var val=collection.Equals(user.ToBsonDocument());
+            //return val;
+            // var collection = mongoDb.GetCollection<BsonDocument>("Users");
+            //var builder = Builders<BsonDocument>.Filter;
+            //var filter = builder.Eq("Email", user.Email) & builder.Eq("Password", user.Password);
+            //var result = await collection.Find(filter).ToListAsync();
+            //if (result.Count == 1)
+            //    return true;
+            //else
+            //    return false;
+            return true;
+
+
+        }
+>>>>>>> Coomiting Login Model , View and Controller
     }
 }

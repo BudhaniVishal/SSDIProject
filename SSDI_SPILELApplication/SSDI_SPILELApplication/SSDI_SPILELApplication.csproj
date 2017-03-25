@@ -233,9 +233,14 @@
     <Compile Include="Models\CreateStory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ICreateStory.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\StoryModel.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\UserRegistrationModel.cs" />
+=======
+    <Compile Include="Models\VerifyLogin.cs" />
+>>>>>>> Coomiting Login Model , View and Controller
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -251,7 +256,11 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\Editor.js" />
+<<<<<<< HEAD
     <Content Include="Scripts\app\Registration.js" />
+=======
+    <Content Include="Scripts\app\login.js" />
+>>>>>>> Coomiting Login Model , View and Controller
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

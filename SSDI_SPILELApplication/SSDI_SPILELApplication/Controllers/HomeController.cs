@@ -41,11 +41,22 @@ namespace SSDI_SPILELApplication.Controllers
             var task = story.CreateEditorStory(data);
             return Json(result);
         }
+<<<<<<< HEAD
 
         [HttpPost]
         public JsonResult UserRegistration(UserRegistrationModel data)
         {
             return null;
+=======
+        [HttpPost]
+        public JsonResult Login(LoginModel credentials)
+        {
+            var userexists = false;
+            VerifyLogin v =new VerifyLogin();
+           v.verifyuser(credentials);
+
+            return Json(userexists);
+>>>>>>> Coomiting Login Model , View and Controller
         }
     }
 }
