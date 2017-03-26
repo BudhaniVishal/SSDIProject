@@ -12,6 +12,7 @@ namespace SSDI_SPILELApplication.Models
         private string emailAddress;
         private string password;
         private string confirmPassword;
+        private string messageString;
 
         public string FirstName
         {
@@ -74,6 +75,20 @@ namespace SSDI_SPILELApplication.Models
         }
 
         public UserType UserType { get; set; }
+
+        public bool IsUserVerified { get; set; }
+
+        public string MessageString
+        {
+            get
+            {
+                return messageString;
+            }
+            set
+            {
+                messageString = value;
+            }
+        }
     }
 
     public enum UserType

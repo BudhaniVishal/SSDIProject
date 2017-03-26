@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SSDI_SPILELApplication.LogicLayer;
 
 namespace SSDI_SPILELApplication.Controllers
 {
@@ -45,7 +46,19 @@ namespace SSDI_SPILELApplication.Controllers
         [HttpPost]
         public JsonResult UserRegistration(UserRegistrationModel data)
         {
-            return null;
+            CreateUserRegistration obj = new CreateUserRegistration();
+            if (obj.RegisterUser(data))
+            {
+                if (data.UserType == UserType.EDITOR)
+                {
+                    data.MessageString = "Editor registration is successfull!! You will receive a confirmation email !!";
+                    return Json("Editor registration is successfull!! You will receive a confirmation email !!");
+                }
+                data.MessageString = "Writer registration is successfull";
+                return Json("Writer registration is successfull !!");
+            }
+            data.MessageString = "Email Id Exists, Please try again !!";
+            return Json("Email Id Exists, Please try again !!");
         }
         
         [HttpPost]

@@ -15,9 +15,9 @@ namespace DataBaseAccessLayer
 {
     public class DatabaseAccess
     {
+
         public static bool CreateStory(ConnStoryTable story)
         {
-
             var Client = new MongoClient();
             var MongoDB = Client.GetDatabase("spielDB");
             var collection = MongoDB.GetCollection<BsonDocument>("StoryTable");
@@ -46,8 +46,40 @@ namespace DataBaseAccessLayer
             //else
             //    return false;
             return true;
+        }
+
+        public static bool RegisterUser(UserRegistrationModel modelData)
+        {
+            var client = new MongoClient();
+            var mongoDb = client.GetDatabase("spielDB");
 
 
+            IMongoCollection<UserRegistrationModel> collection = mongoDb.GetCollection<UserRegistrationModel>("UserRegistration");
+            var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, modelData.EmailAddress);
+            var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p=>p.FirstName);
+            var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
+            if (results.Any())
+            {
+                // user exists return;
+                return false;
+            }
+            else
+            {
+                if (modelData.UserType.Equals("WRITER"))
+                {
+                    modelData.IsUserVerified = true;
+                }
+                else
+                {
+                    modelData.IsUserVerified = false;
+                }
+                //Insert to DB values
+
+                var collectionName = mongoDb.GetCollection<BsonDocument>("UserRegistration");
+                var document = modelData.ToBsonDocument();
+                collectionName.InsertOne(document);
+                return true;
+            }
         }
     }
 }

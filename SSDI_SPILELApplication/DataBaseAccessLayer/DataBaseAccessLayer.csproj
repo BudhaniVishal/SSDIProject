@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="ConnectionClass\ConnStoryTable.cs" />
     <Compile Include="ConnectionClass\LoginCheckDLLModel.cs" />
+    <Compile Include="ConnectionClass\UserRegistrationModel.cs" />
     <Compile Include="DatabaseAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,6 +9,7 @@ var myController2 = module.controller("RegistrationController", function ($scope
             //$http.post('/Home/AjaxMethod', myobj).then(function successCallback(data, status) {
             //    alert("Successful");
             //});
+            
             var post = $http({
                 method: "POST",
                 url: "/Home/UserRegistration",
@@ -17,9 +18,10 @@ var myController2 = module.controller("RegistrationController", function ($scope
                 headers: { "Content-Type": "application/json" }
             });
             post.then(function successCallback(response) {
-                $window.alert("successful");
+                $scope.MessageString = response.data;
+                //$window.alert(response.data);
             }), function errorCallback(response) {
-                $window.alert("error");
+                $scope.MessageString = "An error occured, Please try again.";
             };
         }
     }

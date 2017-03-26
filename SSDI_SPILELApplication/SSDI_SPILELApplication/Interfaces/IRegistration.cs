@@ -9,6 +9,6 @@ namespace SSDI_SPILELApplication.Interfaces
 {
     public interface IRegistration
     {
-        bool RegisterUser(string firstName, string lastName, string emailAddress, string password, string confirmPassword, UserType userType);
+        bool RegisterUser(UserRegistrationModel userData);
     }
 }
