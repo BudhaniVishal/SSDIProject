@@ -64,11 +64,8 @@ namespace SSDI_SPILELApplication.Controllers
         [HttpPost]
         public JsonResult Login(LoginModel credentials)
         {
-            var userexists = false;
-            VerifyLogin v =new VerifyLogin();
-           v.verifyuser(credentials);
-
-            return Json(userexists);
+            VerifyLogin obj =new VerifyLogin();
+            return Json(obj.LoginUser(credentials));
         }
     }
 }

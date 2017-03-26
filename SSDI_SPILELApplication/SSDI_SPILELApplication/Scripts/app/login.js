@@ -17,10 +17,19 @@ var logincontrol = module.controller("loginController", function ($scope, $http,
                 data: myobj,
                 headers: { "Content-Type": "application/json" }
             });
+
             post.then(function successCallback(response) {
-                $window.alert("successful");
+                if (response.data === "Writer Login Successful !!" ||
+                    response.data === "Editor Login Successful !!") {
+                    $window.location.href = '/Home/Editor';
+
+                } else {
+                    $scope.MessageString = response.data;
+                    //$window.location.href = '/Home';
+                }
+
             }), function errorCallback(response) {
-                $window.alert("error");
+                $scope.MessageString = "An error occured, Please try again.";
             };
         }
     }

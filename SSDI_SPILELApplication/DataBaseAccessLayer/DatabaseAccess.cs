@@ -30,22 +30,43 @@ namespace DataBaseAccessLayer
             collection.InsertOne(documnt);
             return true;
         }
-        public static bool CheckUserExists(LoginCheckDLLModel user)
+        public static string LoginUser(LoginCheckDLLModel user)
         {
-            //var client = new MongoClient();
-            //var mongoDb = client.GetDatabase("spielDB");
-            //var collection = mongoDb.GetCollection<BsonDocument>("Users").ToBsonDocument();
-            //var val=collection.Equals(user.ToBsonDocument());
-            //return val;
-            // var collection = mongoDb.GetCollection<BsonDocument>("Users");
-            //var builder = Builders<BsonDocument>.Filter;
-            //var filter = builder.Eq("Email", user.Email) & builder.Eq("Password", user.Password);
-            //var result = await collection.Find(filter).ToListAsync();
-            //if (result.Count == 1)
-            //    return true;
-            //else
-            //    return false;
-            return true;
+            var mongoClient = new MongoClient();
+            var mongoDB = mongoClient.GetDatabase("spielDB");
+
+
+            IMongoCollection<UserRegistrationModel> collection = mongoDB.GetCollection<UserRegistrationModel>("UserRegistration");
+            var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, user.Email);
+            
+            var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p => p.Password).Include(p=>p.UserType).Include(p=>p.IsUserVerified);
+            var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
+            var res = false;
+            if (results.Count() == 1)
+            {
+                var data = results.FirstOrDefault();
+                if (data != null)
+                {
+                    if (data.Password.Equals(user.Password))
+                    {
+                        if (data.UserType.Equals("WRITER"))
+                        {
+                            return "Writer Login Successful !!";
+                        }
+                        if (data.UserType.Equals("EDITOR") && data.IsUserVerified.AsBoolean)
+                        {
+                            return "Editor Login Successful !!";
+                        }
+                        return "Editor not verified yet ";
+                    }
+                    return "Incorrect Password !!";
+                }
+
+                return "Network Issue, Please try again !!";
+            }
+
+            return "Invalid Email Address";
+
         }
 
         public static bool RegisterUser(UserRegistrationModel modelData)
