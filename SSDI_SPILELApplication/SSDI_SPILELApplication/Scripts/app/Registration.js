@@ -11,7 +11,7 @@ var myController2 = module.controller("RegistrationController", function ($scope
             //});
             var post = $http({
                 method: "POST",
-                url: "/Home/AjaxMethod1",
+                url: "/Home/UserRegistration",
                 dataType: 'json/text',
                 data: myobj,
                 headers: { "Content-Type": "application/json" }

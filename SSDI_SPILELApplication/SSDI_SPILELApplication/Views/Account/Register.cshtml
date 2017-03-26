@@ -8,7 +8,8 @@
     <script src="~/Scripts/app/Registration.js"></script>
 </head>
 
-<form class="form-horizontal">
+<form class="form-horizontal" required>
+    
     <div class="row" ng-app="Registration">
 
         <div class="col-md-8" ng-controller="RegistrationController">
@@ -16,64 +17,64 @@
             <section id="RegistrationSection">
 
                 <h4>Register to SPIEL website.</h4>
-                <hr />
+                <hr/>
 
 
-                <div class="form-group">
+                <div class="form-group" required>
 
                     <label class="col-md-2 control-label">First Name</label>
                     <div class="col-md-10">
-                        <input type="text" name="txtFirstName" ng-model="mydata.FirstName" id="FirstName" class="form-control input-sm" placeholder="First Name" />
+                        <input type="text" name="txtFirstName" ng-model="mydata.FirstName" id="FirstName" class="form-control input-sm" placeholder="First Name" required/>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" required>
                     <label class="col-md-2 control-label">Last Name</label>
                     <div class="col-md-10">
-                        <input type="text" name="txtLastName" id="LastName" ng-model="mydata.LastName" class="form-control input-sm" placeholder="Last Name" />
+                        <input type="text" name="txtLastName" id="LastName" ng-model="mydata.LastName" class="form-control input-sm" placeholder="Last Name" required/>
                     </div>
                 </div>
 
 
-                <div class="form-group">
+                <div class="form-group" required>
 
                     <label class="col-md-2 control-label">EmailAddress</label>
                     <div class="col-md-10">
-                        <input type="text" name="txtEmailAddress" id="Emailaddress" ng-model="mydata.EmailAddress" class="form-control input-sm" placeholder="Email address" />
+                        <input type="text" name="txtEmailAddress" id="Emailaddress" ng-model="mydata.EmailAddress" class="form-control input-sm" placeholder="Email address" required/>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" required>
                     <label class="col-md-2 control-label">Password</label>
                     <div class="col-md-10">
-                        <input type="password" name="txtPassword" id="Password" ng-model="mydata.Password" class="form-control input-sm" placeholder="Passsword" />
+                        <input type="password" name="txtPassword" id="Password" ng-model="mydata.Password" class="form-control input-sm" placeholder="Passsword" required/>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" required>
 
                     <label class="col-md-2 control-label">Confirm Password</label>
                     <div class="col-md-10">
-                        <input type="password" name="txtForgotPassword" ng-model="mydata.ConfirmPassword" class="form-control input-sm" placeholder="Confirm Password" />
+                        <input type="password" name="txtConfirmPassword" ng-model="mydata.ConfirmPassword" class="form-control input-sm" placeholder="Confirm Password" required/>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" required>
                     <label class="col-md-2 control-label">Select User Type</label>
 
                     <label class="radio-inline" style="margin-left: 14px">
-                        <input type="radio" value="EDITOR" ng-model="mydata.UserType" name="btnRadioEditor"> Editor
+                        <input type="radio" value="EDITOR" ng-model="mydata.UserType" name="btnRadioEditor" required> Editor
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" value="WRITER" ng-model="mydata.UserType" name="btnRadioWriter"> Writer
+                        <input type="radio" value="WRITER" ng-model="mydata.UserType" name="btnRadioWriter" required> Writer
                     </label>
-                    
+
                 </div>
 
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="btn btn-default" value="Register" ng-click="myfunc.doClick()" />
+                        <input type="submit" class="btn btn-default" value="Register" ng-click="myfunc.doClick()"/>
                     </div>
                 </div>
 
