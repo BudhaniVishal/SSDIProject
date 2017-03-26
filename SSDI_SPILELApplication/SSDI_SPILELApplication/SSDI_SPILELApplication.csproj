@@ -254,6 +254,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\Editor.js" />
     <Content Include="Scripts\app\login.js" />
+    <Content Include="Scripts\app\Registration.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
