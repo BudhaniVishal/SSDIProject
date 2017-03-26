@@ -1,14 +1,11 @@
 ﻿var module = angular.module("Registration", []);
 
-var myController2 = module.controller("RegistrationController", function ($scope, $http, $window) {
+var controller = module.controller("RegistrationController", function ($scope, $http, $window) {
     $scope.mydata = null;
-    $scope.myfunc = {};
-    $scope.myfunc.doClick = function () {
+    $scope.registerButton = {};
+    $scope.registerButton.doClick = function () {
         var myobj = $scope.mydata;
         if (myobj != null) {
-            //$http.post('/Home/AjaxMethod', myobj).then(function successCallback(data, status) {
-            //    alert("Successful");
-            //});
             
             var post = $http({
                 method: "POST",

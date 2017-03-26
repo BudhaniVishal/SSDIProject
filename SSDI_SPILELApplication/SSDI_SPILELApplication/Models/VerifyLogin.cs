@@ -3,25 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DataBaseAccessLayer.ConnectionClass;
+using SSDI_SPILELApplication.Interfaces;
 
 namespace SSDI_SPILELApplication.Models
 {
-    public class VerifyLogin
+    public class VerifyLogin : ILoginUser
     {
-        public bool verifyuser(LoginModel l)
+        public string LoginUser(LoginModel model)
         {
-           
-
             LoginCheckDLLModel logindll = new LoginCheckDLLModel();
-            logindll.Email = l.Email;
-            logindll.Password = l.Password;
-
-            var x =  DataBaseAccessLayer.DatabaseAccess.CheckUserExists(logindll);
-
-            return x;
-
-
-
+            logindll.Email = model.Email;
+            logindll.Password = model.Password;
+            return DataBaseAccessLayer.DatabaseAccess.LoginUser(logindll);
         }
     }
 }
