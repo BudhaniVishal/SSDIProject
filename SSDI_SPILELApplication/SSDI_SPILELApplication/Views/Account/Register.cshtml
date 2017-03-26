@@ -8,87 +8,94 @@
     <script src="~/Scripts/app/Registration.js"></script>
 </head>
 
-<form class="form-horizontal" required>
+
     
     <div class="row" ng-app="Registration">
+        
+        <section id="RegistrationSection">
 
-        <div class="col-md-8" ng-controller="RegistrationController">
+            <div class="col-md-8" ng-controller="RegistrationController">
 
-            <section id="RegistrationSection">
+                <form class="form-horizontal" name="formRegister" ng-submit="submitForm(formRegister.$valid)">
 
-                <h4>Register to SPIEL website.</h4>
-                <hr/>
-
-
-                <div class="form-group" required>
-
-                    <label class="col-md-2 control-label">First Name</label>
-                    <div class="col-md-10">
-                        <input type="text" name="txtFirstName" ng-model="mydata.FirstName" id="FirstName" class="form-control input-sm" placeholder="First Name" required/>
-                    </div>
-                </div>
-
-                <div class="form-group" required>
-                    <label class="col-md-2 control-label">Last Name</label>
-                    <div class="col-md-10">
-                        <input type="text" name="txtLastName" id="LastName" ng-model="mydata.LastName" class="form-control input-sm" placeholder="Last Name" required/>
-                    </div>
-                </div>
+                    <h4>Register to SPIEL website.</h4>
+                    <hr />
 
 
-                <div class="form-group" required>
+                    <div class="form-group" ng-class="{ 'has-error' : formRegister.FirstName.$invalid && !formRegister.FirstName.$pristine }">
 
-                    <label class="col-md-2 control-label">EmailAddress</label>
-                    <div class="col-md-10">
-                        <input type="text" name="txtEmailAddress" id="Emailaddress" ng-model="mydata.EmailAddress" class="form-control input-sm" placeholder="Email address" required/>
-                    </div>
-                </div>
-
-                <div class="form-group" required>
-                    <label class="col-md-2 control-label">Password</label>
-                    <div class="col-md-10">
-                        <input type="password" name="txtPassword" id="Password" ng-model="mydata.Password" class="form-control input-sm" placeholder="Passsword" required/>
-                    </div>
-                </div>
-
-                <div class="form-group" required>
-
-                    <label class="col-md-2 control-label">Confirm Password</label>
-                    <div class="col-md-10">
-                        <input type="password" name="txtConfirmPassword" ng-model="mydata.ConfirmPassword" class="form-control input-sm" placeholder="Confirm Password" required/>
-                    </div>
-                </div>
-
-                <div class="form-group" required>
-                    <label class="col-md-2 control-label">Select User Type</label>
-
-                    <label class="radio-inline" style="margin-left: 14px">
-                        <input type="radio" value="EDITOR" ng-model="mydata.UserType" name="btnRadioEditor" required> Editor
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" value="WRITER" ng-model="mydata.UserType" name="btnRadioWriter" required> Writer
-                    </label>
-
-                </div>
-
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="btn btn-default" value="Register" ng-click="registerButton.doClick()"/>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    
-                    <div class="col-md-10">
-                        <label 
-                               ng-model="mydata.MessageString" ng-bind="MessageString"></label>
+                        <label class="col-md-2 control-label">First Name</label>
+                        <div class="col-md-10">
+                            <input type="text" name="FirstName" ng-model="mydata.FirstName" id="FirstName" class="form-control input-sm" placeholder="First Name" required />
+                        </div>
+                        <p ng-show="formRegister.FirstName.$invalid && !formRegister.FirstName.$pristine" class="help-block">First Name is required.</p>
                     </div>
 
-                </div>
+                    <div class="form-group" required ng-class="{ 'has-error' : formRegister.LastName.$invalid && !formRegister.LastName.$pristine }">
+                        <label class="col-md-2 control-label">Last Name</label>
+                        <div class="col-md-10">
+                            <input type="text" name="LastName" id="LastName" ng-model="mydata.LastName" class="form-control input-sm" placeholder="Last Name" required />
+                        </div>
+                        <p ng-show="formRegister.LastName.$invalid && !formRegister.LastName.$pristine" class="help-block">Last Name is required.</p>
+                    </div>
 
-            </section>
-        </div>
 
+                    <div class="form-group" required ng-class="{ 'has-error' : formRegister.EmailAddress.$invalid && !formRegister.EmailAddress.$pristine }">
+
+                        <label class="col-md-2 control-label">EmailAddress</label>
+                        <div class="col-md-10">
+                            <input type="email" name="EmailAddress" id="Emailaddress" ng-model="mydata.EmailAddress" class="form-control input-sm" placeholder="Email address" required />
+                        </div>
+                        <p ng-show="formRegister.EmailAddress.$invalid && !formRegister.EmailAddress.$pristine" class="help-block">Email address is required.</p>
+                    </div>
+
+                    <div class="form-group" required ng-class="{ 'has-error' : formRegister.Password.$invalid && !formRegister.Password.$pristine }">
+                        <label class="col-md-2 control-label">Password</label>
+                        <div class="col-md-10">
+                            <input type="password" name="Password" id="Password" password-verify="{{mydata.ConfirmPassword}}"
+                                   ng-model="mydata.Password" class="form-control input-sm" placeholder="Passsword" required />
+                        </div>
+                        <p ng-show="formRegister.Password.$invalid && !formRegister.Password.$pristine" class="help-block">Password doesn't match.</p>
+                    </div>
+
+                    <div class="form-group" required ng-class="{ 'has-error' : formRegister.ConfirmPassword.$invalid && !formRegister.ConfirmPassword.$pristine }">
+
+                        <label class="col-md-2 control-label">Confirm Password</label>
+                        <div class="col-md-10">
+                            <input type="password" compare-to="mydata.Password" password-verify="{{mydata.Password}}"
+                                   name="ConfirmPassword" id="ConfirmPassword" ng-model="mydata.ConfirmPassword" class="form-control input-sm" placeholder="Confirm Password" required />
+                        </div>
+                        <p ng-show="formRegister.ConfirmPassword.$invalid && !formRegister.ConfirmPassword.$pristine" class="help-block">Confirm Password doesn't match</p>
+                    </div>
+
+                    <div class="form-group" required>
+                        <label class="col-md-2 control-label">Select User Type</label>
+
+                        <label class="radio-inline" style="margin-left: 14px">
+                            <input type="radio" id="editor" name="editor" ng-checked="true" aria-checked="True"  value="EDITOR"  ng-model="mydata.UserType" > Editor
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="writer" name="writer" value="WRITER" ng-model="mydata.UserType" > Writer
+                        </label>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" class="btn btn-default" value="Register"
+                                   ng-disabled="editorForm.$invalid" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <label ng-model="mydata.MessageString" ng-bind="MessageString"></label>
+                        </div>
+
+                    </div>
+                </form>
+</div>
+        </section>
     </div>
-</form>
+

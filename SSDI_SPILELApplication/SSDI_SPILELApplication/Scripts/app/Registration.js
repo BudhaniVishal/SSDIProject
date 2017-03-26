@@ -3,10 +3,10 @@
 var controller = module.controller("RegistrationController", function ($scope, $http, $window) {
     $scope.mydata = null;
     $scope.registerButton = {};
-    $scope.registerButton.doClick = function () {
-        var myobj = $scope.mydata;
-        if (myobj != null) {
-            
+    $scope.submitForm = function (isValid) {
+        // check to make sure the form is completely valid
+        if (isValid) {
+            var myobj = $scope.mydata;  
             var post = $http({
                 method: "POST",
                 url: "/Home/UserRegistration",
