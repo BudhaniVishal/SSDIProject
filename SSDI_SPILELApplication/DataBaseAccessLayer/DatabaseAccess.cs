@@ -18,20 +18,16 @@ namespace DataBaseAccessLayer
         public static bool CreateStory(ConnStoryTable story)
         {
 
-
             var Client = new MongoClient();
             var MongoDB = Client.GetDatabase("spielDB");
             var collection = MongoDB.GetCollection<BsonDocument>("StoryTable");
             BsonDocument task = null;
-            task =  collection.Find(new BsonDocument()).Sort(Builders<BsonDocument>.Sort.Descending("StoryID")).Limit(1).FirstOrDefault();
+            task = collection.Find(new BsonDocument()).Sort(Builders<BsonDocument>.Sort.Descending("StoryID")).Limit(1).FirstOrDefault();
             var result = BsonSerializer.Deserialize<ConnStoryTable>(task.ToBsonDocument());
             var StoryID = result.StoryID + 1;
             story.StoryID = StoryID;
             var documnt = story.ToBsonDocument();
             collection.InsertOne(documnt);
-            var Collec = MongoDB.GetCollection<BsonDocument>("StoryTable");
-            var documnt = story.ToBsonDocument();
-            Collec.InsertOneAsync(documnt);
             return true;
         }
         public static bool CheckUserExists(LoginCheckDLLModel user)
