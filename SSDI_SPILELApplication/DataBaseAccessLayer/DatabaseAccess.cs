@@ -16,12 +16,19 @@ namespace DataBaseAccessLayer
 {
     public class DatabaseAccess
     {
-        static readonly string dataBaseName = 
-            ConfigurationManager.AppSettings["Database"];
-
-        public static bool CreateStory(ConnStoryTable story)
+        public static bool CreateStory(ConnStoryTable story, string dataBaseName)
         {
-            var collection = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("StoryTable");
+
+            var tableCollection = CreateDataConnection(new MongoClient(), dataBaseName).GetCollection<ConnStoryTable>("StoryTable");
+            var condition = Builders<ConnStoryTable>.Filter.Eq(p => p.Title, story.Title);
+            var fields = Builders<ConnStoryTable>.Projection.Include(p => p.Title).Include(p => p.StoryID);
+            var results = tableCollection.Find(condition).Project<ConnStoryTable>(fields).ToList().AsQueryable();
+            if (results.Count() == 1)
+            {
+                // story exists
+                return false;
+            }
+            var collection = CreateDataConnection(new MongoClient(), dataBaseName).GetCollection<BsonDocument>("StoryTable");
             BsonDocument task = null;
             task = collection.Find(new BsonDocument()).Sort(Builders<BsonDocument>.Sort.Descending("StoryID")).Limit(1).FirstOrDefault();
             var result = BsonSerializer.Deserialize<ConnStoryTable>(task.ToBsonDocument());
@@ -32,15 +39,15 @@ namespace DataBaseAccessLayer
             return true;
         }
 
-        private static IMongoDatabase CreateDataConnection(MongoClient obj)
+        private static IMongoDatabase CreateDataConnection(MongoClient obj, string dataBaseName)
         {
             return obj.GetDatabase(dataBaseName);
         }
 
-        public static string LoginUser(LoginCheckDLLModel user)
+        public static string LoginUser(UserRegistrationModel user, string dataBaseName)
         {
-            IMongoCollection<UserRegistrationModel> collection = CreateDataConnection(new MongoClient()).GetCollection<UserRegistrationModel>("UserRegistration");
-            var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, user.Email);
+            IMongoCollection<UserRegistrationModel> collection = CreateDataConnection(new MongoClient(), dataBaseName).GetCollection<UserRegistrationModel>("UserRegistration");
+            var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, user.EmailAddress);
             
             var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p => p.Password).Include(p=>p.UserType).Include(p=>p.IsUserVerified);
             var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
@@ -72,9 +79,9 @@ namespace DataBaseAccessLayer
 
         }
 
-        public static bool RegisterUser(UserRegistrationModel modelData)
+        public static bool RegisterUser(UserRegistrationModel modelData, string dataBaseName)
         {
-            IMongoCollection<UserRegistrationModel> collection = CreateDataConnection(new MongoClient()).GetCollection<UserRegistrationModel>("UserRegistration");
+            IMongoCollection<UserRegistrationModel> collection = CreateDataConnection(new MongoClient(), dataBaseName).GetCollection<UserRegistrationModel>("UserRegistration");
             var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, modelData.EmailAddress);
             var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p=>p.FirstName);
             var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
@@ -95,7 +102,7 @@ namespace DataBaseAccessLayer
                 }
                 //Insert to DB values
 
-                var collectionName = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("UserRegistration");
+                var collectionName = CreateDataConnection(new MongoClient(), dataBaseName).GetCollection<BsonDocument>("UserRegistration");
                 var document = modelData.ToBsonDocument();
                 collectionName.InsertOne(document);
                 return true;

@@ -87,7 +87,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBaseAccessTest.cs" />
+    <Compile Include="CreateStoryDataBaseAccessTest.cs" />
+    <Compile Include="LoginUserDataBaseAccessTest.cs" />
+    <Compile Include="RegisterUserDataBaseAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using DataBaseAccessLayer.ConnectionClass;
@@ -11,21 +13,18 @@ namespace SSDI_SPILELApplication.Models
     {
         public bool CreateEditorStory(StoryModel story)
         {
-            //var result = false;
+            string dataBaseName = ConfigurationManager.AppSettings["Database"];
             ConnStoryTable obj = new ConnStoryTable();
             obj.Content = story.Content;
-            obj.From = Convert.ToString(story.from);
+            obj.From = Convert.ToString(story.from, CultureInfo.InvariantCulture);
             obj.Scenario = story.Scenario;
             obj.StoryID = story.StoryID;
             obj.Title = story.Title;
-            obj.To = Convert.ToString(story.to);
+            obj.To = Convert.ToString(story.to, CultureInfo.InvariantCulture);
             obj.Type = story.Type;
             obj.Genre = story.genre;
-
-            var test = DataBaseAccessLayer.DatabaseAccess.CreateStory(obj);
-
-
-            return true;
+            
+            return DataBaseAccessLayer.DatabaseAccess.CreateStory(obj, dataBaseName); ;
         }
     }
 }
