@@ -8,7 +8,6 @@ namespace SSDI_SPILELApplication.Tests
     [TestFixture]
     public class LoginUserDataBaseAccessTest
     {
-        private string dataBaseName = "spielDBTest";
         [Test]
         public void TestLoginWriterWithValidCredentials()
         {
@@ -17,7 +16,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.EmailAddress = "vishal@uncc.edu";
             obj.Password = "1234";
             obj.UserType = "WRITER";
-            string s = DatabaseAccess.LoginUser(obj, dataBaseName);
+            string s = new MockDataBaseAccess().LoginUser(obj);
             Assert.AreEqual(s, "Writer Login Successful !!");
         }
 
@@ -29,7 +28,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.EmailAddress = "vishal@uncc.edu";
             obj.Password = "14";
             obj.UserType = "WRITER";
-            string s = DatabaseAccess.LoginUser(obj, dataBaseName);
+            string s = new MockDataBaseAccess().LoginUser(obj);
             Assert.AreEqual(s, "Incorrect Password !!");
         }
 
@@ -41,7 +40,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.EmailAddress = "aa@uncc.edu";
             obj.Password = "1234";
             obj.UserType = "WRITER";
-            string s = DatabaseAccess.LoginUser(obj, dataBaseName);
+            string s = new MockDataBaseAccess().LoginUser(obj);
             Assert.AreEqual(s, "Invalid Email Address");
         }
 
@@ -53,7 +52,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.EmailAddress = "editor@uncc.edu";
             obj.Password = "1234";
             obj.UserType = "EDITOR";
-            string s = DatabaseAccess.LoginUser(obj, dataBaseName);
+            string s = new MockDataBaseAccess().LoginUser(obj);
             Assert.AreEqual(s, "Editor Login Successful !!");
         }
 
@@ -65,7 +64,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.EmailAddress = "edit@uncc.edu";
             obj.Password = "1234";
             obj.UserType = "EDITOR";
-            string s = DatabaseAccess.LoginUser(obj,dataBaseName);
+            string s = new MockDataBaseAccess().LoginUser(obj);
             Assert.AreEqual(s, "Editor not verified yet ");
         }
     }

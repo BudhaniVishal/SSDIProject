@@ -8,9 +8,9 @@ using DataBaseAccessLayer.Interfaces;
 
 namespace DataBaseAccessLayer
 {
-    public class DatabaseAccess : IDatabaseAccess
+    public class MockDataBaseAccess : IDatabaseAccess
     {
-        private static string dataBaseName = ConfigurationManager.AppSettings["Database"];
+        private static string dataBaseName = "spielDBTest";
         public bool CreateStory(ConnStoryTable story)
         {
 
@@ -43,8 +43,8 @@ namespace DataBaseAccessLayer
         {
             IMongoCollection<UserRegistrationModel> collection = CreateDataConnection(new MongoClient()).GetCollection<UserRegistrationModel>("UserRegistration");
             var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, user.EmailAddress);
-            
-            var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p => p.Password).Include(p=>p.UserType).Include(p=>p.IsUserVerified);
+
+            var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p => p.Password).Include(p => p.UserType).Include(p => p.IsUserVerified);
             var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
             var res = false;
             if (results.Count() == 1)
@@ -78,7 +78,7 @@ namespace DataBaseAccessLayer
         {
             IMongoCollection<UserRegistrationModel> collection = CreateDataConnection(new MongoClient()).GetCollection<UserRegistrationModel>("UserRegistration");
             var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, modelData.EmailAddress);
-            var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p=>p.FirstName);
+            var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p => p.FirstName);
             var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
             if (results.Any())
             {

@@ -61,6 +61,8 @@
     <Compile Include="ConnectionClass\LoginCheckDLLModel.cs" />
     <Compile Include="ConnectionClass\UserRegistrationModel.cs" />
     <Compile Include="DatabaseAccess.cs" />
+    <Compile Include="Interfaces\IDatabaseAccess.cs" />
+    <Compile Include="MockDataBaseAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

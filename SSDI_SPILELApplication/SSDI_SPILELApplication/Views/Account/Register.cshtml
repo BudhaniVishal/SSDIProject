@@ -26,17 +26,17 @@
 
                         <label class="col-md-2 control-label">First Name</label>
                         <div class="col-md-10">
-                            <input type="text" name="FirstName" ng-model="mydata.FirstName" id="FirstName" class="form-control input-sm" placeholder="First Name" required />
+                            <input type="text" name="FirstName" ng-model="mydata.FirstName" id="FirstName" ng-minlength="6" ng-maxlength="21" class="form-control input-sm" placeholder="First Name" required />
                         </div>
-                        <p ng-show="formRegister.FirstName.$invalid && !formRegister.FirstName.$pristine" class="help-block">First Name is required.</p>
+                        <p ng-show="formRegister.FirstName.$invalid && !formRegister.FirstName.$pristine" class="help-block">First Name should be greater than 5 and less than 20 characters.</p>
                     </div>
 
                     <div class="form-group" required ng-class="{ 'has-error' : formRegister.LastName.$invalid && !formRegister.LastName.$pristine }">
                         <label class="col-md-2 control-label">Last Name</label>
                         <div class="col-md-10">
-                            <input type="text" name="LastName" id="LastName" ng-model="mydata.LastName" class="form-control input-sm" placeholder="Last Name" required />
+                            <input type="text" name="LastName" id="LastName" ng-minlength="6" ng-maxlength="21" ng-model="mydata.LastName" class="form-control input-sm" placeholder="Last Name" required />
                         </div>
-                        <p ng-show="formRegister.LastName.$invalid && !formRegister.LastName.$pristine" class="help-block">Last Name is required.</p>
+                        <p ng-show="formRegister.LastName.$invalid && !formRegister.LastName.$pristine" class="help-block">Last Name should be greater than 5 and less than 20 characters.</p>
                     </div>
 
 
@@ -44,18 +44,19 @@
 
                         <label class="col-md-2 control-label">EmailAddress</label>
                         <div class="col-md-10">
-                            <input type="email" name="EmailAddress" id="Emailaddress" ng-model="mydata.EmailAddress" class="form-control input-sm" placeholder="Email address" required />
+                            <input type="email" name="EmailAddress" id="EmailAddress" ng-minlength="7" ng-maxlength="21" ng-model="mydata.EmailAddress" class="form-control input-sm" placeholder="Email address" required />
                         </div>
-                        <p ng-show="formRegister.EmailAddress.$invalid && !formRegister.EmailAddress.$pristine" class="help-block">Email address is required.</p>
+                        <p ng-show="formRegister.EmailAddress.$invalid && !formRegister.EmailAddress.$pristine" class="help-block">Email address should be greater than 6 and less than 20 characters
+                         and in correct email format.</p>
                     </div>
 
                     <div class="form-group" required ng-class="{ 'has-error' : formRegister.Password.$invalid && !formRegister.Password.$pristine }">
                         <label class="col-md-2 control-label">Password</label>
                         <div class="col-md-10">
-                            <input type="password" name="Password" id="Password" password-verify="{{mydata.ConfirmPassword}}"
+                            <input type="password" name="Password" id="Password" ng-minlength="6" ng-maxlength="21" password-verify="{{mydata.ConfirmPassword}}"
                                    ng-model="mydata.Password" class="form-control input-sm" placeholder="Passsword" required />
                         </div>
-                        <p ng-show="formRegister.Password.$invalid && !formRegister.Password.$pristine" class="help-block">Password doesn't match.</p>
+                        <p ng-show="formRegister.Password.$invalid && !formRegister.Password.$pristine" class="help-block">Password should be greater than 5 and less than 20 characters.</p>
                     </div>
 
                     <div class="form-group" required ng-class="{ 'has-error' : formRegister.ConfirmPassword.$invalid && !formRegister.ConfirmPassword.$pristine }">
@@ -63,9 +64,9 @@
                         <label class="col-md-2 control-label">Confirm Password</label>
                         <div class="col-md-10">
                             <input type="password" compare-to="mydata.Password" password-verify="{{mydata.Password}}"
-                                   name="ConfirmPassword" id="ConfirmPassword" ng-model="mydata.ConfirmPassword" class="form-control input-sm" placeholder="Confirm Password" required />
+                                   name="ConfirmPassword" id="ConfirmPassword" ng-minlength="6" ng-maxlength="21" ng-model="mydata.ConfirmPassword" class="form-control input-sm" placeholder="Confirm Password" required />
                         </div>
-                        <p ng-show="formRegister.ConfirmPassword.$invalid && !formRegister.ConfirmPassword.$pristine" class="help-block">Confirm Password doesn't match</p>
+                        <p ng-show="formRegister.ConfirmPassword.$invalid && !formRegister.ConfirmPassword.$pristine" class="help-block">Confirm Password should be greater than 5 and less than 20 characters.</p>
                     </div>
 
                     <div class="form-group" required>
