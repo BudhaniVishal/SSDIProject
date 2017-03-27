@@ -1,6 +1,7 @@
 ﻿using DataBaseAccessLayer.ConnectionClass;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,12 @@ namespace DataBaseAccessLayer
 {
     public class DatabaseAccess
     {
+        static readonly string dataBaseName = 
+            ConfigurationManager.AppSettings["Database"];
 
         public static bool CreateStory(ConnStoryTable story)
         {
-            var Client = new MongoClient();
-            var MongoDB = Client.GetDatabase("spielDB");
-            var collection = MongoDB.GetCollection<BsonDocument>("StoryTable");
+            var collection = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("StoryTable");
             BsonDocument task = null;
             task = collection.Find(new BsonDocument()).Sort(Builders<BsonDocument>.Sort.Descending("StoryID")).Limit(1).FirstOrDefault();
             var result = BsonSerializer.Deserialize<ConnStoryTable>(task.ToBsonDocument());
@@ -30,13 +31,15 @@ namespace DataBaseAccessLayer
             collection.InsertOne(documnt);
             return true;
         }
+
+        private static IMongoDatabase CreateDataConnection(MongoClient obj)
+        {
+            return obj.GetDatabase(dataBaseName);
+        }
+
         public static string LoginUser(LoginCheckDLLModel user)
         {
-            var mongoClient = new MongoClient();
-            var mongoDB = mongoClient.GetDatabase("spielDB");
-
-
-            IMongoCollection<UserRegistrationModel> collection = mongoDB.GetCollection<UserRegistrationModel>("UserRegistration");
+            IMongoCollection<UserRegistrationModel> collection = CreateDataConnection(new MongoClient()).GetCollection<UserRegistrationModel>("UserRegistration");
             var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, user.Email);
             
             var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p => p.Password).Include(p=>p.UserType).Include(p=>p.IsUserVerified);
@@ -71,11 +74,7 @@ namespace DataBaseAccessLayer
 
         public static bool RegisterUser(UserRegistrationModel modelData)
         {
-            var client = new MongoClient();
-            var mongoDb = client.GetDatabase("spielDB");
-
-
-            IMongoCollection<UserRegistrationModel> collection = mongoDb.GetCollection<UserRegistrationModel>("UserRegistration");
+            IMongoCollection<UserRegistrationModel> collection = CreateDataConnection(new MongoClient()).GetCollection<UserRegistrationModel>("UserRegistration");
             var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, modelData.EmailAddress);
             var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p=>p.FirstName);
             var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
@@ -96,7 +95,7 @@ namespace DataBaseAccessLayer
                 }
                 //Insert to DB values
 
-                var collectionName = mongoDb.GetCollection<BsonDocument>("UserRegistration");
+                var collectionName = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("UserRegistration");
                 var document = modelData.ToBsonDocument();
                 collectionName.InsertOne(document);
                 return true;

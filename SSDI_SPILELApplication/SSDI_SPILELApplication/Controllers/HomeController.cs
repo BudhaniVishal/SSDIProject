@@ -46,6 +46,10 @@ namespace SSDI_SPILELApplication.Controllers
         [HttpPost]
         public JsonResult UserRegistration(UserRegistrationModel data)
         {
+            if (!data.Password.Equals(data.ConfirmPassword))
+            {
+                return Json("Password and Confirm Password doesn't match !!");
+            }
             CreateUserRegistration obj = new CreateUserRegistration();
             if (obj.RegisterUser(data))
             {
