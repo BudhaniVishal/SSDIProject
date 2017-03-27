@@ -1,0 +1,105 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@using SSDI_SPILELApplication.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Welcome to SPIEL";
+}
+
+
+
+<h2>@ViewBag.Title.</h2>
+<head>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/app/Editor.js"></script>
+</head>
+<body>
+    <div class="row" ng-app="myapp">
+
+        <section id="editorhome">
+            <div class="col-md-" ng-controller="EditorController">
+                <form name="editorForm" class="myForm" ng-submit="submitForm(editorForm.$valid)" novalidate>
+                    <div class="form-group" ng-class="{ 'has-error' : editorForm.title.$invalid && !editorForm.title.$pristine }">
+                        <div class="col-md-offset-2 col-md-10">
+                            <label class="col-md-2 control-label">Title</label>
+                            <input class="col-md-10 form-control" name="title" type="text" id="title" ng-model="mydata.Title" required />
+                            <p ng-show="editorForm.title.$invalid && !editorForm.title.$pristine" class="help-block">Title is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" ng-class="{ 'has-error' : editorForm.scenario.$invalid && !editorForm.scenario.$pristine }">
+                            <label class="col-md-2 control-label">Scenario</label>
+                            <textarea class="col-md-10 form-control" type="text" id="scenario" name="scenario" ng-model="mydata.Scenario" row="6" cols="50" required></textarea>
+                            <p ng-show="editorForm.scenario.$invalid && !editorForm.scenario.$pristine" class="help-block">Scenario is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" ng-class="{ 'has-error' : editorForm.genre.$invalid && !editorForm.genre.$pristine }">
+                            <label class="col-md-2 control-label">Genre</label>
+                            <select class="col-md-10 form-control" id="genre" name="genre" ng-model="mydata.Genre" required>
+                                <option selected value="">Please Select</option>
+                                <option value="Action/Adventure">Action/Adventure</option>
+                                <option value="Business">Business</option>
+                                <option value="Career">Career</option>
+                                <option value="Comedy">Comedy</option>
+                                <option value="Detective">Detective</option>
+                                <option value="Family">Family</option>
+                                <option value="Ghost">Ghost</option>
+                                <option value="Mystery">Mystery</option>
+                                <option value="Thriller">Thriller/Suspense</option>
+                            </select>
+                            <p ng-show="editorForm.genre.$invalid && !editorForm.genre.$pristine" class="help-block">Genre is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10 " ng-class="{ 'has-error' : editorForm.type.$invalid && !editorForm.type.$pristine }">
+                            <label class="col-md-2 control-label">Type</label>
+                            <select class="col-md-10 form-control" id="type" name="type" ng-model="mydata.Type" required>
+                                <option selected value="">Please Select</option>
+                                <option value="Short Stories">Short Stories</option>
+                                <option value="Article">Article</option>
+                                <option value="Poetry">Poetry</option>
+                                <option value="Fiction">Fiction</option>
+                                <option value="Non Fiction">Non Fiction</option>
+                                <option value="Classics">Classics</option>
+                            </select>
+                            <p ng-show="editorForm.type.$invalid && !editorForm.type.$pristine" class="help-block">Type is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" ng-class="{ 'has-error' : editorForm.from.$invalid && !editorForm.from.$pristine }">
+                            <label class="col-md-2 control-label">From</label>
+                            <input class="col-md-10 form-control" type="date" id="from" name="from" ng-model="mydata.From" ng-minlength="5" ng-maxlength="12" required />
+                        </div>
+                        <p ng-show="editorForm.from.$invalid && !editorForm.from.$pristine" class="help-block">From date is required.</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" ng-class="{ 'has-error' : editorForm.to.$invalid && !editorForm.to.$pristine }">
+                            <label class="col-md-2 control-label">To</label>
+                            <input class="col-md-10 form-control" type="date" id="to" ng-model="mydata.To" ng-minlength="5" ng-maxlength="12" required />
+                        </div>
+                        <p ng-show="editorForm.to.$invalid && !editorForm.to.$pristine" name="to" class="help-block">To date is required.</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Submit Form" ng-disabled="editorForm.$invalid" class="btn btn-default" />
+                        </div>
+                    </div>
+                </form>
+                <div>
+                </div>
+            </div>
+        </section>
+        <div class="col-md-4">
+        </div>
+    </div>
+</body>
+</html>
+
+
+
