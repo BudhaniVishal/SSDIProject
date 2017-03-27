@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Threading;
 using DataBaseAccessLayer;
 using DataBaseAccessLayer.ConnectionClass;
 using MongoDB.Driver;
@@ -47,6 +48,7 @@ namespace SSDI_SPILELApplication.Tests
         [Test]
         public void TestRegisterUserWithNewEmailForDbInsert()
         {
+            
             var condition = Builders<UserRegistrationModel>.Filter.Empty;
             MongoClient mongoClient = new MongoClient();
             var dataBase = mongoClient.GetDatabase(dataBaseName);
@@ -62,7 +64,8 @@ namespace SSDI_SPILELApplication.Tests
             obj.ConfirmPassword = "Test";
             obj.UserType = "WRITER";
             obj.IsUserVerified = obj.UserType.Equals("WRITER");
-            obj.EmailAddress = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ", "") + "test@uncc.edu"; // new email id
+            Thread.Sleep(1000); // Given for synchronization
+            obj.EmailAddress = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ", "") + "test@uncc.edu"; // new email id          
             result = new MockDataBaseAccess().RegisterUser(obj);
             Assert.IsTrue(result); // value added
 
