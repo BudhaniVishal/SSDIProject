@@ -9,7 +9,7 @@ namespace SSDI_SPILELApplication.Tests
     [TestFixture]
     public class RegisterUserDataBaseAccessTest
     {
-        private string dataBaseName = "spielDB";
+        private string dataBaseName = "spielDBTest";
         [Test]
         public void TestRegisterUserWithExistingEmail()
         {

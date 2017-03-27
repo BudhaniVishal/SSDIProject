@@ -8,7 +8,7 @@ namespace SSDI_SPILELApplication.Tests
     [TestFixture]
     public class LoginUserDataBaseAccessTest
     {
-        private string dataBaseName = "spielDB";
+        private string dataBaseName = "spielDBTest";
         [Test]
         public void TestLoginWriterWithValidCredentials()
         {
