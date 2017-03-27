@@ -15,7 +15,7 @@ var myController2 = module.controller("EditorController", function ($scope, $htt
                 headers: { "Content-Type": "application/json" }
             });
             post.then(function successCallback(response) {
-                $window.alert("Story Created!");
+                $window.alert(response.data);
             }), function errorCallback(response) {
                 $window.alert("error");
             };

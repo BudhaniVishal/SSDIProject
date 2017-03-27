@@ -1,12 +1,15 @@
-﻿using DataBaseAccessLayer;
+﻿using System;
+using System.Globalization;
+using DataBaseAccessLayer;
 using DataBaseAccessLayer.ConnectionClass;
 using NUnit.Framework;
 
 namespace SSDI_SPILELApplication.Tests
 {
     [TestFixture]
-    public class DataBaseAccessTest
+    public class RegisterUserDataBaseAccessTest
     {
+        private string dataBaseName = "spielDBTest";
         [Test]
         public void TestRegisterUserWithExistingEmail()
         {
@@ -19,11 +22,11 @@ namespace SSDI_SPILELApplication.Tests
             obj.UserType = "WRITER";
             obj.IsUserVerified = obj.UserType.Equals("WRITER");
             obj.EmailAddress = "vbudhani@uncc.edu"; // email id exists
-            result = DatabaseAccess.RegisterUser(obj);
+            result = DatabaseAccess.RegisterUser(obj, dataBaseName);
             Assert.IsFalse(result); // value exists
 
         }
-
+        [Test]
         public void TestRegisterUserWithNewEmail()
         {
             bool result = false;
@@ -34,8 +37,8 @@ namespace SSDI_SPILELApplication.Tests
             obj.ConfirmPassword = "Test";
             obj.UserType = "WRITER";
             obj.IsUserVerified = obj.UserType.Equals("WRITER");
-            obj.EmailAddress = "test@uncc.edu"; // new email id
-            result = DatabaseAccess.RegisterUser(obj);
+            obj.EmailAddress = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ","") +"test@uncc.edu"; // new email id
+            result = DatabaseAccess.RegisterUser(obj, dataBaseName);
             Assert.IsTrue(result); // value exists
 
         }

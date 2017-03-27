@@ -37,10 +37,10 @@ namespace SSDI_SPILELApplication.Controllers
         [HttpPost]
         public JsonResult CreateEditorStory(StoryModel data)
         {
-            var result = true;
             CreateStory story = new CreateStory();
-            var task = story.CreateEditorStory(data);
-            return Json(result);
+            if(story.CreateEditorStory(data))
+            return Json("Story Created !!");
+            return Json("Story with same title exists !!");
         }
 
         [HttpPost]
