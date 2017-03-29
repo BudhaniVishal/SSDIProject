@@ -317,6 +317,7 @@
     <Content Include="Views\Home\editor.cshtml">
       <BrowseToURL>~/Home/editor</BrowseToURL>
     </Content>
+    <Content Include="Views\Home\EditorHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
