@@ -29,14 +29,14 @@
                         <div class="col-md-offset-2 col-md-10">
                             <label class="col-md-2 control-label">Title</label>
                             <input class="col-md-10 form-control" name="title" type="text" id="title" ng-model="mydata.Title" required />
-                            <p ng-show="editorForm.title.$invalid && !editorForm.title.$pristine" class="help-block">Title is required.</p>
+                            <p ng-cloak ng-show="editorForm.title.$invalid && !editorForm.title.$pristine" class="help-block">Title is required.</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10" ng-class="{ 'has-error' : editorForm.scenario.$invalid && !editorForm.scenario.$pristine }">
                             <label class="col-md-2 control-label">Scenario</label>
                             <textarea class="col-md-10 form-control" type="text" id="scenario" name="scenario" ng-model="mydata.Scenario" row="6" cols="50" required></textarea>
-                            <p ng-show="editorForm.scenario.$invalid && !editorForm.scenario.$pristine" class="help-block">Scenario is required.</p>
+                            <p ng-cloak ng-show="editorForm.scenario.$invalid && !editorForm.scenario.$pristine" class="help-block">Scenario is required.</p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -54,7 +54,7 @@
                                 <option value="Mystery">Mystery</option>
                                 <option value="Thriller">Thriller/Suspense</option>
                             </select>
-                            <p ng-show="editorForm.genre.$invalid && !editorForm.genre.$pristine" class="help-block">Genre is required.</p>
+                            <p ng-cloak ng-show="editorForm.genre.$invalid && !editorForm.genre.$pristine" class="help-block">Genre is required.</p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -69,7 +69,7 @@
                                 <option value="Non Fiction">Non Fiction</option>
                                 <option value="Classics">Classics</option>
                             </select>
-                            <p ng-show="editorForm.type.$invalid && !editorForm.type.$pristine" class="help-block">Type is required.</p>
+                            <p ng-cloak ng-show="editorForm.type.$invalid && !editorForm.type.$pristine" class="help-block">Type is required.</p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -77,14 +77,14 @@
                             <label class="col-md-2 control-label">From</label>
                             <input class="col-md-10 form-control" type="date" id="from" name="from" ng-model="mydata.From" ng-minlength="5" ng-maxlength="12" required />
                         </div>
-                        <p ng-show="editorForm.from.$invalid && !editorForm.from.$pristine" class="help-block">From date is required.</p>
+                        <p ng-cloak ng-show="editorForm.from.$invalid && !editorForm.from.$pristine" class="help-block">From date is required.</p>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10" ng-class="{ 'has-error' : editorForm.to.$invalid && !editorForm.to.$pristine }">
                             <label class="col-md-2 control-label">To</label>
                             <input class="col-md-10 form-control" type="date" id="to" ng-model="mydata.To" ng-minlength="5" ng-maxlength="12" required />
                         </div>
-                        <p ng-show="editorForm.to.$invalid && !editorForm.to.$pristine" name="to" class="help-block">To date is required.</p>
+                        <p ng-cloak ng-show="editorForm.to.$invalid && !editorForm.to.$pristine" name="to" class="help-block">To date is required.</p>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">

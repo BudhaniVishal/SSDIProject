@@ -28,7 +28,7 @@
                         <div class="col-md-10">
                             <input type="text" name="FirstName" pattern="[a-zA-Z]+" ng-pattern-restrict  ng-model="mydata.FirstName" id="FirstName" ng-minlength="6" ng-maxlength="21" class="form-control input-sm" placeholder="First Name" required />
                         </div>
-                        <p ng-show="formRegister.FirstName.$invalid && !formRegister.FirstName.$pristine" class="help-block">First Name should only contain characters & should be greater than 5 and less than 20 characters.</p>
+                        <p ng-cloak ng-show="formRegister.FirstName.$invalid && !formRegister.FirstName.$pristine" class="help-block">First Name should only contain characters & should be greater than 5 and less than 20 characters.</p>
                     </div>
 
                     <div class="form-group" required ng-class="{ 'has-error' : formRegister.LastName.$invalid && !formRegister.LastName.$pristine }">
@@ -36,7 +36,7 @@
                         <div class="col-md-10">
                             <input type="text" name="LastName" pattern="[a-zA-Z]+" ng-pattern-restrict  id="LastName" ng-minlength="6" ng-maxlength="21" ng-model="mydata.LastName" class="form-control input-sm" placeholder="Last Name" required />
                         </div>
-                        <p ng-show="formRegister.LastName.$invalid && !formRegister.LastName.$pristine" class="help-block">Last Name should only contain characters & should be greater than 5 and less than 20 characters.</p>
+                        <p ng-cloak ng-show="formRegister.LastName.$invalid && !formRegister.LastName.$pristine" class="help-block">Last Name should only contain characters & should be greater than 5 and less than 20 characters.</p>
                     </div>
 
 
@@ -46,7 +46,7 @@
                         <div class="col-md-10">
                             <input type="email" name="EmailAddress" id="EmailAddress" ng-minlength="7" ng-maxlength="21" ng-model="mydata.EmailAddress" class="form-control input-sm" placeholder="Email address" required />
                         </div>
-                        <p ng-show="formRegister.EmailAddress.$invalid && !formRegister.EmailAddress.$pristine" class="help-block">Email address should be greater than 6 and less than 20 characters
+                        <p ng-cloak ng-show="formRegister.EmailAddress.$invalid && !formRegister.EmailAddress.$pristine" class="help-block">Email address should be greater than 6 and less than 20 characters
                          and in correct email format.</p>
                     </div>
 
@@ -56,7 +56,7 @@
                             <input type="password" name="Password" id="Password" ng-minlength="6" ng-maxlength="21" password-verify="{{mydata.ConfirmPassword}}"
                                    ng-model="mydata.Password" class="form-control input-sm" placeholder="Passsword" required />
                         </div>
-                        <p ng-show="formRegister.Password.$invalid && !formRegister.Password.$pristine" class="help-block">Password should be greater than 5 and less than 20 characters.</p>
+                        <p ng-cloak ng-show="formRegister.Password.$invalid && !formRegister.Password.$pristine" class="help-block">Password should be greater than 5 and less than 20 characters.</p>
                     </div>
 
                     <div class="form-group" required ng-class="{ 'has-error' : formRegister.ConfirmPassword.$invalid && !formRegister.ConfirmPassword.$pristine }">
@@ -66,7 +66,7 @@
                             <input type="password" compare-to="mydata.Password" password-verify="{{mydata.Password}}"
                                    name="ConfirmPassword" id="ConfirmPassword" ng-minlength="6" ng-maxlength="21" ng-model="mydata.ConfirmPassword" class="form-control input-sm" placeholder="Confirm Password" required />
                         </div>
-                        <p ng-show="formRegister.ConfirmPassword.$invalid && !formRegister.ConfirmPassword.$pristine" class="help-block">Confirm Password should be greater than 5 and less than 20 characters.</p>
+                        <p ng-cloak ng-show="formRegister.ConfirmPassword.$invalid && !formRegister.ConfirmPassword.$pristine" class="help-block">Confirm Password should be greater than 5 and less than 20 characters.</p>
                     </div>
 
                     <div class="form-group" required>

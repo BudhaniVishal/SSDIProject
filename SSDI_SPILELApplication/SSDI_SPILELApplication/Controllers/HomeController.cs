@@ -14,6 +14,7 @@ namespace SSDI_SPILELApplication.Controllers
     {
         public ActionResult Index()
         {
+            AccountController.ShowLogOff = false;
             return View();
         }
 
@@ -61,6 +62,10 @@ namespace SSDI_SPILELApplication.Controllers
         {
             VerifyLogin obj =new VerifyLogin();
             ResultCode result = obj.LoginUser(credentials);
+            if (result.Result)
+            {
+                AccountController.ShowLogOff = true;
+            }
             return Json(result.Message);
         }
     }
