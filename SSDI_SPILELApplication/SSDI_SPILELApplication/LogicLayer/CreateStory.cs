@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Globalization;
-using System.Linq;
-using System.Web;
 using DataBaseAccessLayer.ConnectionClass;
-using System.Threading.Tasks;
+using DataBaseAccessLayer;
+using SSDI_SPILELApplication.Interfaces;
+using SSDI_SPILELApplication.Models;
 
-namespace SSDI_SPILELApplication.Models
+namespace SSDI_SPILELApplication.LogicLayer
 {
     public class CreateStory : ICreateStory
     {
-        public bool CreateEditorStory(StoryModel story)
+        public ResultCode CreateEditorStory(StoryModel story)
         {
-            string dataBaseName = ConfigurationManager.AppSettings["Database"];
+            DatabaseAccess objDatabaseAccess = new DatabaseAccess();
             ConnStoryTable obj = new ConnStoryTable();
             obj.Content = story.Content;
             obj.From = Convert.ToString(story.from, CultureInfo.InvariantCulture);
@@ -23,8 +21,8 @@ namespace SSDI_SPILELApplication.Models
             obj.To = Convert.ToString(story.to, CultureInfo.InvariantCulture);
             obj.Type = story.Type;
             obj.Genre = story.genre;
-            
-            return DataBaseAccessLayer.DatabaseAccess.CreateStory(obj, dataBaseName); ;
+
+            return objDatabaseAccess.CreateStory(obj); ;
         }
     }
 }

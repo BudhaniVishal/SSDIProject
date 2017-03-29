@@ -9,9 +9,9 @@ using DataBaseAccessLayer.Interfaces;
 
 namespace DataBaseAccessLayer
 {
-    public class DatabaseAccess : IDatabaseAccess
+    public class MockDataBaseAccess : IDatabaseAccess
     {
-        private static string dataBaseName = ConfigurationManager.AppSettings["Database"];
+        private static string dataBaseName = "spielDBTest";
         public ResultCode CreateStory(ConnStoryTable story)
         {
             ResultCode resultCode = new ResultCode();
@@ -42,7 +42,8 @@ namespace DataBaseAccessLayer
                 {
                     result = BsonSerializer.Deserialize<ConnStoryTable>(task.ToBsonDocument());
                 }
-                var StoryID = (task != null) ? (result.StoryID + 1): 1; // If table is empty, push value as 1.
+                var StoryID = (task != null) ? (result.StoryID + 1) : 1; // If table is empty, push value as 1.
+
                 story.StoryID = StoryID;
                 var documnt = story.ToBsonDocument();
                 collection.InsertOne(documnt);
@@ -57,7 +58,7 @@ namespace DataBaseAccessLayer
                 resultCode.Message = "Error occured, Please try again !!";
                 return resultCode;
             }
-            
+
         }
 
         private IMongoDatabase CreateDataConnection(MongoClient obj)
@@ -75,6 +76,7 @@ namespace DataBaseAccessLayer
 
                 var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p => p.Password).Include(p => p.UserType).Include(p => p.IsUserVerified);
                 var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
+                
                 if (results.Count() == 1)
                 {
                     var data = results.FirstOrDefault();

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SSDI_SPILELApplication.Models
+namespace DataBaseAccessLayer.ConnectionClass
 {
-     interface ICreateStory
+    public class ResultCode
     {
-        bool CreateEditorStory(StoryModel story);
+        public bool Result;
+        public string Message;
     }
 }

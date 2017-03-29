@@ -2,14 +2,10 @@
 
 var logincontrol = module.controller("loginController", function ($scope, $http, $window) {
     $scope.mydata = null;
-
     $scope.loginbtn = {};
-    $scope.loginbtn.click = function () {
-        var myobj = $scope.mydata;
-        if (myobj != null) {
-            //$http.post('/Home/AjaxMethod', myobj).then(function successCallback(data, status) {
-            //    alert("Successful");
-            //});
+    $scope.submitForm = function (isValid) {
+        if (isValid) {
+            var myobj = $scope.mydata;
             var post = $http({
                 method: "POST",
                 url: "/Home/Login",

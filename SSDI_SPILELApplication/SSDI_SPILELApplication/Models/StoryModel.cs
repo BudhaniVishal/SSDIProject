@@ -15,5 +15,6 @@ namespace SSDI_SPILELApplication.Models
         public String genre { get; set; }
         public DateTime to { get; set; }
         public DateTime from {get; set;}
+        public string MessageString { get; set; }
     }
 }

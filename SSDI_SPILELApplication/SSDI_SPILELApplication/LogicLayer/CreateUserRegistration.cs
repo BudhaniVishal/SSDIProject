@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using DataBaseAccessLayer;
+﻿using DataBaseAccessLayer;
 using SSDI_SPILELApplication.Interfaces;
 using SSDI_SPILELApplication.Models;
 using DBLayer = DataBaseAccessLayer.ConnectionClass;
-using System.Configuration;
 
 namespace SSDI_SPILELApplication.LogicLayer
 {
     public class CreateUserRegistration : IRegistration
     {
-        public bool RegisterUser(UserRegistrationModel modelData)
+        public DBLayer.ResultCode RegisterUser(UserRegistrationModel modelData)
         {
-            string dataBaseName = ConfigurationManager.AppSettings["Database"];
+            DatabaseAccess objDatabaseAccess = new DatabaseAccess();
             DBLayer.UserRegistrationModel obj = new DBLayer.UserRegistrationModel
             {
                 FirstName = modelData.FirstName,
@@ -25,7 +20,7 @@ namespace SSDI_SPILELApplication.LogicLayer
                 UserType = modelData.UserType.ToString()
             };
 
-            return DatabaseAccess.RegisterUser(obj, dataBaseName); 
+            return objDatabaseAccess.RegisterUser(obj); 
         }
     }
 }

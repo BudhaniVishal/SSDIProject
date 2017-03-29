@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DataBaseAccessLayer;
 using NUnit.Framework;
 using DataBaseAccessLayer.ConnectionClass;
+using MongoDB.Driver;
 
 namespace SSDI_SPILELApplication.Tests
 {
@@ -17,7 +18,7 @@ namespace SSDI_SPILELApplication.Tests
         [Test]
         public void TestEditorCreateStory()
         {
-            bool result = false;
+            ResultCode result;
             ConnStoryTable obj = new ConnStoryTable();
             obj.Title = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ", "") + "Test";
             obj.Scenario = "Test";
@@ -25,9 +26,71 @@ namespace SSDI_SPILELApplication.Tests
             obj.Type = "Test";
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
-            result = DatabaseAccess.CreateStory(obj, dataBaseName);
-            Assert.IsTrue(result); // value saved
+            result = new MockDataBaseAccess().CreateStory(obj);
+            Assert.IsTrue(result.Result); // value saved
+        }
 
+        [Test]
+        public void TestEditorForExistingStory()
+        {
+            ResultCode result;
+            ConnStoryTable obj = new ConnStoryTable();
+            obj.Title = "Test"; // Already existing story
+            obj.Scenario = "Test";
+            obj.Genre = "Test";
+            obj.Type = "Test";
+            obj.To = "01/01/2017";
+            obj.From = "01/02/2017";
+            result = new MockDataBaseAccess().CreateStory(obj);
+            Assert.IsFalse(result.Result); // value not saved
+        }
+
+        [Test]
+        public void TestCreateStoryForDatabaseIncrement()
+        {
+            var condition = Builders<ConnStoryTable>.Filter.Empty;
+            MongoClient mongoClient = new MongoClient();
+            var dataBase = mongoClient.GetDatabase(dataBaseName);
+            var collection = dataBase.GetCollection<ConnStoryTable>("StoryTable");
+            int count = collection.Find(condition).ToList().Count; // Gives the initial count
+
+            ResultCode result;
+            ConnStoryTable obj = new ConnStoryTable();
+            obj.Title = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ", "") + "Test";
+            obj.Scenario = "Test";
+            obj.Genre = "Test";
+            obj.Type = "Test";
+            obj.To = "01/01/2017";
+            obj.From = "01/02/2017";
+            result = new MockDataBaseAccess().CreateStory(obj);
+            Assert.IsTrue(result.Result); // value saved
+
+            int countNew = collection.Find(condition).ToList().Count; // new count
+            Assert.AreEqual(count + 1, countNew); // Value added to database
+        }
+
+        [Test]
+        public void TestCreateExistingStoryForDatabaseNonIncrement()
+        {
+            var condition = Builders<ConnStoryTable>.Filter.Empty;
+            MongoClient mongoClient = new MongoClient();
+            var dataBase = mongoClient.GetDatabase(dataBaseName);
+            var collection = dataBase.GetCollection<ConnStoryTable>("StoryTable");
+            int count = collection.Find(condition).ToList().Count; // Gives the initial count
+
+            ResultCode result;
+            ConnStoryTable obj = new ConnStoryTable();
+            obj.Title =  "Test"; // Already existing story
+            obj.Scenario = "Test";
+            obj.Genre = "Test";
+            obj.Type = "Test";
+            obj.To = "01/01/2017";
+            obj.From = "01/02/2017";
+            result = new MockDataBaseAccess().CreateStory(obj);
+            Assert.IsFalse(result.Result); // value not saved
+
+            int countNew = collection.Find(condition).ToList().Count; // new count
+            Assert.AreEqual(count, countNew); // Value not added to database
         }
     }
 }

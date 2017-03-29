@@ -8,65 +8,69 @@ namespace SSDI_SPILELApplication.Tests
     [TestFixture]
     public class LoginUserDataBaseAccessTest
     {
-        private string dataBaseName = "spielDBTest";
         [Test]
         public void TestLoginWriterWithValidCredentials()
         {
+            ResultCode result = new ResultCode();
             UserRegistrationModel obj = new UserRegistrationModel();
             obj.IsUserVerified = true;
             obj.EmailAddress = "vishal@uncc.edu";
             obj.Password = "1234";
             obj.UserType = "WRITER";
-            string s = DatabaseAccess.LoginUser(obj, dataBaseName);
-            Assert.AreEqual(s, "Writer Login Successful !!");
+            result = new MockDataBaseAccess().LoginUser(obj);
+            Assert.AreEqual(result.Message, "Writer Login Successful !!");
         }
 
         [Test]
         public void TestLoginWriterWithInValidPassword()
         {
+            ResultCode result = new ResultCode();
             UserRegistrationModel obj = new UserRegistrationModel();
             obj.IsUserVerified = BsonBoolean.True;
             obj.EmailAddress = "vishal@uncc.edu";
             obj.Password = "14";
             obj.UserType = "WRITER";
-            string s = DatabaseAccess.LoginUser(obj, dataBaseName);
-            Assert.AreEqual(s, "Incorrect Password !!");
+            result = new MockDataBaseAccess().LoginUser(obj);
+            Assert.AreEqual(result.Message, "Incorrect Password !!");
         }
 
         [Test]
         public void TestLoginUserWithInValidEmail()
         {
+            ResultCode result = new ResultCode();
             UserRegistrationModel obj = new UserRegistrationModel();
             obj.IsUserVerified = BsonBoolean.True;
             obj.EmailAddress = "aa@uncc.edu";
             obj.Password = "1234";
             obj.UserType = "WRITER";
-            string s = DatabaseAccess.LoginUser(obj, dataBaseName);
-            Assert.AreEqual(s, "Invalid Email Address");
+            result = new MockDataBaseAccess().LoginUser(obj);
+            Assert.AreEqual(result.Message, "Invalid Email Address");
         }
 
         [Test]
         public void TestLoginEditorwithValidDetailsAndApproved()
         {
+            ResultCode result = new ResultCode();
             UserRegistrationModel obj = new UserRegistrationModel();
             obj.IsUserVerified = BsonBoolean.True;
             obj.EmailAddress = "editor@uncc.edu";
             obj.Password = "1234";
             obj.UserType = "EDITOR";
-            string s = DatabaseAccess.LoginUser(obj, dataBaseName);
-            Assert.AreEqual(s, "Editor Login Successful !!");
+            result = new MockDataBaseAccess().LoginUser(obj);
+            Assert.AreEqual(result.Message, "Editor Login Successful !!");
         }
 
         [Test]
         public void TestLoginEditorwithValidDetailsAndNotApproved()
         {
+            ResultCode result = new ResultCode();
             UserRegistrationModel obj = new UserRegistrationModel();
             obj.IsUserVerified = BsonBoolean.False;
             obj.EmailAddress = "edit@uncc.edu";
             obj.Password = "1234";
             obj.UserType = "EDITOR";
-            string s = DatabaseAccess.LoginUser(obj,dataBaseName);
-            Assert.AreEqual(s, "Editor not verified yet ");
+            result = new MockDataBaseAccess().LoginUser(obj);
+            Assert.AreEqual(result.Message, "Editor not verified yet ");
         }
     }
 }
