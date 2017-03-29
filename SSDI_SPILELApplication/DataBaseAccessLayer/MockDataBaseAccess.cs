@@ -1,4 +1,5 @@
-﻿using DataBaseAccessLayer.ConnectionClass;
+﻿using System;
+using DataBaseAccessLayer.ConnectionClass;
 using System.Configuration;
 using System.Linq;
 using MongoDB.Driver;
@@ -11,27 +12,53 @@ namespace DataBaseAccessLayer
     public class MockDataBaseAccess : IDatabaseAccess
     {
         private static string dataBaseName = "spielDBTest";
-        public bool CreateStory(ConnStoryTable story)
+        public ResultCode CreateStory(ConnStoryTable story)
         {
-
-            var tableCollection = CreateDataConnection(new MongoClient()).GetCollection<ConnStoryTable>("StoryTable");
-            var condition = Builders<ConnStoryTable>.Filter.Eq(p => p.Title, story.Title);
-            var fields = Builders<ConnStoryTable>.Projection.Include(p => p.Title).Include(p => p.StoryID);
-            var results = tableCollection.Find(condition).Project<ConnStoryTable>(fields).ToList().AsQueryable();
-            if (results.Count() == 1)
+            ResultCode resultCode = new ResultCode();
+            try
             {
-                // story exists
-                return false;
+                var tableCollection = CreateDataConnection(new MongoClient())
+                    .GetCollection<ConnStoryTable>("StoryTable");
+                var condition = Builders<ConnStoryTable>.Filter.Eq(p => p.Title, story.Title);
+                var fields = Builders<ConnStoryTable>.Projection.Include(p => p.Title).Include(p => p.StoryID);
+                var results = tableCollection.Find(condition).Project<ConnStoryTable>(fields).ToList().AsQueryable();
+                if (results.Count() == 1)
+                {
+                    // story exists
+                    resultCode.Result = false;
+                    resultCode.Message = "Story with same title exists !!";
+                    return resultCode;
+                }
+                var collection = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("StoryTable");
+                BsonDocument task = null;
+                task =
+                    collection.Find(new BsonDocument())
+                        .Sort(Builders<BsonDocument>.Sort.Descending("StoryID"))
+                        .Limit(1)
+                        .FirstOrDefault();
+
+                ConnStoryTable result = null;
+                if (task != null)
+                {
+                    result = BsonSerializer.Deserialize<ConnStoryTable>(task.ToBsonDocument());
+                }
+                var StoryID = (task != null) ? (result.StoryID + 1) : 1; // If table is empty, push value as 1.
+
+                story.StoryID = StoryID;
+                var documnt = story.ToBsonDocument();
+                collection.InsertOne(documnt);
+
+                resultCode.Result = false;
+                resultCode.Message = "Story Created !!";
+                return resultCode;
             }
-            var collection = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("StoryTable");
-            BsonDocument task = null;
-            task = collection.Find(new BsonDocument()).Sort(Builders<BsonDocument>.Sort.Descending("StoryID")).Limit(1).FirstOrDefault();
-            var result = BsonSerializer.Deserialize<ConnStoryTable>(task.ToBsonDocument());
-            var StoryID = result.StoryID + 1;
-            story.StoryID = StoryID;
-            var documnt = story.ToBsonDocument();
-            collection.InsertOne(documnt);
-            return true;
+            catch (Exception ex)
+            {
+                resultCode.Result = false;
+                resultCode.Message = "Error occured, Please try again !!";
+                return resultCode;
+            }
+
         }
 
         private IMongoDatabase CreateDataConnection(MongoClient obj)
@@ -39,68 +66,107 @@ namespace DataBaseAccessLayer
             return obj.GetDatabase(dataBaseName);
         }
 
-        public string LoginUser(UserRegistrationModel user)
+        public ResultCode LoginUser(UserRegistrationModel user)
         {
-            IMongoCollection<UserRegistrationModel> collection = CreateDataConnection(new MongoClient()).GetCollection<UserRegistrationModel>("UserRegistration");
-            var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, user.EmailAddress);
-
-            var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p => p.Password).Include(p => p.UserType).Include(p => p.IsUserVerified);
-            var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
-            var res = false;
-            if (results.Count() == 1)
+            ResultCode resultCode = new ResultCode();
+            try
             {
-                var data = results.FirstOrDefault();
-                if (data != null)
+                IMongoCollection<UserRegistrationModel> collection = CreateDataConnection(new MongoClient()).GetCollection<UserRegistrationModel>("UserRegistration");
+                var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, user.EmailAddress);
+
+                var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p => p.Password).Include(p => p.UserType).Include(p => p.IsUserVerified);
+                var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
+                
+                if (results.Count() == 1)
                 {
-                    if (data.Password.Equals(user.Password))
+                    var data = results.FirstOrDefault();
+                    if (data != null)
                     {
-                        if (data.UserType.Equals("WRITER"))
+                        if (data.Password.Equals(user.Password))
                         {
-                            return "Writer Login Successful !!";
+                            if (data.UserType.Equals("WRITER"))
+                            {
+                                resultCode.Result = true;
+                                resultCode.Message = "Writer Login Successful !!";
+                                return resultCode;
+                            }
+                            if (data.UserType.Equals("EDITOR") && data.IsUserVerified.AsBoolean)
+                            {
+                                resultCode.Result = true;
+                                resultCode.Message = "Editor Login Successful !!";
+                                return resultCode;
+                            }
+                            resultCode.Result = false;
+                            resultCode.Message = "Editor not verified yet !!";
+                            return resultCode;
                         }
-                        if (data.UserType.Equals("EDITOR") && data.IsUserVerified.AsBoolean)
-                        {
-                            return "Editor Login Successful !!";
-                        }
-                        return "Editor not verified yet ";
+                        resultCode.Result = false;
+                        resultCode.Message = "Incorrect Password !!";
+                        return resultCode;
                     }
-                    return "Incorrect Password !!";
+                    resultCode.Result = false;
+                    resultCode.Message = "Network Issue, Please try again !!";
+                    return resultCode;
                 }
-
-                return "Network Issue, Please try again !!";
+                resultCode.Result = false;
+                resultCode.Message = "Invalid Email Address";
+                return resultCode;
             }
-
-            return "Invalid Email Address";
-
+            catch (Exception ex)
+            {
+                resultCode.Result = false;
+                resultCode.Message = "Error occured, Please try again !!";
+                return resultCode;
+            }
         }
 
-        public bool RegisterUser(UserRegistrationModel modelData)
+        public ResultCode RegisterUser(UserRegistrationModel modelData)
         {
-            IMongoCollection<UserRegistrationModel> collection = CreateDataConnection(new MongoClient()).GetCollection<UserRegistrationModel>("UserRegistration");
-            var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, modelData.EmailAddress);
-            var fields = Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p => p.FirstName);
-            var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
-            if (results.Any())
+            ResultCode resultCode = new ResultCode();
+            try
             {
-                // user exists return;
-                return false;
-            }
-            else
-            {
-                if (modelData.UserType.Equals("WRITER"))
+                IMongoCollection<UserRegistrationModel> collection =
+                    CreateDataConnection(new MongoClient()).GetCollection<UserRegistrationModel>("UserRegistration");
+                var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, modelData.EmailAddress);
+                var fields =
+                    Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress).Include(p => p.FirstName);
+                var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
+                if (results.Any())
                 {
-                    modelData.IsUserVerified = true;
+                    // user exists return;
+                    resultCode.Result = false;
+                    resultCode.Message = "Email Id Exists, Please try again !!";
+                    return resultCode;
                 }
                 else
                 {
-                    modelData.IsUserVerified = false;
-                }
-                //Insert to DB values
+                    if (modelData.UserType.Equals("WRITER"))
+                    {
+                        modelData.IsUserVerified = true;
+                        resultCode.Message = "Writer registration is successfull";
+                    }
+                    else
+                    {
+                        modelData.IsUserVerified = false;
+                        resultCode.Message =
+                            "Editor registration is successfull!! You will receive a confirmation email !!";
+                    }
+                    //Insert to DB values
 
-                var collectionName = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("UserRegistration");
-                var document = modelData.ToBsonDocument();
-                collectionName.InsertOne(document);
-                return true;
+                    var collectionName =
+                        CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("UserRegistration");
+                    var document = modelData.ToBsonDocument();
+                    collectionName.InsertOne(document);
+
+                    resultCode.Result = true;
+                    return resultCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                resultCode.Result = false;
+                resultCode.Message = "Error occured, Please try again !!";
+                return resultCode;
             }
         }
     }

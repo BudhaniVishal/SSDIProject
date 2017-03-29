@@ -7,7 +7,7 @@ namespace SSDI_SPILELApplication.LogicLayer
 {
     public class CreateUserRegistration : IRegistration
     {
-        public bool RegisterUser(UserRegistrationModel modelData)
+        public DBLayer.ResultCode RegisterUser(UserRegistrationModel modelData)
         {
             DatabaseAccess objDatabaseAccess = new DatabaseAccess();
             DBLayer.UserRegistrationModel obj = new DBLayer.UserRegistrationModel

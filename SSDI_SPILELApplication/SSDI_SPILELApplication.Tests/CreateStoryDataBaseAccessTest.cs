@@ -18,7 +18,7 @@ namespace SSDI_SPILELApplication.Tests
         [Test]
         public void TestEditorCreateStory()
         {
-            bool result = false;
+            ResultCode result;
             ConnStoryTable obj = new ConnStoryTable();
             obj.Title = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ", "") + "Test";
             obj.Scenario = "Test";
@@ -27,13 +27,13 @@ namespace SSDI_SPILELApplication.Tests
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
             result = new MockDataBaseAccess().CreateStory(obj);
-            Assert.IsTrue(result); // value saved
+            Assert.IsTrue(result.Result); // value saved
         }
 
         [Test]
         public void TestEditorForExistingStory()
         {
-            bool result = true;
+            ResultCode result;
             ConnStoryTable obj = new ConnStoryTable();
             obj.Title = "Test"; // Already existing story
             obj.Scenario = "Test";
@@ -42,7 +42,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
             result = new MockDataBaseAccess().CreateStory(obj);
-            Assert.IsFalse(result); // value not saved
+            Assert.IsFalse(result.Result); // value not saved
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace SSDI_SPILELApplication.Tests
             var collection = dataBase.GetCollection<ConnStoryTable>("StoryTable");
             int count = collection.Find(condition).ToList().Count; // Gives the initial count
 
-            bool result = false;
+            ResultCode result;
             ConnStoryTable obj = new ConnStoryTable();
             obj.Title = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ", "") + "Test";
             obj.Scenario = "Test";
@@ -63,7 +63,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
             result = new MockDataBaseAccess().CreateStory(obj);
-            Assert.IsTrue(result); // value saved
+            Assert.IsTrue(result.Result); // value saved
 
             int countNew = collection.Find(condition).ToList().Count; // new count
             Assert.AreEqual(count + 1, countNew); // Value added to database
@@ -78,7 +78,7 @@ namespace SSDI_SPILELApplication.Tests
             var collection = dataBase.GetCollection<ConnStoryTable>("StoryTable");
             int count = collection.Find(condition).ToList().Count; // Gives the initial count
 
-            bool result = true;
+            ResultCode result;
             ConnStoryTable obj = new ConnStoryTable();
             obj.Title =  "Test"; // Already existing story
             obj.Scenario = "Test";
@@ -87,7 +87,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
             result = new MockDataBaseAccess().CreateStory(obj);
-            Assert.IsFalse(result); // value not saved
+            Assert.IsFalse(result.Result); // value not saved
 
             int countNew = collection.Find(condition).ToList().Count; // new count
             Assert.AreEqual(count, countNew); // Value not added to database

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SSDI_SPILELApplication.Models;
+using DataBaseAccessLayer.ConnectionClass;
+using UserRegistrationModel = SSDI_SPILELApplication.Models.UserRegistrationModel;
 
 namespace SSDI_SPILELApplication.Interfaces
 {
     public interface IRegistration
     {
-        bool RegisterUser(UserRegistrationModel userData);
+        ResultCode RegisterUser(UserRegistrationModel userData);
     }
 }

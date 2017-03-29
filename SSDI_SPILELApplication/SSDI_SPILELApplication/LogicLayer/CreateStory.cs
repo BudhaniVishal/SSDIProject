@@ -9,7 +9,7 @@ namespace SSDI_SPILELApplication.LogicLayer
 {
     public class CreateStory : ICreateStory
     {
-        public bool CreateEditorStory(StoryModel story)
+        public ResultCode CreateEditorStory(StoryModel story)
         {
             DatabaseAccess objDatabaseAccess = new DatabaseAccess();
             ConnStoryTable obj = new ConnStoryTable();

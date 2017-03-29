@@ -1,9 +1,10 @@
-﻿using SSDI_SPILELApplication.Models;
+﻿using DataBaseAccessLayer.ConnectionClass;
+using SSDI_SPILELApplication.Models;
 
 namespace SSDI_SPILELApplication.Interfaces
 {
     interface ICreateStory
     {
-        bool CreateEditorStory(StoryModel story);
+        ResultCode CreateEditorStory(StoryModel story);
     }
 }

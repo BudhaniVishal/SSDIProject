@@ -4,8 +4,8 @@ namespace DataBaseAccessLayer.Interfaces
 {
     interface IDatabaseAccess
     {
-        bool CreateStory(ConnStoryTable story);
-        string LoginUser(UserRegistrationModel user);
-        bool RegisterUser(UserRegistrationModel modelData);
+        ResultCode CreateStory(ConnStoryTable story);
+        ResultCode LoginUser(UserRegistrationModel user);
+        ResultCode RegisterUser(UserRegistrationModel modelData);
     }
 }

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DataBaseAccessLayer.ConnectionClass;
 using SSDI_SPILELApplication.LogicLayer;
+using UserRegistrationModel = SSDI_SPILELApplication.Models.UserRegistrationModel;
 
 namespace SSDI_SPILELApplication.Controllers
 {
@@ -38,9 +40,8 @@ namespace SSDI_SPILELApplication.Controllers
         public JsonResult CreateEditorStory(StoryModel data)
         {
             CreateStory story = new CreateStory();
-            if(story.CreateEditorStory(data))
-            return Json("Story Created !!");
-            return Json("Story with same title exists !!");
+            ResultCode result = story.CreateEditorStory(data);
+            return Json(result.Message);
         }
 
         [HttpPost]
@@ -51,25 +52,16 @@ namespace SSDI_SPILELApplication.Controllers
                 return Json("Password and Confirm Password doesn't match !!");
             }
             CreateUserRegistration obj = new CreateUserRegistration();
-            if (obj.RegisterUser(data))
-            {
-                if (data.UserType == UserType.EDITOR)
-                {
-                    data.MessageString = "Editor registration is successfull!! You will receive a confirmation email !!";
-                    return Json("Editor registration is successfull!! You will receive a confirmation email !!");
-                }
-                data.MessageString = "Writer registration is successfull";
-                return Json("Writer registration is successfull !!");
-            }
-            data.MessageString = "Email Id Exists, Please try again !!";
-            return Json("Email Id Exists, Please try again !!");
+            ResultCode result = obj.RegisterUser(data);
+            return Json(result.Message);
         }
         
         [HttpPost]
         public JsonResult Login(LoginModel credentials)
         {
             VerifyLogin obj =new VerifyLogin();
-            return Json(obj.LoginUser(credentials));
+            ResultCode result = obj.LoginUser(credentials);
+            return Json(result.Message);
         }
     }
 }
