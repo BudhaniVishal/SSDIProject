@@ -48,7 +48,7 @@ namespace DataBaseAccessLayer
                 var documnt = story.ToBsonDocument();
                 collection.InsertOne(documnt);
 
-                resultCode.Result = false;
+                resultCode.Result = true;
                 resultCode.Message = "Story Created !!";
                 return resultCode;
             }

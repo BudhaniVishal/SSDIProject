@@ -17,7 +17,7 @@ namespace SSDI_SPILELApplication.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        public static bool ShowLogOff;
         public AccountController()
         {
         }
@@ -57,6 +57,7 @@ namespace SSDI_SPILELApplication.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            //ShowLogOff = false;
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

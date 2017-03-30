@@ -14,13 +14,13 @@ namespace SSDI_SPILELApplication.LogicLayer
             DatabaseAccess objDatabaseAccess = new DatabaseAccess();
             ConnStoryTable obj = new ConnStoryTable();
             obj.Content = story.Content;
-            obj.From = Convert.ToString(story.from, CultureInfo.InvariantCulture);
+            obj.From = Convert.ToString(story.From, CultureInfo.InvariantCulture);
             obj.Scenario = story.Scenario;
             obj.StoryID = story.StoryID;
             obj.Title = story.Title;
-            obj.To = Convert.ToString(story.to, CultureInfo.InvariantCulture);
+            obj.To = Convert.ToString(story.To, CultureInfo.InvariantCulture);
             obj.Type = story.Type;
-            obj.Genre = story.genre;
+            obj.Genre = story.Genre;
 
             return objDatabaseAccess.CreateStory(obj); ;
         }
