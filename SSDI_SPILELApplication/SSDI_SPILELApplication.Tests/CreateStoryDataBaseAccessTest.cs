@@ -8,6 +8,7 @@ using DataBaseAccessLayer;
 using NUnit.Framework;
 using DataBaseAccessLayer.ConnectionClass;
 using MongoDB.Driver;
+using System.Threading;
 
 namespace SSDI_SPILELApplication.Tests
 {
@@ -20,6 +21,7 @@ namespace SSDI_SPILELApplication.Tests
         {
             ResultCode result;
             ConnStoryTable obj = new ConnStoryTable();
+            Thread.Sleep(1000);
             obj.Title = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ", "") + "Test";
             obj.Scenario = "Test";
             obj.Genre = "Test";

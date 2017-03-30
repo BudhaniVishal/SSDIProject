@@ -70,7 +70,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.Password = "1234";
             obj.UserType = "EDITOR";
             result = new MockDataBaseAccess().LoginUser(obj);
-            Assert.AreEqual(result.Message, "Editor not verified yet ");
+            Assert.AreEqual(result.Message, "Editor not verified yet !!");
         }
     }
 }
