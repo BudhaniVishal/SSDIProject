@@ -181,3 +181,7 @@ D:\SSDI\GitHub\SSDIProject\SSDI_SPILELApplication\SSDI_SPILELApplication\bin\Mic
 D:\SSDI\GitHub\SSDIProject\SSDI_SPILELApplication\SSDI_SPILELApplication\obj\Debug\SSDI_SPILELApplication.csprojResolveAssemblyReference.cache
 D:\SSDI\GitHub\SSDIProject\SSDI_SPILELApplication\SSDI_SPILELApplication\obj\Debug\SSDI_SPILELApplication.dll
 D:\SSDI\GitHub\SSDIProject\SSDI_SPILELApplication\SSDI_SPILELApplication\obj\Debug\SSDI_SPILELApplication.pdb
+D:\SSDI\GitHub\SSDIProject\SSDI_SPILELApplication\SSDI_SPILELApplication\bin\DataBaseAccessLayer.dll
+D:\SSDI\GitHub\SSDIProject\SSDI_SPILELApplication\SSDI_SPILELApplication\bin\nunit.framework.dll
+D:\SSDI\GitHub\SSDIProject\SSDI_SPILELApplication\SSDI_SPILELApplication\bin\DataBaseAccessLayer.pdb
+D:\SSDI\GitHub\SSDIProject\SSDI_SPILELApplication\SSDI_SPILELApplication\bin\nunit.framework.xml
