@@ -11,7 +11,8 @@ namespace DataBaseAccessLayer
 {
     public class DatabaseAccess : IDatabaseAccess
     {
-        private static string dataBaseName = ConfigurationManager.AppSettings["Database"];
+        //private static string dataBaseName = ConfigurationManager.AppSettings["Database"];
+        private static string dataBaseName = "spielDB";
         public ResultCode CreateStory(ConnStoryTable story)
         {
             ResultCode resultCode = new ResultCode();
@@ -47,7 +48,7 @@ namespace DataBaseAccessLayer
                 var documnt = story.ToBsonDocument();
                 collection.InsertOne(documnt);
 
-                resultCode.Result = false;
+                resultCode.Result = true;
                 resultCode.Message = "Story Created !!";
                 return resultCode;
             }

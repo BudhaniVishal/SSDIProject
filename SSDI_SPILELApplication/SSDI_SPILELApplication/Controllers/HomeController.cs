@@ -40,33 +40,46 @@ namespace SSDI_SPILELApplication.Controllers
         [HttpPost]
         public JsonResult CreateEditorStory(StoryModel data)
         {
-            CreateStory story = new CreateStory();
-            ResultCode result = story.CreateEditorStory(data);
-            return Json(result.Message);
+            if (data != null)
+            {
+                CreateStory story = new CreateStory();
+                ResultCode result = story.CreateEditorStory(data);
+                return Json(result);
+            }
+            return Json("Error !! Data is null.");
         }
 
         [HttpPost]
         public JsonResult UserRegistration(UserRegistrationModel data)
         {
-            if (!data.Password.Equals(data.ConfirmPassword))
+            if(data != null)
             {
-                return Json("Password and Confirm Password doesn't match !!");
+                if (!data.Password.Equals(data.ConfirmPassword))
+                {
+                    return Json("Password and Confirm Password doesn't match !!");
+                }
+                CreateUserRegistration obj = new CreateUserRegistration();
+                ResultCode result = obj.RegisterUser(data);
+                return Json(result.Message);
             }
-            CreateUserRegistration obj = new CreateUserRegistration();
-            ResultCode result = obj.RegisterUser(data);
-            return Json(result.Message);
+            return Json("Error !! Data is null.");
+
         }
         
         [HttpPost]
         public JsonResult Login(LoginModel credentials)
         {
-            VerifyLogin obj =new VerifyLogin();
-            ResultCode result = obj.LoginUser(credentials);
-            if (result.Result)
+            if (credentials != null)
             {
-                AccountController.ShowLogOff = true;
+                VerifyLogin obj = new VerifyLogin();
+                ResultCode result = obj.LoginUser(credentials);
+                if (result.Result)
+                {
+                    AccountController.ShowLogOff = true;
+                }
+                return Json(result.Message);
             }
-            return Json(result.Message);
+            return Json("Error !! Data is null.");
         }
     }
 }

@@ -102,10 +102,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateEditorStoryHomeControllerTest.cs" />
     <Compile Include="CreateStoryDataBaseAccessTest.cs" />
     <Compile Include="LoginUserDataBaseAccessTest.cs" />
+    <Compile Include="LoginUserHomeControllerTest.cs" />
     <Compile Include="RegisterUserDataBaseAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterUserHomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
