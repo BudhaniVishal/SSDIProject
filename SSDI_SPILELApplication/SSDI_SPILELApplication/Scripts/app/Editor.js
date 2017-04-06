@@ -4,7 +4,7 @@ var myController2 = module.controller("EditorController", function ($scope, $htt
     $scope.mydata = null;
     $scope.myfunc = {};
     $scope.checkErr = function (startDate, endDate) {
-        debugger;
+       
         $scope.errMessage = '';
         $scope.curDate = new Date();
 

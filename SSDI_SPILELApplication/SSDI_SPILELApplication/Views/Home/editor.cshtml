@@ -83,7 +83,7 @@
                         <div class="col-md-offset-2 col-md-10" ng-class="{ 'has-error' : editorForm.to.$invalid && !editorForm.to.$pristine }">
                             <label class="col-md-2 control-label">To</label>
                             <input class="col-md-10 form-control" type="date" id="to" ng-model="mydata.To" ng-change='checkErr(mydata.From,mydata.To)' ng-minlength="5" ng-maxlength="12" required />
-                            <span class="help-block">{{errMessage}}</span>
+                            <span ng-cloak class="help-block">{{errMessage}}</span>
                         </div>
                         <p ng-cloak ng-show="editorForm.to.$invalid && !editorForm.to.$pristine" name="to" class="help-block">To date is required.</p>
                     </div>
