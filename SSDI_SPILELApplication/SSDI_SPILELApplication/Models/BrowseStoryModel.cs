@@ -11,6 +11,5 @@ namespace SSDI_SPILELApplication.Models
         public List<StoryModel> Stories;
         public List<SelectListItem> GenreValues;
         public List<SelectListItem> TypeValues;
-        public string SelectedGenre;
     }
 }

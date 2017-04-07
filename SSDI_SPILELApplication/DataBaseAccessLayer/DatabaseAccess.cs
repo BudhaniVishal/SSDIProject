@@ -170,6 +170,19 @@ namespace DataBaseAccessLayer
             }
         }
 
+        public List<ConnStoryTable> GetAllStories()
+        {
+            try
+            {
+                return null;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+            
+        }
+
         //public List<ConnStoryTable> BrowseCreatorStory(String ID)
         //{
         //    ResultCode resultCode = new ResultCode();

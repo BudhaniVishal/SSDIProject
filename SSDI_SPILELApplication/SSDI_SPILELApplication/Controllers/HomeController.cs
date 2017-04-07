@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using DataBaseAccessLayer.ConnectionClass;
 using SSDI_SPILELApplication.LogicLayer;
 using UserRegistrationModel = SSDI_SPILELApplication.Models.UserRegistrationModel;
+using SSDI_SPILELApplication.Utilities;
 
 namespace SSDI_SPILELApplication.Controllers
 {
@@ -15,6 +16,10 @@ namespace SSDI_SPILELApplication.Controllers
         static List<StoryModel> storiesAvailable;
         public ActionResult Index()
         {
+            if(Session["username"] != null)
+            {
+                Session.Clear();
+            }
             AccountController.ShowLogOff = false;
             return View();
         }
@@ -35,8 +40,11 @@ namespace SSDI_SPILELApplication.Controllers
         public ActionResult editor()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
+            if (Session["username"] != null)
+            {
+                return View();
+            }
+            else return View("Index");
         }
 
         
@@ -61,87 +69,14 @@ namespace SSDI_SPILELApplication.Controllers
             ViewBag.TypeValue = "Type";
 
 
-            model.GenreValues = GetGenres();
-            model.TypeValues = GetTypes();
+            model.GenreValues = HomeControllerUtilities.GetGenres();
+            model.TypeValues = HomeControllerUtilities.GetTypes();
 
             model.Stories = storiesAvailable;
             return View(model);
-            //return View(storiesAvailable);
         }
 
-        public ActionResult TestView()
-        {
-            BrowseStoryModel model = new BrowseStoryModel();
 
-            storiesAvailable = new List<StoryModel>();
-
-            //string strDDLValue = Request.Form["genre"].ToString();
-            for (int i = 1; i <= 10; i++)
-            {
-                StoryModel story = new StoryModel();
-                story.Title = "test Story" + i;
-                story.Content = "test Story" + i;
-                //story.Genres = genre;
-                //story.Types = type;
-                storiesAvailable.Add(story);
-            }
-
-            //ViewBag.Test = genre;
-            ViewBag.GenreValue = "Select";
-            ViewBag.TypeValue = "Type";
-
-
-            model.GenreValues = GetGenres();
-            model.TypeValues = GetTypes();
-
-            model.Stories = storiesAvailable;
-            return View(model);
-            //return View(storiesAvailable);
-        }
-
-        private List<SelectListItem> GetTypes()
-        {
-            List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem
-            {
-                Text = "Type1",
-                Value = "Type1"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Type2",
-                Value = "Type2",
-                Selected = true
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Type3",
-                Value = "Type3"
-            });
-            return items;
-        }
-
-        private List<SelectListItem> GetGenres()
-        {
-            List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem
-            {
-                Text = "Swimming",
-                Value = "Swimming"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Cycling",
-                Value = "Cycling",
-                Selected = true
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Running",
-                Value = "Running"
-            });
-            return items;
-        }
 
         
         public ActionResult FilterStories(string SelectedGenre, string SelectedType)
@@ -163,18 +98,14 @@ namespace SSDI_SPILELApplication.Controllers
                 storiesAvailable.Add(story);
             }
             model.Stories = storiesAvailable;
-            model.GenreValues = GetGenres();
-            model.SelectedGenre = GetGenres().Any(x => x.Selected).ToString();
-            model.TypeValues = GetTypes();
+            model.GenreValues = HomeControllerUtilities.GetGenres();
+            model.TypeValues = HomeControllerUtilities.GetTypes();
 
 
             ViewBag.GenreValue = "Family";
             ViewBag.TypeValue = "Type";
             //return View("DisplayAvailableStories", storiesAvailable);
-            return View("DisplayAvailableStories", model);
-            //http://stackoverflow.com/questions/21170064/how-to-refresh-only-part-of-the-index-page-in-mvc-5
-            //http://stackoverflow.com/questions/23851323/how-to-access-a-view-element-from-controller
-            //http://www.binaryintellect.net/articles/4a00a9ce-73e5-4d89-aaae-2d835eca0854.aspx
+            return View("BrowseStories", model);
 
         }
 
@@ -221,6 +152,8 @@ namespace SSDI_SPILELApplication.Controllers
                 ResultCode result = obj.LoginUser(credentials);
                 if (result.Result)
                 {
+                    Session["username"] = credentials.Email;
+                    Session["password"] = credentials.Password;
                     AccountController.ShowLogOff = true;
                 }
                 return Json(result.Message);
