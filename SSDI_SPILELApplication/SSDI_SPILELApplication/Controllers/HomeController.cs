@@ -40,22 +40,60 @@ namespace SSDI_SPILELApplication.Controllers
         }
 
         
-        public ActionResult BrowseStories()
+        public ActionResult BrowseStories(string ID)
         {
             BrowseStoryModel model = new BrowseStoryModel();
+
             
-            storiesAvailable = new List<StoryModel>();
-            
+
+                BrowseStory story = new BrowseStory();
+            model.Stories = story.BrowseStories(ID);
+
+                storiesAvailable = new List<StoryModel>();
+
+            //    //string strDDLValue = Request.Form["genre"].ToString();
+            //    for (int i = 1; i <= 10; i++)
+            //    {
+            //        StoryModel story = new StoryModel();
+            //        story.Title = "test Story" + i;
+            //        story.Content = "test Story" + i;
+            //        //story.Genres = genre;
+            //        //story.Types = type;
+            //        storiesAvailable.Add(story);
+            //    }
+
+            //    //ViewBag.Test = genre;
+            //    ViewBag.GenreValue = "Select";
+            //    ViewBag.TypeValue = "Type";
+
+
+            //    model.GenreValues = GetGenres();
+            //    model.TypeValues = GetTypes();
+
+            //    model.Stories = storiesAvailable;
+
+            //    //return View(storiesAvailable);
+            //}
+            //else { }
+            return View(model);
+        }
+        public ActionResult MyContribution()
+        {
+            BrowseStoryModel model = new BrowseStoryModel();
+
+            var contributedStories = new List<StoryModel>();
+
             //string strDDLValue = Request.Form["genre"].ToString();
-            for (int i = 1; i<= 10; i++){
+            for (int i = 1; i <= 10; i++)
+            {
                 StoryModel story = new StoryModel();
-                story.Title = "test Story" + i;
-                story.Content = "test Story" + i;
+                story.Title = "Contributed test Story" + i;
+                story.Content = "Contributed test Story" + i;
                 //story.Genres = genre;
                 //story.Types = type;
-                storiesAvailable.Add(story);
+                contributedStories.Add(story);
             }
-            
+
             //ViewBag.Test = genre;
             ViewBag.GenreValue = "Select";
             ViewBag.TypeValue = "Type";
@@ -64,7 +102,7 @@ namespace SSDI_SPILELApplication.Controllers
             model.GenreValues = GetGenres();
             model.TypeValues = GetTypes();
 
-            model.Stories = storiesAvailable;
+            model.Stories = contributedStories;
             return View(model);
             //return View(storiesAvailable);
         }

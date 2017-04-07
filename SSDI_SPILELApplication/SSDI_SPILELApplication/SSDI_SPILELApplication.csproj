@@ -231,9 +231,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IBrowseStory.cs" />
     <Compile Include="Interfaces\ICreateStory.cs" />
     <Compile Include="Interfaces\ILoginUser.cs" />
     <Compile Include="Interfaces\IRegistration.cs" />
+    <Compile Include="LogicLayer\BrowseStory.cs" />
     <Compile Include="LogicLayer\CreateStory.cs" />
     <Compile Include="LogicLayer\CreateUserRegistration.cs" />
     <Compile Include="LogicLayer\VerifyLogin.cs" />
