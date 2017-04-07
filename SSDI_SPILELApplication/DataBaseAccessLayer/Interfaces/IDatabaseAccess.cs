@@ -1,4 +1,5 @@
-﻿using DataBaseAccessLayer.ConnectionClass;
+﻿using System.Collections.Generic;
+using DataBaseAccessLayer.ConnectionClass;
 
 namespace DataBaseAccessLayer.Interfaces
 {
@@ -7,5 +8,6 @@ namespace DataBaseAccessLayer.Interfaces
         ResultCode CreateStory(ConnStoryTable story);
         ResultCode LoginUser(UserRegistrationModel user);
         ResultCode RegisterUser(UserRegistrationModel modelData);
+        List<ConnStoryTable> GetAllStories();
     }
 }

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using DataBaseAccessLayer.ConnectionClass;
 using SSDI_SPILELApplication.LogicLayer;
 using UserRegistrationModel = SSDI_SPILELApplication.Models.UserRegistrationModel;
+using SSDI_SPILELApplication.Utilities;
 
 namespace SSDI_SPILELApplication.Controllers
 {
@@ -61,112 +62,14 @@ namespace SSDI_SPILELApplication.Controllers
             ViewBag.TypeValue = "Type";
 
 
-            model.GenreValues = GetGenres();
-            model.TypeValues = GetTypes();
+            model.GenreValues = HomeControllerUtilities.GetGenres();
+            model.TypeValues = HomeControllerUtilities.GetTypes();
 
             model.Stories = storiesAvailable;
             return View(model);
-            //return View(storiesAvailable);
         }
 
-        private List<SelectListItem> GetGenres()
-        {
-            List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem
-            {
-                Text = "Please Select Genre",
-                Value = "Please Select Genre",
-                Selected = true
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Action/Adventure",
-                Value = "Action/Adventure"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Business",
-                Value = "Business"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Career",
-                Value = "Career"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Comedy",
-                Value = "Comedy",
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Detective",
-                Value = "Detective"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Family",
-                Value = "Family"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Ghost",
-                Value = "Ghost"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Mystery",
-                Value = "Mystery",
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Thriller",
-                Value = "Thriller"
-            });
-            return items;
-        }
 
-        private List<SelectListItem> GetTypes()
-        {
-            List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem
-            {
-                Text = "Please Select Type",
-                Value = "Please Select Type",
-                Selected = true
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Short Stories",
-                Value = "Short Stories"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Article",
-                Value = "Article"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Poetry",
-                Value = "Poetry"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Fiction",
-                Value = "Fiction"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Non-Fiction",
-                Value = "Non-Fiction"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Classics",
-                Value = "Classics"
-            });
-            return items;
-        }
 
         
         public ActionResult FilterStories(string SelectedGenre, string SelectedType)
@@ -188,9 +91,8 @@ namespace SSDI_SPILELApplication.Controllers
                 storiesAvailable.Add(story);
             }
             model.Stories = storiesAvailable;
-            model.GenreValues = GetGenres();
-            model.SelectedGenre = GetGenres().Any(x => x.Selected).ToString();
-            model.TypeValues = GetTypes();
+            model.GenreValues = HomeControllerUtilities.GetGenres();
+            model.TypeValues = HomeControllerUtilities.GetTypes();
 
 
             ViewBag.GenreValue = "Family";

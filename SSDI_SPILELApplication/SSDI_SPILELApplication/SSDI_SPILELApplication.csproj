@@ -232,10 +232,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ICreateStory.cs" />
+    <Compile Include="Interfaces\IGetStories.cs" />
     <Compile Include="Interfaces\ILoginUser.cs" />
     <Compile Include="Interfaces\IRegistration.cs" />
     <Compile Include="LogicLayer\CreateStory.cs" />
     <Compile Include="LogicLayer\CreateUserRegistration.cs" />
+    <Compile Include="LogicLayer\GetStories.cs" />
     <Compile Include="LogicLayer\VerifyLogin.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BrowseStoryModel.cs" />

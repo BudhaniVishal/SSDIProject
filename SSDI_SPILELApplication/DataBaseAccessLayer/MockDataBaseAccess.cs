@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using DataBaseAccessLayer.Interfaces;
+using System.Collections.Generic;
 
 namespace DataBaseAccessLayer
 {
@@ -168,6 +169,11 @@ namespace DataBaseAccessLayer
                 resultCode.Message = "Error occured, Please try again !!";
                 return resultCode;
             }
+        }
+
+        public List<ConnStoryTable> GetAllStories()
+        {
+            return null;
         }
     }
 }
