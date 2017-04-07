@@ -69,34 +69,61 @@ namespace SSDI_SPILELApplication.Controllers
             //return View(storiesAvailable);
         }
 
-        public ActionResult TestView()
+        private List<SelectListItem> GetGenres()
         {
-            BrowseStoryModel model = new BrowseStoryModel();
-
-            storiesAvailable = new List<StoryModel>();
-
-            //string strDDLValue = Request.Form["genre"].ToString();
-            for (int i = 1; i <= 10; i++)
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem
             {
-                StoryModel story = new StoryModel();
-                story.Title = "test Story" + i;
-                story.Content = "test Story" + i;
-                //story.Genres = genre;
-                //story.Types = type;
-                storiesAvailable.Add(story);
-            }
-
-            //ViewBag.Test = genre;
-            ViewBag.GenreValue = "Select";
-            ViewBag.TypeValue = "Type";
-
-
-            model.GenreValues = GetGenres();
-            model.TypeValues = GetTypes();
-
-            model.Stories = storiesAvailable;
-            return View(model);
-            //return View(storiesAvailable);
+                Text = "Please Select Genre",
+                Value = "Please Select Genre",
+                Selected = true
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Action/Adventure",
+                Value = "Action/Adventure"
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Business",
+                Value = "Business"
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Career",
+                Value = "Career"
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Comedy",
+                Value = "Comedy",
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Detective",
+                Value = "Detective"
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Family",
+                Value = "Family"
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Ghost",
+                Value = "Ghost"
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Mystery",
+                Value = "Mystery",
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Thriller",
+                Value = "Thriller"
+            });
+            return items;
         }
 
         private List<SelectListItem> GetTypes()
@@ -104,41 +131,39 @@ namespace SSDI_SPILELApplication.Controllers
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem
             {
-                Text = "Type1",
-                Value = "Type1"
-            });
-            items.Add(new SelectListItem
-            {
-                Text = "Type2",
-                Value = "Type2",
+                Text = "Please Select Type",
+                Value = "Please Select Type",
                 Selected = true
             });
             items.Add(new SelectListItem
             {
-                Text = "Type3",
-                Value = "Type3"
-            });
-            return items;
-        }
-
-        private List<SelectListItem> GetGenres()
-        {
-            List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem
-            {
-                Text = "Swimming",
-                Value = "Swimming"
+                Text = "Short Stories",
+                Value = "Short Stories"
             });
             items.Add(new SelectListItem
             {
-                Text = "Cycling",
-                Value = "Cycling",
-                Selected = true
+                Text = "Article",
+                Value = "Article"
             });
             items.Add(new SelectListItem
             {
-                Text = "Running",
-                Value = "Running"
+                Text = "Poetry",
+                Value = "Poetry"
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Fiction",
+                Value = "Fiction"
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Non-Fiction",
+                Value = "Non-Fiction"
+            });
+            items.Add(new SelectListItem
+            {
+                Text = "Classics",
+                Value = "Classics"
             });
             return items;
         }
@@ -171,10 +196,7 @@ namespace SSDI_SPILELApplication.Controllers
             ViewBag.GenreValue = "Family";
             ViewBag.TypeValue = "Type";
             //return View("DisplayAvailableStories", storiesAvailable);
-            return View("DisplayAvailableStories", model);
-            //http://stackoverflow.com/questions/21170064/how-to-refresh-only-part-of-the-index-page-in-mvc-5
-            //http://stackoverflow.com/questions/23851323/how-to-access-a-view-element-from-controller
-            //http://www.binaryintellect.net/articles/4a00a9ce-73e5-4d89-aaae-2d835eca0854.aspx
+            return View("BrowseStories", model);
 
         }
 
