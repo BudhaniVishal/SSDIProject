@@ -8,6 +8,6 @@ namespace DataBaseAccessLayer.Interfaces
         ResultCode CreateStory(ConnStoryTable story);
         ResultCode LoginUser(UserRegistrationModel user);
         ResultCode RegisterUser(UserRegistrationModel modelData);
-        List<ConnStoryTable> BrowseStory(string ID);
+        //List<ConnStoryTable> BrowseCreatorStory(string ID);
     }
 }

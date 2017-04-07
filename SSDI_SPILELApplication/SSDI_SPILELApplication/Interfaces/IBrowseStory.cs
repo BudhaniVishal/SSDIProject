@@ -8,8 +8,8 @@ using SSDI_SPILELApplication.Models;
 
 namespace SSDI_SPILELApplication.Interfaces
 {
-    interface IBrowseStory
+    interface IBrowseCreatorStory
     {
-        List<ConnStoryTable> BrowseStories(String ID);
+        List<ConnStoryTable> BrowseCreatorStory(String ID);
     }
 }

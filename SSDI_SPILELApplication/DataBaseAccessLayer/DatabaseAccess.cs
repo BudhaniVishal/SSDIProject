@@ -170,35 +170,35 @@ namespace DataBaseAccessLayer
             }
         }
 
-        public List<ConnStoryTable> BrowseStory(String ID)
-        {
-            ResultCode resultCode = new ResultCode();
-            try
-            {
-                var tableCollection = CreateDataConnection(new MongoClient())
-                    .GetCollection<ConnStoryTable>("StoryTable");
-                //var condition = Builders<ConnStoryTable>.Filter.Eq(p => p.Title, story.Title);
-                //var fields = Builders<ConnStoryTable>.Projection.Include(p => p.Title).Include(p => p.StoryID);
-                var results = tableCollection.Find(new BsonDocument()).ToList();
+        //public List<ConnStoryTable> BrowseCreatorStory(String ID)
+        //{
+        //    ResultCode resultCode = new ResultCode();
+        //    try
+        //    {
+        //        var tableCollection = CreateDataConnection(new MongoClient())
+        //            .GetCollection<ConnStoryTable>("StoryTable");
+        //        //var condition = Builders<ConnStoryTable>.Filter.Eq(p => p.Title, story.Title);
+        //        //var fields = Builders<ConnStoryTable>.Projection.Include(p => p.Title).Include(p => p.StoryID);
+        //        var results = tableCollection.Find(new BsonDocument()).ToList();
 
-                List<ConnStoryTable> Stories = new List<ConnStoryTable>();
-                foreach (var story in results)
-                {
+        //        List<ConnStoryTable> Stories = new List<ConnStoryTable>();
+        //        foreach (var story in results)
+        //        {
 
-                    Stories.Add(story);
-                }
+        //            Stories.Add(story);
+        //        }
 
                
-                return Stories;
-            }
-            catch (Exception ex)
-            {
-                resultCode.Result = false;
-                resultCode.Message = "Error occured, Please try again !!";
-                return resultCode;
-            }
+        //        return Stories;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        resultCode.Result = false;
+        //        resultCode.Message = "Error occured, Please try again !!";
+        //        return resultCode;
+        //    }
 
 
-        }
+        //}
     }
 }
