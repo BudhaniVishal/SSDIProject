@@ -16,6 +16,10 @@ namespace SSDI_SPILELApplication.Controllers
         static List<StoryModel> storiesAvailable;
         public ActionResult Index()
         {
+            if(Session["username"] != null)
+            {
+                Session.Clear();
+            }
             AccountController.ShowLogOff = false;
             return View();
         }
@@ -36,8 +40,11 @@ namespace SSDI_SPILELApplication.Controllers
         public ActionResult editor()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
+            if (Session["username"] != null)
+            {
+                return View();
+            }
+            else return View("Index");
         }
 
         
@@ -145,6 +152,8 @@ namespace SSDI_SPILELApplication.Controllers
                 ResultCode result = obj.LoginUser(credentials);
                 if (result.Result)
                 {
+                    Session["username"] = credentials.Email;
+                    Session["password"] = credentials.Password;
                     AccountController.ShowLogOff = true;
                 }
                 return Json(result.Message);
