@@ -254,15 +254,62 @@ namespace DataBaseAccessLayer
 
 		}
 
+        public List<ConnStoryTable> BrowseCreatedStories(string username)
+        {
+            username = "mdeshpa3";
+            List<ConnStoryTable> crtrStoryListObj = new List<ConnStoryTable>();
+            ConnStoryTable crtrStoryObj = new ConnStoryTable();
+            try
+            {
+                var tableCollection = CreateDataConnection(new MongoClient())
+                    .GetCollection<CreatorStoryModel>("CreatorStoryTable");
+                var condition = Builders<CreatorStoryModel>.Filter.Eq(p => p.EditorID, username);
+                var results = tableCollection.Find(condition).ToList().AsQueryable();
+                foreach (var story in results)
+                {
+                    var tableCollection2 = CreateDataConnection(new MongoClient())
+                    .GetCollection<ConnStoryTable>("StoryTable");
+                    var fields = Builders<ConnStoryTable>.Projection.Include(p => p.Title).Include(p => p.Content);
+                    var condition2 = Builders<ConnStoryTable>.Filter.Eq(p => p.StoryID, story.StoryID);
+                    var StoryResults = tableCollection2.Find(condition2).Project<ConnStoryTable>(fields).ToList();
+                    for (int i = 0; i < StoryResults.Count(); i++)
+                    {
+                        crtrStoryListObj.Add(StoryResults[i]);
+                    }
+                }
+                return crtrStoryListObj;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<ConnStoryTable> BrowseContributorStories(string username)
+        {
+            username = "mdeshpa3";
+            List<ConnStoryTable> cntrStoryListObj = new List<ConnStoryTable>();
+            List<ContributorStoryModel> cntrStoryObj = new List<ContributorStoryModel>();
+            try
+            {
+                var tableCollection = CreateDataConnection(new MongoClient())
+                    .GetCollection<ContributorStoryModel>("ContributorStoryTable");
+                var condition = Builders<ContributorStoryModel>.Filter.Eq(p => p.ContributorID, username);
+                var results = tableCollection.Find(condition).ToList().AsQueryable();
+                foreach (var story in results)
+                {
+                    cntrStoryObj.Add(story);
+                }
+                return cntrStoryListObj;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
 
 
 
-
-
-
-
-
-
-	}
+    }
 }

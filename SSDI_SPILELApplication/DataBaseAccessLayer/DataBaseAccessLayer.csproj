@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionClass\ConnStoryTable.cs" />
+    <Compile Include="ConnectionClass\ContributorStoryModel.cs" />
+    <Compile Include="ConnectionClass\CreatorStoryModel.cs" />
     <Compile Include="ConnectionClass\ResultCode.cs" />
     <Compile Include="ConnectionClass\LoginCheckDLLModel.cs" />
     <Compile Include="ConnectionClass\UpdatePasswordModelDLL.cs" />
