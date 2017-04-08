@@ -242,8 +242,3 @@ ModelManifest.xml
 /SSDI_SPILELApplication/DataBaseAccessLayer/obj/Debug
 /TestingApp
 /.gitattributes
-<<<<<<< HEAD
-/SSDI_SPILELApplication/SSDI_SPILELApplication/Scripts/app
-=======
-/SSDI_SPILELApplication/SSDI_SPILELApplication/Views/Home/WriterReview.cshtml
->>>>>>> changes

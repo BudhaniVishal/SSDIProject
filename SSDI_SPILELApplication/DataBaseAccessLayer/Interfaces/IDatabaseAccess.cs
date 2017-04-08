@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DataBaseAccessLayer.ConnectionClass;
-using System.Collections.Generic;
 
 namespace DataBaseAccessLayer.Interfaces
 {
@@ -10,6 +9,7 @@ namespace DataBaseAccessLayer.Interfaces
         ResultCode LoginUser(UserRegistrationModel user);
         ResultCode RegisterUser(UserRegistrationModel modelData);
         List<ConnStoryTable> GetAllStories();
-        //List<ConnStoryTable> BrowseCreatorStory(string ID);
-    }
+		ResultCode VerifyEmail(VerifyEmailDLLModel email);
+		ResultCode updatepassword(UpdatePasswordModelDLL data, string email);
+	}
 }

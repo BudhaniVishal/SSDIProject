@@ -171,9 +171,81 @@ namespace DataBaseAccessLayer
             }
         }
 
-        public List<ConnStoryTable> GetAllStories()
-        {
-            return null;
-        }
-    }
+		public ResultCode VerifyEmail(VerifyEmailDLLModel email)
+		{
+			ResultCode resultCode = new ResultCode();
+			try
+			{
+				IMongoCollection<UserRegistrationModel> collection =
+					CreateDataConnection(new MongoClient()).GetCollection<UserRegistrationModel>("UserRegistration");
+				var condition = Builders<UserRegistrationModel>.Filter.Eq(p => p.EmailAddress, email.Email);
+				var fields =
+					Builders<UserRegistrationModel>.Projection.Include(p => p.EmailAddress);
+				var results = collection.Find(condition).Project<UserRegistrationModel>(fields).ToList().AsQueryable();
+				if (results.Any())
+				{
+
+					resultCode.Result = true;
+					resultCode.Message = "Registered User !!";
+					return resultCode;
+				}
+				else
+				{
+					resultCode.Result = false;
+					resultCode.Message = "User does not exists !!";
+					return resultCode;
+				}
+
+			}
+			catch (Exception e)
+			{
+				resultCode.Result = false;
+				resultCode.Message = "Error occured, Please try again !!";
+				return resultCode;
+
+			}
+		}
+
+		public List<ConnStoryTable> GetAllStories()
+		{
+			try
+			{
+				IMongoCollection<ConnStoryTable> collection =
+					CreateDataConnection(new MongoClient()).GetCollection<ConnStoryTable>("StoryTable");
+				var results = collection.Find(new BsonDocument()).ToList();
+				return results;
+			}
+			catch (Exception ex)
+			{
+				return null;
+			}
+
+		}
+
+		public ResultCode updatepassword(UpdatePasswordModelDLL data, string email)
+		{
+			ResultCode resultCode = new ResultCode();
+			try
+			{
+				IMongoCollection<BsonDocument> collection =
+					CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("UserRegistration");
+				var condition = Builders<BsonDocument>.Filter.Eq("EmailAddress", email);
+				var update = Builders<BsonDocument>.Update.Set("Password", data.Password).Set("ConfirmPassword", data.ConfirmPassword);
+				var res = collection.UpdateOne(condition, update);
+
+				resultCode.Result = true;
+				resultCode.Message = "Password Updated Successfully !!";
+				return resultCode;
+
+			}
+			catch (Exception e)
+			{
+				resultCode.Result = false;
+				resultCode.Message = "Error occured, Please try again !!";
+				return resultCode;
+
+			}
+
+		}
+	}
 }

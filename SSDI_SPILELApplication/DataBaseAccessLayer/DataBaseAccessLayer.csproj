@@ -60,7 +60,9 @@
     <Compile Include="ConnectionClass\ConnStoryTable.cs" />
     <Compile Include="ConnectionClass\ResultCode.cs" />
     <Compile Include="ConnectionClass\LoginCheckDLLModel.cs" />
+    <Compile Include="ConnectionClass\UpdatePasswordModelDLL.cs" />
     <Compile Include="ConnectionClass\UserRegistrationModel.cs" />
+    <Compile Include="ConnectionClass\VerifyEmailDLLModel.cs" />
     <Compile Include="DatabaseAccess.cs" />
     <Compile Include="Interfaces\IDatabaseAccess.cs" />
     <Compile Include="MockDataBaseAccess.cs" />
