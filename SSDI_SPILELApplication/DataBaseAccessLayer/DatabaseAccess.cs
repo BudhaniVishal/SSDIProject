@@ -255,8 +255,7 @@ namespace DataBaseAccessLayer
 		}
 
         public List<ConnStoryTable> BrowseCreatedStories(string username)
-        {
-            username = "mdeshpa3";
+        {   
             List<ConnStoryTable> crtrStoryListObj = new List<ConnStoryTable>();
             ConnStoryTable crtrStoryObj = new ConnStoryTable();
             try
@@ -285,10 +284,8 @@ namespace DataBaseAccessLayer
             }
         }
 
-        public List<ConnStoryTable> BrowseContributorStories(string username)
+        public List<ContributorStoryModel> BrowseContributorStories(string username)
         {
-            username = "mdeshpa3";
-            List<ConnStoryTable> cntrStoryListObj = new List<ConnStoryTable>();
             List<ContributorStoryModel> cntrStoryObj = new List<ContributorStoryModel>();
             try
             {
@@ -300,16 +297,12 @@ namespace DataBaseAccessLayer
                 {
                     cntrStoryObj.Add(story);
                 }
-                return cntrStoryListObj;
+                return cntrStoryObj;
             }
             catch (Exception ex)
             {
                 return null;
             }
         }
-
-
-
-
     }
 }

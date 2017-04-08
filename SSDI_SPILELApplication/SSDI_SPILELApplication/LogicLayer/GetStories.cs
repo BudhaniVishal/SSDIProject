@@ -51,7 +51,7 @@ namespace SSDI_SPILELApplication.LogicLayer
                 return storyObj;
 
             }
-        public List<StoryModel> getContributorStories(string username, string role)
+        public List<StoryModel> getContributorStories(string username)
         {
             List<StoryModel> storyObj = new List<StoryModel>();
             DatabaseAccess objDatabaseAccess = new DatabaseAccess();
@@ -60,12 +60,8 @@ namespace SSDI_SPILELApplication.LogicLayer
             {
                 StoryModel Obj = new StoryModel();
                 Obj.Content = story.Content;
-                //Obj.From = story.From;
-                Obj.Genre = story.Genre;
-                Obj.Scenario = story.Scenario;
                 Obj.StoryID = Convert.ToInt32(story.StoryID);
                 Obj.Title = story.Title;
-                Obj.Type = story.Type;
                 storyObj.Add(Obj);
             }
             return storyObj;

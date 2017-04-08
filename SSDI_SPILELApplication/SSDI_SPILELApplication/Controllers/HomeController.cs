@@ -90,9 +90,50 @@ namespace SSDI_SPILELApplication.Controllers
             return View(model);
         }
 
+        public ActionResult BrowseUserStories(string buttonEvent)
+        {
+            BrowseStoryModel model = new BrowseStoryModel();
+
+            
+            storiesAvailable = new List<StoryModel>();
+            var username = Session["username"].ToString();
+            GetStories storyobj = new GetStories();
+            if (buttonEvent == "Creator") { 
+                var results = storyobj.getCreatedStories(username);
+                for (int i = 0; i < results.Count; i++)
+                {
+                    StoryModel story = new StoryModel();
+                    story.Title = results[i].Title;
+                    story.Content = results[i].Content;
+                    storiesAvailable.Add(story);
+                }
+            }
+            else if(buttonEvent== "Contributor")
+            {
+                var results = storyobj.getContributorStories(username);
+                for (int i = 0; i < results.Count; i++)
+                {
+                    StoryModel story = new StoryModel();
+                    story.Title = results[i].Title;
+                    story.Content = results[i].Content;
+                    storiesAvailable.Add(story);
+                }
+            }
+            
+            ViewBag.GenreValue = "Select";
+            ViewBag.TypeValue = "Type";
 
 
-        
+            model.GenreValues = HomeControllerUtilities.GetGenres();
+            model.TypeValues = HomeControllerUtilities.GetTypes();
+
+            model.Stories = storiesAvailable;
+            return View("BrowseStories", model);
+        }
+
+
+
+
         public ActionResult FilterStories(string SelectedGenre, string SelectedType)
         {
             BrowseStoryModel model = new BrowseStoryModel();

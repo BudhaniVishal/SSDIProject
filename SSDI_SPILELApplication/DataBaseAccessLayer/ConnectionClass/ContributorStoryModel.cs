@@ -7,7 +7,7 @@ using MongoDB.Bson;
 
 namespace DataBaseAccessLayer.ConnectionClass
 {
-    class ContributorStoryModel
+    public class ContributorStoryModel
     {
         public ObjectId _id { get; set; }
         public int StoryID { get; set; }

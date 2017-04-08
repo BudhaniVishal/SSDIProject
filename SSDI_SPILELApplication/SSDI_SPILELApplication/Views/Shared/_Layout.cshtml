@@ -44,10 +44,10 @@
                         </a>  
                     </li>
                     <li>
-                        <a href="#">View My Stories</a>
+                        @Html.ActionLink("My Stories", "BrowseUserStories", "Home", new { buttonEvent = "Creator" },null)
                     </li>
                     <li>
-                        @Html.ActionLink("My Contribution", "MyContribution", "Home")
+                        @Html.ActionLink("My Contribution", "BrowseUserStories", "Home", new { buttonEvent = "Contributor" },null)
                     </li>
                     <li>
                         <a href="#">Create new Story</a>
