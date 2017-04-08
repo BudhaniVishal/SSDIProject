@@ -28,23 +28,36 @@ namespace SSDI_SPILELApplication.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
+			
             return View();
         }
-        public ActionResult editor()
+		
+		public ActionResult editor()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
+			if (Session["username"] != null)
+			{
+				return View();
+			}
+			else return View("Index");
         }
         [HttpPost]
         public JsonResult CreateEditorStory(StoryModel data)
         {
-            if (data != null)
+            if (data != null )
             {
-                CreateStory story = new CreateStory();
-                ResultCode result = story.CreateEditorStory(data);
-                return Json(result);
+				if (Session["username"] != null & Session["password"] != null)
+				{
+
+					CreateStory story = new CreateStory();
+					ResultCode result = story.CreateEditorStory(data);
+					return Json(result);
+				}
+				else
+				{
+					return Json("Invalid Session . Please Login");
+
+				}
             }
             return Json("Error !! Data is null.");
         }
@@ -75,11 +88,53 @@ namespace SSDI_SPILELApplication.Controllers
                 ResultCode result = obj.LoginUser(credentials);
                 if (result.Result)
                 {
+					Session["username"] = credentials.Email;
+					Session["password"] = credentials.Password;
                     AccountController.ShowLogOff = true;
                 }
                 return Json(result.Message);
             }
             return Json("Error !! Data is null.");
         }
-    }
+		[HttpPost]
+		public JsonResult verifyEmail(VerifyEmailModel v)
+		{
+			if (v != null)
+			{
+				Session["email"] = v.Email;
+				VerifyEmailLL obj = new VerifyEmailLL();
+				ResultCode result = obj.VerifyEmail(v);
+				
+					return Json(result.Message);
+			}
+			return Json("Error !! Data is null.");
+		}
+
+
+		[HttpPost]
+		public JsonResult updatepassword(UpdatepasswordModel v)
+		{
+			if (v != null)
+			{
+				if (!v.Password.Equals(v.ConfirmPassword))
+				{
+					return Json("Password and Confirm Password doesn't match !!");
+				}
+				String email = Session["email"].ToString();
+				UpdatePasswordLL obj = new UpdatePasswordLL();
+				ResultCode result = obj.updatepassword(v, email); 
+
+				return Json(result.Message);
+
+
+
+
+			}
+			return Json("Error !! Data is null.");
+		}
+
+
+
+
+	}
 }
