@@ -57,7 +57,7 @@ namespace SSDI_SPILELApplication.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            //ShowLogOff = false;
+            ShowLogOff = false;
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

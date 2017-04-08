@@ -7,13 +7,19 @@ using System.Web.Mvc;
 using DataBaseAccessLayer.ConnectionClass;
 using SSDI_SPILELApplication.LogicLayer;
 using UserRegistrationModel = SSDI_SPILELApplication.Models.UserRegistrationModel;
+using SSDI_SPILELApplication.Utilities;
 
 namespace SSDI_SPILELApplication.Controllers
 {
     public class HomeController : Controller
     {
+        static List<StoryModel> storiesAvailable;
         public ActionResult Index()
         {
+            if(Session["username"] != null)
+            {
+                Session.Clear();
+            }
             AccountController.ShowLogOff = false;
             return View();
         }
@@ -35,12 +41,50 @@ namespace SSDI_SPILELApplication.Controllers
 		public ActionResult editor()
         {
             ViewBag.Message = "Your application description page.";
-			if (Session["username"] != null)
-			{
-				return View();
-			}
-			else return View("Index");
+            if (Session["username"] != null)
+            {
+                return View();
+            }
+            else return View("Index");
         }
+
+        
+        public ActionResult BrowseStories()
+        {
+            BrowseStoryModel model = new BrowseStoryModel();
+            
+            storiesAvailable = new List<StoryModel>();
+            storiesAvailable = new GetStories().GetAllStories();
+
+
+            model.GenreValues = HomeControllerUtilities.GetGenres();
+            model.TypeValues = HomeControllerUtilities.GetTypes();
+
+            model.Stories = storiesAvailable;
+            return View(model);
+        }
+
+
+
+        
+        public ActionResult FilterStories(string SelectedGenre, string SelectedType)
+        {
+            BrowseStoryModel model = new BrowseStoryModel();
+            storiesAvailable = new List<StoryModel>();
+            storiesAvailable = new GetStories().GetAllStories();
+            model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, SelectedGenre, SelectedType); ;
+            model.GenreValues = HomeControllerUtilities.GetGenres();
+            model.TypeValues = HomeControllerUtilities.GetTypes();
+
+            return View("BrowseStories", model);
+
+        }
+
+        protected void ddlselect_Changed(object sender, EventArgs e)
+        {
+
+        }
+
         [HttpPost]
         public JsonResult CreateEditorStory(StoryModel data)
         {
@@ -88,8 +132,8 @@ namespace SSDI_SPILELApplication.Controllers
                 ResultCode result = obj.LoginUser(credentials);
                 if (result.Result)
                 {
-					Session["username"] = credentials.Email;
-					Session["password"] = credentials.Password;
+                    Session["username"] = credentials.Email;
+                    Session["password"] = credentials.Password;
                     AccountController.ShowLogOff = true;
                 }
                 return Json(result.Message);

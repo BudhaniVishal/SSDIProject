@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using DataBaseAccessLayer.Interfaces;
+using System.Collections.Generic;
 
 namespace DataBaseAccessLayer
 {
@@ -206,6 +207,22 @@ namespace DataBaseAccessLayer
 				resultCode.Message = "Error occured, Please try again !!";
 				return resultCode;
 
+			}
+
+		}
+
+		public List<ConnStoryTable> GetAllStories()
+		{
+			try
+			{
+				IMongoCollection<ConnStoryTable> collection =
+					CreateDataConnection(new MongoClient()).GetCollection<ConnStoryTable>("StoryTable");
+				var results = collection.Find(new BsonDocument()).ToList();
+				return results;
+			}
+			catch (Exception ex)
+			{
+				return null;
 			}
 
 		}
