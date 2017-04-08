@@ -91,7 +91,7 @@ namespace SSDI_SPILELApplication.Controllers
             {
                 CreateStory story = new CreateStory();
                 ResultCode result = story.CreateEditorStory(data);
-                return Json(result);
+                return Json(result.Message);
             }
             return Json("Error !! Data is null.");
         }
