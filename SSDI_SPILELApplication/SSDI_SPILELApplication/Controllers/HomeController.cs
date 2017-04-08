@@ -53,20 +53,7 @@ namespace SSDI_SPILELApplication.Controllers
             BrowseStoryModel model = new BrowseStoryModel();
             
             storiesAvailable = new List<StoryModel>();
-            
-            //string strDDLValue = Request.Form["genre"].ToString();
-            for (int i = 1; i<= 10; i++){
-                StoryModel story = new StoryModel();
-                story.Title = "test Story" + i;
-                story.Content = "test Story" + i;
-                //story.Genres = genre;
-                //story.Types = type;
-                storiesAvailable.Add(story);
-            }
-            
-            //ViewBag.Test = genre;
-            ViewBag.GenreValue = "Select";
-            ViewBag.TypeValue = "Type";
+            storiesAvailable = new GetStories().GetAllStories();
 
 
             model.GenreValues = HomeControllerUtilities.GetGenres();
@@ -82,29 +69,12 @@ namespace SSDI_SPILELApplication.Controllers
         public ActionResult FilterStories(string SelectedGenre, string SelectedType)
         {
             BrowseStoryModel model = new BrowseStoryModel();
-
-            var t1 = Request.Form["GenreVal"];
-            var t = ViewBag.GenreValue;
-            var k = ViewBag.TypeValue;
             storiesAvailable = new List<StoryModel>();
-
-            //string strDDLValue = Request.Form["genre"].ToString();
-
-            for (int i = 1; i <= 10; i++)
-            {
-                StoryModel story = new StoryModel();
-                story.Title = "A Story" + i;
-                story.Content = "A Story" + i;
-                storiesAvailable.Add(story);
-            }
-            model.Stories = storiesAvailable;
+            storiesAvailable = new GetStories().GetAllStories();
+            model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, SelectedGenre, SelectedType); ;
             model.GenreValues = HomeControllerUtilities.GetGenres();
             model.TypeValues = HomeControllerUtilities.GetTypes();
 
-
-            ViewBag.GenreValue = "Family";
-            ViewBag.TypeValue = "Type";
-            //return View("DisplayAvailableStories", storiesAvailable);
             return View("BrowseStories", model);
 
         }

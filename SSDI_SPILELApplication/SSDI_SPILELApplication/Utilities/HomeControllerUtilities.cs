@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SSDI_SPILELApplication.Models;
 
 namespace SSDI_SPILELApplication.Utilities
 {
     public class HomeControllerUtilities
     {
-        public static List<SelectListItem> GetGenres()
+        internal static List<SelectListItem> GetGenres()
         {
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem
@@ -53,13 +54,13 @@ namespace SSDI_SPILELApplication.Utilities
             });
             items.Add(new SelectListItem
             {
-                Text = "Thriller",
-                Value = "Thriller"
+                Text = "Thriller/Suspense",
+                Value = "Thriller/Suspense"
             });
             return items;
         }
 
-        public static List<SelectListItem> GetTypes()
+        internal static List<SelectListItem> GetTypes()
         {
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem
@@ -84,8 +85,8 @@ namespace SSDI_SPILELApplication.Utilities
             });
             items.Add(new SelectListItem
             {
-                Text = "Non-Fiction",
-                Value = "Non-Fiction"
+                Text = "Non Fiction",
+                Value = "Non Fiction"
             });
             items.Add(new SelectListItem
             {
@@ -93,6 +94,30 @@ namespace SSDI_SPILELApplication.Utilities
                 Value = "Classics"
             });
             return items;
+        }
+
+        internal static List<StoryModel> FilterStories(List<StoryModel> storiesAvailable, string selectedGenre, string selectedType)
+        {
+            try
+            {
+                if (selectedGenre != string.Empty)
+                {
+                    storiesAvailable = storiesAvailable.FindAll(x => x.Genre == selectedGenre).ToList();
+                }
+                if(selectedType != string.Empty)
+                {
+                    storiesAvailable = storiesAvailable.FindAll(x => x.Type == selectedType).ToList();
+                }
+                return storiesAvailable;
+            }
+
+            catch(Exception ex)
+            {
+                return storiesAvailable;
+            }
+
+            
+            
         }
     }
 }

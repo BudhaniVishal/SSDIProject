@@ -174,7 +174,10 @@ namespace DataBaseAccessLayer
         {
             try
             {
-                return null;
+                IMongoCollection<ConnStoryTable> collection = 
+                    CreateDataConnection(new MongoClient()).GetCollection<ConnStoryTable>("StoryTable");
+                var results = collection.Find(new BsonDocument()).ToList();
+                return results;
             }
             catch(Exception ex)
             {
