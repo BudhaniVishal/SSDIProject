@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using NUnit.Framework;
 using SSDI_SPILELApplication.Controllers;
+using SSDI_SPILELApplication.LogicLayer;
 using SSDI_SPILELApplication.Models;
+using SSDI_SPILELApplication.Tests.MockClasses;
 
 namespace SSDI_SPILELApplication.Tests
 {
@@ -24,16 +26,17 @@ namespace SSDI_SPILELApplication.Tests
 		[Test]
 		public void VerifyUserEmailExistsForCorrectValues()
 		{
-			HomeController obj = new HomeController();
+			MockHomeController obj = new MockHomeController();
 			VerifyEmailModel model = new VerifyEmailModel();
 			model.Email = "vbudhani@uncc.edu";
+		
 			JsonResult result = obj.VerifyEmail(model);
 			Assert.AreEqual(result.Data.ToString(), "Registered User !!");
 		}
 		[Test]
 		public void VerifyUserEmailExistsForNegativeCase()
 		{
-			HomeController obj = new HomeController();
+			MockHomeController obj = new MockHomeController();
 			VerifyEmailModel model = new VerifyEmailModel();
 			model.Email = "vbudh@uncc.edu";
 			JsonResult result = obj.VerifyEmail(model);
