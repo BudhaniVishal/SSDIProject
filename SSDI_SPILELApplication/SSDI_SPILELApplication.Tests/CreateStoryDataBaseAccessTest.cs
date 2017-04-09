@@ -22,13 +22,14 @@ namespace SSDI_SPILELApplication.Tests
             ResultCode result;
             ConnStoryTable obj = new ConnStoryTable();
             Thread.Sleep(1000);
+            var username = "mdeshpa3@gmail.com";
             obj.Title = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ", "") + "Test";
             obj.Scenario = "Test";
             obj.Genre = "Test";
             obj.Type = "Test";
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
-            result = new MockDataBaseAccess().CreateStory(obj);
+            result = new MockDataBaseAccess().CreateStory(obj, username);
             Assert.IsTrue(result.Result); // value saved
         }
 

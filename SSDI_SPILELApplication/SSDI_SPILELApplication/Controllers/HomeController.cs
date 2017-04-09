@@ -177,8 +177,9 @@ namespace SSDI_SPILELApplication.Controllers
 				if (Session["username"] != null & Session["password"] != null)
 				{
 
-					CreateStory story = new CreateStory();
-					ResultCode result = story.CreateEditorStory(data);
+                    var username = Session["username"].ToString();
+                    CreateStory story = new CreateStory();
+					ResultCode result = story.CreateEditorStory(data,username);
 					return Json(result);
 				}
 				else

@@ -13,7 +13,7 @@ namespace DataBaseAccessLayer
     public class MockDataBaseAccess : IDatabaseAccess
     {
         private static string dataBaseName = "spielDBTest";
-        public ResultCode CreateStory(ConnStoryTable story)
+        public ResultCode CreateStory(ConnStoryTable story,string username)
         {
             ResultCode resultCode = new ResultCode();
             try
@@ -49,6 +49,12 @@ namespace DataBaseAccessLayer
                 var documnt = story.ToBsonDocument();
                 collection.InsertOne(documnt);
 
+                var Collect = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("CreatorStoryTable");
+                CreatorStoryModel crtrObj = new CreatorStoryModel();
+                crtrObj.StoryID = StoryID;
+                crtrObj.EditorID = username;
+                var documnt2 = crtrObj.ToBsonDocument();
+                Collect.InsertOne(documnt2);
                 resultCode.Result = true;
                 resultCode.Message = "Story Created !!";
                 return resultCode;

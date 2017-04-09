@@ -14,7 +14,7 @@ namespace DataBaseAccessLayer
 	{
 		//private static string dataBaseName = ConfigurationManager.AppSettings["Database"];
 		private static string dataBaseName = "spielDB";
-		public ResultCode CreateStory(ConnStoryTable story)
+		public ResultCode CreateStory(ConnStoryTable story, string username)
 		{
 			ResultCode resultCode = new ResultCode();
 			try
@@ -49,7 +49,14 @@ namespace DataBaseAccessLayer
 				var documnt = story.ToBsonDocument();
 				collection.InsertOne(documnt);
 
-				resultCode.Result = true;
+                var Collect = CreateDataConnection(new MongoClient())
+                    .GetCollection<BsonDocument>("CreatorStoryTable");
+                CreatorStoryModel crtrObj = new CreatorStoryModel();
+                crtrObj.StoryID = StoryID;
+                crtrObj.EditorID = username;
+                var documnt2 = crtrObj.ToBsonDocument();
+                Collect.InsertOne(documnt2);
+                resultCode.Result = true;
 				resultCode.Message = "Story Created !!";
 				return resultCode;
 			}

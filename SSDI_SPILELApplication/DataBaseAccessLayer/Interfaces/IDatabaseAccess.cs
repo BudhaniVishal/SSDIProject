@@ -5,7 +5,7 @@ namespace DataBaseAccessLayer.Interfaces
 {
     interface IDatabaseAccess
     {
-        ResultCode CreateStory(ConnStoryTable story);
+        ResultCode CreateStory(ConnStoryTable story, string username);
         ResultCode LoginUser(UserRegistrationModel user);
         ResultCode RegisterUser(UserRegistrationModel modelData);
         List<ConnStoryTable> GetAllStories();
