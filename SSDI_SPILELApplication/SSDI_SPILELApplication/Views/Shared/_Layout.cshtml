@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using SSDI_SPILELApplication.Controllers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,7 +10,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-static-top">
+    <div class="navbar navbar-static-top" style="text-align:left">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -22,45 +23,49 @@
                 </Label>
                 @*@Html.ActionLink("SPIEL", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" style="text-align:left">
                 <ul class="nav navbar-nav">
-                    
-                    @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
+                    @if (!AccountController.ShowLogOff)
+                    {
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Browse Stories", "BrowseStories", "Home")</li>
+                    <li>@Html.ActionLink("View All Stories", "BrowseStories", "Home")</li>
+                    }
                 </ul>
                  @Html.Partial("_LoginPartial")
             </div>
     </div>
-        @if (HttpContext.Current.Session["username"] != null ){ 
-        <text>
+        @if (HttpContext.Current.Session["username"] != null)
+        {
             <div class="container col-md-2">
-            <nav class="navbar" id="sidebar-wrapper" role="navigation">
-                <ul class="nav sidebar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="sidebar-brand">
-                        <a href="#">
-                            View All Stories
-                        </a>  
-                    </li>
-                    <li>
-                        @Html.ActionLink("My Stories", "BrowseUserStories", "Home", new { buttonEvent = "Creator" },null)
-                    </li>
-                    <li>
-                        @Html.ActionLink("My Contribution", "BrowseUserStories", "Home", new { buttonEvent = "Contributor" },null)
-                    </li>
-                    <li>
-                        <a href="#">Create new Story</a>
-                    </li>
-                    
-                </ul>
-            </nav>
+                <nav class="navbar" id="sidebar-wrapper" role="navigation">
+                    <ul class="nav sidebar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li class="sidebar-brand">
+                            <a href="#">
+                                View All Stories
+                            </a>
+                        </li>
+                        <li>
+                            @Html.ActionLink("My Stories", "BrowseUserStories", "Home", new { buttonEvent = "Creator" }, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("My Contribution", "BrowseUserStories", "Home", new { buttonEvent = "Contributor" }, null)
+                        </li>
+                        <li>
+                            <a href="#">Create new Story</a>
+                        </li>
+
+                    </ul>
+                </nav>
             </div>
-        </text>
-       }
-        else{ 
-            @:<div class="container col-md-1"></div>
-    }
+        }
+        else
+        {
+            <div class="container col-md-1"></div>
+            <div class="container col-md-1"></div>
+            <div style="min-width:200px;"></div>
+        }
     <div class="container body-content col-md-10">
         @RenderBody()
         <hr />

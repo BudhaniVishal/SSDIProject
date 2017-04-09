@@ -56,33 +56,6 @@ namespace SSDI_SPILELApplication.Controllers
             storiesAvailable = new List<StoryModel>();
             storiesAvailable = new GetStories().GetAllStories();
 
-
-            var username = Session["username"].ToString();
-            GetStories storyobj = new GetStories();
-            var results = storyobj.getCreatedStories(username);
-
-            //string strDDLValue = Request.Form["genre"].ToString();
-            for(int i = 0; i < results.Count; i++)
-            {
-                StoryModel story = new StoryModel();
-                story.Title = results[i].Title;
-                story.Content = results[i].Content;
-                storiesAvailable.Add(story);
-            }
-            //for (int i = 1; i<= 10; i++){
-            //    StoryModel story = new StoryModel();
-            //    story.Title = "test Story" + i;
-            //    story.Content = "test Story" + i;
-            //    //story.Genres = genre;
-            //    //story.Types = type;
-            //    storiesAvailable.Add(story);
-            //}
-            
-            //ViewBag.Test = genre;
-            ViewBag.GenreValue = "Select";
-            ViewBag.TypeValue = "Type";
-
-
             model.GenreValues = HomeControllerUtilities.GetGenres();
             model.TypeValues = HomeControllerUtilities.GetTypes();
 
