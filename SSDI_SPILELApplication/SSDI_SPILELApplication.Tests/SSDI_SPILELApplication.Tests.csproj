@@ -109,6 +109,9 @@
     <Compile Include="RegisterUserDataBaseAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterUserHomeControllerTest.cs" />
+    <Compile Include="TestUpdatepasswordDataBaseAccess.cs" />
+    <Compile Include="VerifyUserEmailexistsHomeControllerTests.cs" />
+    <Compile Include="VerifyUserEmailexistsDatabaseAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

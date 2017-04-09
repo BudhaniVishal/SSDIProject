@@ -208,7 +208,7 @@ namespace SSDI_SPILELApplication.Controllers
             return Json("Error !! Data is null.");
         }
 		[HttpPost]
-		public JsonResult verifyEmail(VerifyEmailModel v)
+		public JsonResult VerifyEmail(VerifyEmailModel v)
 		{
 			if (v != null)
 			{
@@ -236,10 +236,6 @@ namespace SSDI_SPILELApplication.Controllers
 				ResultCode result = obj.updatepassword(v, email); 
 
 				return Json(result.Message);
-
-
-
-
 			}
 			return Json("Error !! Data is null.");
 		}
