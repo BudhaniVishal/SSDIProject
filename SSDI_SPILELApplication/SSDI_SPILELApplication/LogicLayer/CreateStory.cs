@@ -10,7 +10,7 @@ namespace SSDI_SPILELApplication.LogicLayer
 {
     public class CreateStory : ICreateStory
     {
-        public ResultCode CreateEditorStory(StoryModel story)
+        public ResultCode CreateEditorStory(StoryModel story, string username)
         {
             DatabaseAccess objDatabaseAccess = new DatabaseAccess();
             ConnStoryTable obj = new ConnStoryTable();
@@ -23,7 +23,7 @@ namespace SSDI_SPILELApplication.LogicLayer
             obj.Type = story.Type;
             obj.Genre = story.Genre;
 
-            return objDatabaseAccess.CreateStory(obj); ;
+            return objDatabaseAccess.CreateStory(obj, username); ;
         }
     }
 }
