@@ -27,7 +27,23 @@ namespace SSDI_SPILELApplication.Tests.MockClasses
 			}
 			return Json("Error !! Data is null.");
 		}
+		[HttpPost]
+		public JsonResult updatepassword(UpdatepasswordModel v,string e )
+		{
+			if (v != null)
+			{
+				if (!v.Password.Equals(v.ConfirmPassword))
+				{
+					return Json("Password and Confirm Password doesn't match !!");
+				}
+				String email = e;
+				UpdatePasswordLL obj = new UpdatePasswordLL();
+				ResultCode result = obj.updatepassword(v, email);
 
+				return Json(result.Message);
+			}
+			return Json("Error !! Data is null.");
+		}
 
 	}
 }
