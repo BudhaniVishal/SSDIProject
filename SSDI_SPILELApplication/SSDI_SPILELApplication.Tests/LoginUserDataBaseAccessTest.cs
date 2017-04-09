@@ -15,7 +15,7 @@ namespace SSDI_SPILELApplication.Tests
             UserRegistrationModel obj = new UserRegistrationModel();
             obj.IsUserVerified = true;
             obj.EmailAddress = "vishal@uncc.edu";
-            obj.Password = "1234";
+            obj.Password = "123456";
             obj.UserType = "WRITER";
             result = new MockDataBaseAccess().LoginUser(obj);
             Assert.AreEqual(result.Message, "Writer Login Successful !!");
@@ -54,7 +54,7 @@ namespace SSDI_SPILELApplication.Tests
             UserRegistrationModel obj = new UserRegistrationModel();
             obj.IsUserVerified = BsonBoolean.True;
             obj.EmailAddress = "editor@uncc.edu";
-            obj.Password = "1234";
+            obj.Password = "123456";
             obj.UserType = "EDITOR";
             result = new MockDataBaseAccess().LoginUser(obj);
             Assert.AreEqual(result.Message, "Editor Login Successful !!");
@@ -67,7 +67,7 @@ namespace SSDI_SPILELApplication.Tests
             UserRegistrationModel obj = new UserRegistrationModel();
             obj.IsUserVerified = BsonBoolean.False;
             obj.EmailAddress = "edit@uncc.edu";
-            obj.Password = "1234";
+            obj.Password = "123456";
             obj.UserType = "EDITOR";
             result = new MockDataBaseAccess().LoginUser(obj);
             Assert.AreEqual(result.Message, "Editor not verified yet !!");
