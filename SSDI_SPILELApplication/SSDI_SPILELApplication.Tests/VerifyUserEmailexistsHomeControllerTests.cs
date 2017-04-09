@@ -18,7 +18,7 @@ namespace SSDI_SPILELApplication.Tests
 		[Test]
 		public void VerifyUserEmailExistsForNullValues()
 		{
-			HomeController obj = new HomeController();
+			MockHomeController obj = new MockHomeController();
 			JsonResult result = obj.VerifyEmail(null);
 			Assert.AreEqual(result.Data.ToString(), errorMessage);
 		}

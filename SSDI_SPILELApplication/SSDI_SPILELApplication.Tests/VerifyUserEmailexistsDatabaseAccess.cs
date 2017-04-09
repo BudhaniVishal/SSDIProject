@@ -27,7 +27,7 @@ namespace SSDI_SPILELApplication.Tests
 		{
 			ResultCode result = new ResultCode();
 			VerifyEmailDLLModel obj = new VerifyEmailDLLModel();
-			obj.Email = "vishal@uncc.edu";
+			obj.Email = "vishal123@uncc.edu";
 			result = new MockDataBaseAccess().VerifyEmail(obj);
 			Assert.AreEqual(result.Message, "User does not exists !!");
 		}
