@@ -332,6 +332,8 @@
     <Content Include="Views\Home\EditorHome.cshtml" />
     <Content Include="Views\Home\BrowseStories.cshtml" />
     <Content Include="Views\Home\UserHome.cshtml" />
+    <Content Include="Views\Home\BrowseCreatorStories.cshtml" />
+    <Content Include="Views\Home\BrowseContributorStories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
