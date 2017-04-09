@@ -37,6 +37,7 @@ namespace SSDI_SPILELApplication.Tests
         public void TestEditorForExistingStory()
         {
             ResultCode result;
+            var username = "mdeshpa3@gmail.com";
             ConnStoryTable obj = new ConnStoryTable();
             obj.Title = "Test"; // Already existing story
             obj.Scenario = "Test";
@@ -44,13 +45,14 @@ namespace SSDI_SPILELApplication.Tests
             obj.Type = "Test";
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
-            result = new MockDataBaseAccess().CreateStory(obj);
+            result = new MockDataBaseAccess().CreateStory(obj, username);
             Assert.IsFalse(result.Result); // value not saved
         }
 
         [Test]
         public void TestCreateStoryForDatabaseIncrement()
         {
+            var username = "mdeshpa3@gmail.com";
             var condition = Builders<ConnStoryTable>.Filter.Empty;
             MongoClient mongoClient = new MongoClient();
             var dataBase = mongoClient.GetDatabase(dataBaseName);
@@ -65,7 +67,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.Type = "Test";
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
-            result = new MockDataBaseAccess().CreateStory(obj);
+            result = new MockDataBaseAccess().CreateStory(obj,username);
             Assert.IsTrue(result.Result); // value saved
 
             int countNew = collection.Find(condition).ToList().Count; // new count
@@ -75,6 +77,7 @@ namespace SSDI_SPILELApplication.Tests
         [Test]
         public void TestCreateExistingStoryForDatabaseNonIncrement()
         {
+            var username = "mdeshpa3@gmail.com";
             var condition = Builders<ConnStoryTable>.Filter.Empty;
             MongoClient mongoClient = new MongoClient();
             var dataBase = mongoClient.GetDatabase(dataBaseName);
@@ -89,7 +92,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.Type = "Test";
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
-            result = new MockDataBaseAccess().CreateStory(obj);
+            result = new MockDataBaseAccess().CreateStory(obj, username);
             Assert.IsFalse(result.Result); // value not saved
 
             int countNew = collection.Find(condition).ToList().Count; // new count
