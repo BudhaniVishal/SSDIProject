@@ -106,9 +106,14 @@
     <Compile Include="CreateStoryDataBaseAccessTest.cs" />
     <Compile Include="LoginUserDataBaseAccessTest.cs" />
     <Compile Include="LoginUserHomeControllerTest.cs" />
+    <Compile Include="MockClasses\MockHomeController.cs" />
+    <Compile Include="MockClasses\MockVerifyEmaillLL.cs" />
     <Compile Include="RegisterUserDataBaseAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterUserHomeControllerTest.cs" />
+    <Compile Include="TestUpdatepasswordDataBaseAccess.cs" />
+    <Compile Include="VerifyUserEmailexistsHomeControllerTests.cs" />
+    <Compile Include="VerifyUserEmailexistsDatabaseAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

@@ -227,15 +227,27 @@ namespace DataBaseAccessLayer
 			ResultCode resultCode = new ResultCode();
 			try
 			{
-				IMongoCollection<BsonDocument> collection =
-					CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("UserRegistration");
-				var condition = Builders<BsonDocument>.Filter.Eq("EmailAddress", email);
-				var update = Builders<BsonDocument>.Update.Set("Password", data.Password).Set("ConfirmPassword", data.ConfirmPassword);
-				var res = collection.UpdateOne(condition, update);
+				if (data.Password.Equals(data.ConfirmPassword))
+				{
 
-				resultCode.Result = true;
-				resultCode.Message = "Password Updated Successfully !!";
-				return resultCode;
+					IMongoCollection<BsonDocument> collection =
+						CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("UserRegistration");
+					var condition = Builders<BsonDocument>.Filter.Eq("EmailAddress", email);
+					var update = Builders<BsonDocument>.Update.Set("Password", data.Password)
+						.Set("ConfirmPassword", data.ConfirmPassword);
+					var res = collection.UpdateOne(condition, update);
+
+					resultCode.Result = true;
+					resultCode.Message = "Password Updated Successfully !!";
+					return resultCode;
+				}
+				else
+				{
+
+					resultCode.Result = false;
+					resultCode.Message = "Password and Confirm Password does not match !!";
+					return resultCode;
+				}
 
 			}
 			catch (Exception e)
