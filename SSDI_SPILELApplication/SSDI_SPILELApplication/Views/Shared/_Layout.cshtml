@@ -41,10 +41,10 @@
             <nav class="navbar" id="sidebar-wrapper" role="navigation">
                 <ul class="nav sidebar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="sidebar-brand">
+                    <li> @Html.ActionLink("View All Stories", "BrowseStories", "Home")<!--class="sidebar-brand">
                         <a href="#">
                             View All Stories
-                        </a>  
+                        </a>-->  
                     </li>
                     <li>
                         @Html.ActionLink("My Stories", "BrowseCreatorStories", "Home")
