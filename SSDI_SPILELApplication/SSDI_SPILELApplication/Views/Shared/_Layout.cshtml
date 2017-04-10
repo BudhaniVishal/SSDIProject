@@ -42,9 +42,7 @@
                 <ul class="nav sidebar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li class="sidebar-brand">
-                        <a href="#">
-                            View All Stories
-                        </a>  
+                        @Html.ActionLink("View All Stories", "BrowseStories", "Home")  
                     </li>
                     <li>
                         @Html.ActionLink("My Stories", "BrowseCreatorStories", "Home")

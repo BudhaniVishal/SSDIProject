@@ -283,6 +283,11 @@ namespace DataBaseAccessLayer
                     .GetCollection<CreatorStoryModel>("CreatorStoryTable");
                 var condition = Builders<CreatorStoryModel>.Filter.Eq(p => p.EditorID, username);
                 var results = tableCollection.Find(condition).ToList().AsQueryable();
+                if (results == null)
+                {
+                    crtrStoryListObj[0].MessageString = "Data is null";
+                }
+                else { 
                 foreach (var story in results)
                 {
                     var tableCollection2 = CreateDataConnection(new MongoClient())
@@ -295,10 +300,13 @@ namespace DataBaseAccessLayer
                         crtrStoryListObj.Add(StoryResults[i]);
                     }
                 }
+                }
                 return crtrStoryListObj;
+           
             }
             catch (Exception ex)
             {
+
                 return null;
             }
         }
