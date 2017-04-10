@@ -217,11 +217,11 @@ namespace DataBaseAccessLayer
 				IMongoCollection<ConnStoryTable> collection =
 					CreateDataConnection(new MongoClient()).GetCollection<ConnStoryTable>("StoryTable");
 				var results = collection.Find(new BsonDocument()).ToList();
-				return results;
+				return (results != null) ? results : new List<ConnStoryTable>();
 			}
 			catch (Exception ex)
 			{
-				return null;
+				return new List<ConnStoryTable>();
 			}
 
 		}
