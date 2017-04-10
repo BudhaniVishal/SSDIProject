@@ -326,14 +326,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Views\Home\editor.cshtml">
-      <BrowseToURL>~/Home/editor</BrowseToURL>
-    </Content>
+    <Content Include="Views\Home\editor.cshtml" />
     <Content Include="Views\Home\EditorHome.cshtml" />
     <Content Include="Views\Home\BrowseStories.cshtml" />
     <Content Include="Views\Home\UserHome.cshtml" />
-    <Content Include="Views\Home\BrowseCreatorStories.cshtml" />
     <Content Include="Views\Home\BrowseContributorStories.cshtml" />
+    <Content Include="Views\Home\BrowseCreatorStories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
