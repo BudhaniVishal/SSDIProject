@@ -1,0 +1,83 @@
+﻿@*@model IEnumerable<SSDI_SPILELApplication.Models.StoryModel>*@
+@model SSDI_SPILELApplication.Models.BrowseStoryModel
+
+@{
+    ViewBag.Title = "Browse Contributor Stories";
+}
+<head>
+    <script src="~/Scripts/angular.min.js"></script>
+</head>
+@using (Html.BeginForm("FilterContributorStories", "Home", FormMethod.Post))
+{
+    <body>
+        <div ng-app="BrowseStory" ng-controller="BrowseStoryController">
+            <form id="BrowseStories" name="BrowseStories">
+                <table class="table">
+                    <tr>
+                        <td style="text-align:center">
+                            <h4>
+                                Browse My Contributions
+                            </h4>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+                <table class="table">
+
+
+                    @for (int i = 1; i <= Model.Stories.Count; i++)
+                    {
+                        <tr>
+                            <td style="text-align:left">
+                                <label>@i.</label>
+                            </td>
+                            <td style="text-align:left; margin:0px,0px,0px,0px">
+
+                                @Html.DisplayFor(modelItem => Model.Stories[i - 1].Title)
+                            </td>
+
+                            <td style="text-align:center; overflow:auto">
+                                @Html.DisplayFor(modelItem => Model.Stories[i - 1].Content)
+                            </td>
+                            <td style="text-align:right">
+                                <input type="submit" value="Contribute" />
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Scenario)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Content)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StoryID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Type)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Genre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.To)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.From)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MessageString)
+                                </td>*@
+                        </tr>
+                    }
+
+                </table>
+            </form>
+        </div>
+    </body>
+}
+
+
+
+
+
