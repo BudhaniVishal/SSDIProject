@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrowseCreatorStoriesControllerTest.cs" />
+    <Compile Include="BrowseStoriesHomeControllerTest.cs" />
     <Compile Include="CreateEditorStoryHomeControllerTest.cs" />
     <Compile Include="CreateStoryDataBaseAccessTest.cs" />
     <Compile Include="LoginUserDataBaseAccessTest.cs" />

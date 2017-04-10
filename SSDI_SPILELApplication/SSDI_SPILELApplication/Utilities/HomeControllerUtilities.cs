@@ -9,7 +9,7 @@ namespace SSDI_SPILELApplication.Utilities
 {
     public class HomeControllerUtilities
     {
-        internal static List<SelectListItem> GetGenres()
+        public static List<SelectListItem> GetGenres()
         {
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem
@@ -60,7 +60,7 @@ namespace SSDI_SPILELApplication.Utilities
             return items;
         }
 
-        internal static List<SelectListItem> GetTypes()
+        public static List<SelectListItem> GetTypes()
         {
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem
@@ -96,7 +96,7 @@ namespace SSDI_SPILELApplication.Utilities
             return items;
         }
 
-        internal static List<StoryModel> FilterStories(List<StoryModel> storiesAvailable, string selectedGenre, string selectedType)
+        public static List<StoryModel> FilterStories(List<StoryModel> storiesAvailable, string selectedGenre, string selectedType)
         {
             try
             {
