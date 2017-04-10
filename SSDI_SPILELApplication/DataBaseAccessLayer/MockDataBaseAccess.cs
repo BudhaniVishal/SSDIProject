@@ -147,17 +147,8 @@ namespace DataBaseAccessLayer
                 }
                 else
                 {
-                    if (modelData.UserType.Equals("WRITER"))
-                    {
-                        modelData.IsUserVerified = true;
-                        resultCode.Message = "Writer registration is successfull";
-                    }
-                    else
-                    {
-                        modelData.IsUserVerified = false;
-                        resultCode.Message =
-                            "Editor registration is successfull!! You will receive a confirmation email !!";
-                    }
+                    modelData.IsUserVerified = true;
+
                     //Insert to DB values
 
                     var collectionName =
@@ -166,6 +157,7 @@ namespace DataBaseAccessLayer
                     collectionName.InsertOne(document);
 
                     resultCode.Result = true;
+                    resultCode.Message = "Registration is successfull !!";
                     return resultCode;
                 }
             }

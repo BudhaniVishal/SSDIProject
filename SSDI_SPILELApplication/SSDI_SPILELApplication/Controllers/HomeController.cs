@@ -164,11 +164,6 @@ namespace SSDI_SPILELApplication.Controllers
 
         }
 
-        protected void ddlselect_Changed(object sender, EventArgs e)
-        {
-
-        }
-
         [HttpPost]
         public JsonResult CreateEditorStory(StoryModel data)
         {
@@ -180,7 +175,7 @@ namespace SSDI_SPILELApplication.Controllers
                     var username = Session["username"].ToString();
                     CreateStory story = new CreateStory();
 					ResultCode result = story.CreateEditorStory(data,username);
-					return Json(result);
+					return Json(result.Message);
 				}
 				else
 				{

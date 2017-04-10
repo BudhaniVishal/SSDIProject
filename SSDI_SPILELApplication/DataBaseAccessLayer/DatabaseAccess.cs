@@ -147,26 +147,18 @@ namespace DataBaseAccessLayer
 				}
 				else
 				{
-					if (modelData.UserType.Equals("WRITER"))
-					{
-						modelData.IsUserVerified = true;
-						resultCode.Message = "Writer registration is successfull";
-					}
-					else
-					{
-						modelData.IsUserVerified = false;
-						resultCode.Message =
-							"Editor registration is successfull!! You will receive a confirmation email !!";
-					}
-					//Insert to DB values
+                    modelData.IsUserVerified = true;
+                    
+                    //Insert to DB values
 
-					var collectionName =
+                    var collectionName =
 						CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("UserRegistration");
 					var document = modelData.ToBsonDocument();
 					collectionName.InsertOne(document);
 
 					resultCode.Result = true;
-					return resultCode;
+                    resultCode.Message = "Registration is successfull !!";
+                    return resultCode;
 				}
 			}
 			catch (Exception ex)
