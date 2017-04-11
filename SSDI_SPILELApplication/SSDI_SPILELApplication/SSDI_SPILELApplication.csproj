@@ -231,11 +231,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IBrowseSuggestions.cs" />
     <Compile Include="Interfaces\IBrowseStory.cs" />
     <Compile Include="Interfaces\ICreateStory.cs" />
     <Compile Include="Interfaces\IGetStories.cs" />
     <Compile Include="Interfaces\ILoginUser.cs" />
     <Compile Include="Interfaces\IRegistration.cs" />
+    <Compile Include="LogicLayer\BrowseSuggestion.cs" />
     <Compile Include="LogicLayer\BrowseStory.cs" />
     <Compile Include="LogicLayer\CreateStory.cs" />
     <Compile Include="LogicLayer\CreateUserRegistration.cs" />
@@ -249,6 +251,8 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\StoryModel.cs" />
+    <Compile Include="Models\StorySuggestionsModel.cs" />
+    <Compile Include="Models\SuggestionModel.cs" />
     <Compile Include="Models\UpdatepasswordModel.cs" />
     <Compile Include="Models\UserRegistrationModel.cs" />
     <Compile Include="Models\VerifyEmailModel.cs" />
@@ -332,8 +336,7 @@
     <Content Include="Views\Home\EditorHome.cshtml" />
     <Content Include="Views\Home\BrowseStories.cshtml" />
     <Content Include="Views\Home\UserHome.cshtml" />
-    <Content Include="Views\Home\BrowseCreatorStories.cshtml" />
-    <Content Include="Views\Home\BrowseContributorStories.cshtml" />
+    <Content Include="Views\Home\BrowseSuggestions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
