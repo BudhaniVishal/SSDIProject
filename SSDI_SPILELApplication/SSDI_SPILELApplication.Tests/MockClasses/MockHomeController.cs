@@ -13,8 +13,9 @@ namespace SSDI_SPILELApplication.Tests.MockClasses
 {
 	public class MockHomeController : Controller
 	{
+        static List<StoryModel> storiesAvailable;
 
-		[HttpPost]
+        [HttpPost]
 		public JsonResult VerifyEmail(VerifyEmailModel v)
 		{
 			if (v != null)
@@ -45,5 +46,65 @@ namespace SSDI_SPILELApplication.Tests.MockClasses
 			return Json("Error !! Data is null.");
 		}
 
-	}
+
+        public ActionResult BrowseCreatorStories()
+        {
+            BrowseStoryModel model = new BrowseStoryModel();
+
+
+            storiesAvailable = new List<StoryModel>();
+            var username = "mdeshpa3@gmail.com";
+            GetStories storyobj = new GetStories();
+            var results = storyobj.getCreatedStories(username);
+            for (int i = 0; i < results.Count; i++)
+            {
+                StoryModel story = new StoryModel();
+                story.Title = results[i].Title;
+                story.Content = results[i].Content;
+                storiesAvailable.Add(story);
+            }
+
+            ViewBag.GenreValue = "Select";
+            ViewBag.TypeValue = "Type";
+
+
+            model.GenreValues = HomeControllerUtilities.GetGenres();
+            model.TypeValues = HomeControllerUtilities.GetTypes();
+
+            model.Stories = storiesAvailable;
+            return View(model);
+        }
+
+        public ActionResult BrowseContributorStories()
+        {
+            BrowseStoryModel model = new BrowseStoryModel();
+
+
+            storiesAvailable = new List<StoryModel>();
+            var username = "mdeshpa3@gmail.com";
+            GetStories storyobj = new GetStories();
+
+            var results = storyobj.getContributorStories(username);
+            for (int i = 0; i < results.Count; i++)
+            {
+                StoryModel story = new StoryModel();
+                story.Title = results[i].Title;
+                story.Content = results[i].Content;
+                storiesAvailable.Add(story);
+            }
+
+            ViewBag.GenreValue = "Select";
+            ViewBag.TypeValue = "Type";
+
+
+            model.GenreValues = HomeControllerUtilities.GetGenres();
+            model.TypeValues = HomeControllerUtilities.GetTypes();
+
+            model.Stories = storiesAvailable;
+            return View(model);
+        }
+
+
+
+    }
 }
