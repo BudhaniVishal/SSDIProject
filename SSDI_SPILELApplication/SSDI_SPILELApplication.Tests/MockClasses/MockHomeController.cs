@@ -104,6 +104,22 @@ namespace SSDI_SPILELApplication.Tests.MockClasses
             return View(model);
         }
 
+        public JsonResult CreateEditorStory(StoryModel data)
+        {
+            if (data != null)
+            {
+
+
+                var username = "mdeshpa3@gmail.com";
+                    CreateStory story = new CreateStory();
+                    ResultCode result = story.CreateEditorStory(data, username);
+                    return Json(result.Message);
+                
+            }
+            return Json("Error !! Data is null.");
+        }
+
+
 
 
     }

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using NUnit.Framework;
 using SSDI_SPILELApplication.Controllers;
 using SSDI_SPILELApplication.Models;
-
+using SSDI_SPILELApplication.Tests.MockClasses;
 
 namespace SSDI_SPILELApplication.Tests
 {
@@ -26,7 +26,7 @@ namespace SSDI_SPILELApplication.Tests
         [Test]
         public void CreateEditorStoryCorrectValues()
         {
-            HomeController obj = new HomeController();
+            MockHomeController obj = new MockHomeController();
             StoryModel model = new StoryModel();
             model.Title = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ", "") + "Test Story";
             model.Content = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ", "") + "Test Story Content";
