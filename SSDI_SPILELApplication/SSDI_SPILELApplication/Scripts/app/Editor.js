@@ -1,27 +1,33 @@
 ﻿var module = angular.module("myapp", []);
 
-var myController2 = module.controller("EditorController", function ($scope, $http, $window) {
+var myController2 = module.controller("EditorController", function ($scope, $http) {
     $scope.mydata = null;
     $scope.myfunc = {};
     $scope.checkErr = function (startDate, endDate) {
-       
         $scope.errMessage = '';
         $scope.curDate = new Date();
-        debugger;
+        //debugger;
+        var difference = Date.parse($scope.curDate) - Date.parse(startDate);
         if (Date.parse(endDate) < Date.parse(startDate)) {
             $scope.errMessage = 'End Date should be greater than start date';
-            isValid =false;
+            $scope.isValid = false;
         }
-        if (Date.parse(startDate) < Date.parse($scope.curDate)) {
-            $scope.errMessage = 'Start date should not be before today.';
-            isValid = false;
+        else if (Date.parse(startDate) < Date.parse($scope.curDate)) {
+            if (!(difference < 86400000)) {
+                $scope.errMessage = 'Start date should not be lesser than today';
+                $scope.isValid = false;
+            }
+        }
+        else if (Date.parse(startDate) > Date.parse($scope.curDate)) {
+            $scope.errMessage = 'Start date cannot be greater than today';
+            $scope.isValid = false;
         }
 
     };
     $scope.submitForm = function (isValid) {
-        debugger;
+        //debugger;
         // check to make sure the form is completely valid
-        if (isValid) {
+        if ($scope.errMessage === '') {
             var myobj = $scope.mydata;
             var post = $http({
                 method: "POST",
@@ -36,6 +42,7 @@ var myController2 = module.controller("EditorController", function ($scope, $htt
                 $scope.MessageString = "An error occured, Please try again.";
             };
         }
+        $scope.MessageString = $scope.errMessage;
     }
 });
 
