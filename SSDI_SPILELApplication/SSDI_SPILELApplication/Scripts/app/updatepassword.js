@@ -17,8 +17,8 @@ var logincontrol = module.controller("resetpasswordController", function ($scope
             post.then(function successCallback(response) {
                 if (response.data === "Password Updated Successfully !!") {
                     $scope.MessageString = response.data;
-                    window.alert("Password Updated Successfully !! Please login.");                    
-                    $window.location.href = '/Home/index';
+                    //window.alert("Password Updated Successfully !! Please login.");                    
+                    //$window.location.href = '/Home/index';
                 } else {
                     $scope.MessageString = response.data;
                     //$window.location.href = '/Home/index';

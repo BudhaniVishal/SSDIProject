@@ -24,7 +24,13 @@ else
         <li>
             @if (AccountController.ShowLogOff)
             {
-                @Html.ActionLink("Log off", "Index", "Home", routeValues: null, htmlAttributes: new {id = "logoffLink"})
+                <table>
+                    <tr>
+                        <td><h5>Welcome @Session["username"]</h5></td>
+                        <td style="min-width:20px;"></td>
+                        <td>@Html.ActionLink("Log off", "Index", "Home", routeValues: null, htmlAttributes: new { id = "logoffLink" })</td>
+                    </tr>
+                </table>
             }
             else
             {

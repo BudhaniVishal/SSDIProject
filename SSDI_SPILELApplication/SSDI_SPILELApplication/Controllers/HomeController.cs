@@ -124,12 +124,12 @@ namespace SSDI_SPILELApplication.Controllers
 
 
 
-        public ActionResult FilterStories(string SelectedGenre, string SelectedType)
+        public ActionResult FilterStories(string selectedGenre, string selectedType)
         {
             BrowseStoryModel model = new BrowseStoryModel();
             storiesAvailable = new List<StoryModel>();
             storiesAvailable = new GetStories().GetAllStories();
-            model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, SelectedGenre, SelectedType); ;
+            model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, selectedGenre, selectedType); ;
             model.GenreValues = HomeControllerUtilities.GetGenres();
             model.TypeValues = HomeControllerUtilities.GetTypes();
 
@@ -137,35 +137,30 @@ namespace SSDI_SPILELApplication.Controllers
 
         }
 
-        public ActionResult FilterCreatorStories(string SelectedGenre, string SelectedType)
+        public ActionResult FilterCreatorStories(string selectedGenre, string selectedType)
         {
             BrowseStoryModel model = new BrowseStoryModel();
             storiesAvailable = new List<StoryModel>();
             var username = Session["username"].ToString();
             storiesAvailable = new GetStories().getCreatedStories(username);
-            model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, SelectedGenre, SelectedType); ;
+            model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, selectedGenre, selectedType); ;
             model.GenreValues = HomeControllerUtilities.GetGenres();
             model.TypeValues = HomeControllerUtilities.GetTypes();
 
             return View("BrowseStories", model);
 
         }
-        public ActionResult FilterContributorStories(string SelectedGenre, string SelectedType)
+        public ActionResult FilterContributorStories(string selectedGenre, string selectedType)
         {
             BrowseStoryModel model = new BrowseStoryModel();
             storiesAvailable = new List<StoryModel>();
             var username = Session["username"].ToString();
             storiesAvailable = new GetStories().getContributorStories(username);
-            model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, SelectedGenre, SelectedType); ;
+            model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, selectedGenre, selectedType); ;
             model.GenreValues = HomeControllerUtilities.GetGenres();
             model.TypeValues = HomeControllerUtilities.GetTypes();
 
             return View("BrowseStories", model);
-
-        }
-
-        protected void ddlselect_Changed(object sender, EventArgs e)
-        {
 
         }
 
@@ -180,7 +175,7 @@ namespace SSDI_SPILELApplication.Controllers
                     var username = Session["username"].ToString();
                     CreateStory story = new CreateStory();
 					ResultCode result = story.CreateEditorStory(data,username);
-					return Json(result);
+					return Json(result.Message);
 				}
 				else
 				{

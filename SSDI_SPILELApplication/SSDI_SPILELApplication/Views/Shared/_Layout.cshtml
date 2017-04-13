@@ -40,17 +40,15 @@
             <div class="container col-md-2">
             <nav class="navbar" id="sidebar-wrapper" role="navigation">
                 <ul class="nav sidebar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li> @Html.ActionLink("View All Stories", "BrowseStories", "Home")<!--class="sidebar-brand">
-                        <a href="#">
-                            View All Stories
-                        </a>-->  
+                        @Html.ActionLink("View All Stories", "BrowseStories", "Home")  
                     </li>
                     <li>
                         @Html.ActionLink("My Stories", "BrowseCreatorStories", "Home")
                     </li>
                     <li>
-                        @Html.ActionLink("My Contribution", "BrowseContributorStories", "Home")
+                        @Html.ActionLink("My Contributions", "BrowseContributorStories", "Home")
                     </li>
                     <li>
                         @Html.ActionLink("Create New Story", "editor", "Home")

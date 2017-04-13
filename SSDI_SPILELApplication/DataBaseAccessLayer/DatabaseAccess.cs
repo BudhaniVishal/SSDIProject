@@ -147,26 +147,18 @@ namespace DataBaseAccessLayer
 				}
 				else
 				{
-					if (modelData.UserType.Equals("WRITER"))
-					{
-						modelData.IsUserVerified = true;
-						resultCode.Message = "Writer registration is successfull";
-					}
-					else
-					{
-						modelData.IsUserVerified = false;
-						resultCode.Message =
-							"Editor registration is successfull!! You will receive a confirmation email !!";
-					}
-					//Insert to DB values
+                    modelData.IsUserVerified = true;
+                    
+                    //Insert to DB values
 
-					var collectionName =
+                    var collectionName =
 						CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("UserRegistration");
 					var document = modelData.ToBsonDocument();
 					collectionName.InsertOne(document);
 
 					resultCode.Result = true;
-					return resultCode;
+                    resultCode.Message = "Registration is successfull !!";
+                    return resultCode;
 				}
 			}
 			catch (Exception ex)
@@ -225,11 +217,11 @@ namespace DataBaseAccessLayer
 				IMongoCollection<ConnStoryTable> collection =
 					CreateDataConnection(new MongoClient()).GetCollection<ConnStoryTable>("StoryTable");
 				var results = collection.Find(new BsonDocument()).ToList();
-				return results;
+				return (results != null) ? results : new List<ConnStoryTable>();
 			}
 			catch (Exception ex)
 			{
-				return null;
+				return new List<ConnStoryTable>();
 			}
 
 		}
@@ -283,6 +275,11 @@ namespace DataBaseAccessLayer
                     .GetCollection<CreatorStoryModel>("CreatorStoryTable");
                 var condition = Builders<CreatorStoryModel>.Filter.Eq(p => p.EditorID, username);
                 var results = tableCollection.Find(condition).ToList().AsQueryable();
+                if (results == null)
+                {
+                    crtrStoryListObj[0].MessageString = "Data is null";
+                }
+                else { 
                 foreach (var story in results)
                 {
                     var tableCollection2 = CreateDataConnection(new MongoClient())
@@ -295,10 +292,13 @@ namespace DataBaseAccessLayer
                         crtrStoryListObj.Add(StoryResults[i]);
                     }
                 }
+                }
                 return crtrStoryListObj;
+           
             }
             catch (Exception ex)
             {
+
                 return null;
             }
         }

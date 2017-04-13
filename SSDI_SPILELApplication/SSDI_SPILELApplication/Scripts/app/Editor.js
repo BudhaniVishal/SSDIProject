@@ -7,18 +7,19 @@ var myController2 = module.controller("EditorController", function ($scope, $htt
        
         $scope.errMessage = '';
         $scope.curDate = new Date();
-
+        debugger;
         if (Date.parse(endDate) < Date.parse(startDate)) {
             $scope.errMessage = 'End Date should be greater than start date';
-            return false;
+            isValid =false;
         }
         if (Date.parse(startDate) < Date.parse($scope.curDate)) {
             $scope.errMessage = 'Start date should not be before today.';
-            return false;
+            isValid = false;
         }
 
     };
     $scope.submitForm = function (isValid) {
+        debugger;
         // check to make sure the form is completely valid
         if (isValid) {
             var myobj = $scope.mydata;

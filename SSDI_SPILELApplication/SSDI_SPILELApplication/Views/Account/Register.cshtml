@@ -69,7 +69,8 @@
                         <p ng-cloak ng-show="formRegister.ConfirmPassword.$invalid && !formRegister.ConfirmPassword.$pristine" class="help-block">Confirm Password should be greater than 5 and less than 20 characters.</p>
                     </div>
 
-                    <div class="form-group" required>
+                    @*Removed as its no more needed as we have modified the login logic*@                    
+                    @*<div class="form-group" required>
                         <label class="col-md-2 control-label">Select User Type</label>
 
                         <label class="radio-inline" style="margin-left: 14px">
@@ -79,7 +80,9 @@
                             <input type="radio" id="writer" name="writer" value="WRITER" ng-model="mydata.UserType" > Writer
                         </label>
 
-                    </div>
+                    </div>*@
+
+                    
 
 
                     <div class="form-group">
