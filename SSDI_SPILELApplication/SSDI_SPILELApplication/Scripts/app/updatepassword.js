@@ -18,7 +18,7 @@ var logincontrol = module.controller("resetpasswordController", function ($scope
                 if (response.data === "Password Updated Successfully !!") {
                     $scope.MessageString = response.data;
                     //window.alert("Password Updated Successfully !! Please login.");                    
-                    //$window.location.href = '/Home/index';
+                    $window.location.href = '/Account/ResetPasswordConfirmation';
                 } else {
                     $scope.MessageString = response.data;
                     //$window.location.href = '/Home/index';
