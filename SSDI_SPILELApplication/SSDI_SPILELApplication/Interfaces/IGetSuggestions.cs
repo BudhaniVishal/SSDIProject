@@ -8,8 +8,8 @@ using SSDI_SPILELApplication.Models;
 
 namespace SSDI_SPILELApplication.Interfaces
 {
-    interface IBrowseSuggestions
+    interface IGetSuggestions
     {
-        List<SuggestionTable> BrowseSuggestions(int story_id);
+        List<SuggestionTable> ReturnSuggestions(int storyID);
     }
 }

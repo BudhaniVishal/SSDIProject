@@ -231,13 +231,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IBrowseSuggestions.cs" />
+    <Compile Include="Interfaces\IGetSuggestions.cs" />
     <Compile Include="Interfaces\IBrowseStory.cs" />
     <Compile Include="Interfaces\ICreateStory.cs" />
     <Compile Include="Interfaces\IGetStories.cs" />
     <Compile Include="Interfaces\ILoginUser.cs" />
     <Compile Include="Interfaces\IRegistration.cs" />
-    <Compile Include="LogicLayer\BrowseSuggestion.cs" />
+    <Compile Include="LogicLayer\GetSuggestions.cs" />
     <Compile Include="LogicLayer\BrowseStory.cs" />
     <Compile Include="LogicLayer\CreateStory.cs" />
     <Compile Include="LogicLayer\CreateUserRegistration.cs" />

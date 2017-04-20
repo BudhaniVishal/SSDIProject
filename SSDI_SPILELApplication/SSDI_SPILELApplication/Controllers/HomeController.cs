@@ -71,14 +71,15 @@ namespace SSDI_SPILELApplication.Controllers
             storiesAvailable = new List<StoryModel>();
             var username = Session["username"].ToString();
             GetStories storyobj = new GetStories();
-                var results = storyobj.getCreatedStories(username);
-                for (int i = 0; i < results.Count; i++)
-                {
-                    StoryModel story = new StoryModel();
-                    story.Title = results[i].Title;
-                    story.Content = results[i].Content;
-                    storiesAvailable.Add(story);
-                }
+            var results = storyobj.getCreatedStories(username);
+            for (int i = 0; i < results.Count; i++)
+            {
+                StoryModel story = new StoryModel();
+                story.Title = results[i].Title;
+                story.Content = results[i].Content;
+				story.StoryID = results[i].StoryID;
+                storiesAvailable.Add(story);
+            }
             
             ViewBag.GenreValue = "Select";
             ViewBag.TypeValue = "Type";
@@ -106,6 +107,7 @@ namespace SSDI_SPILELApplication.Controllers
                 StoryModel story = new StoryModel();
                 story.Title = results[i].Title;
                 story.Content = results[i].Content;
+				story.StoryID = results[i].StoryID;
                 storiesAvailable.Add(story);
             }
 
@@ -119,12 +121,37 @@ namespace SSDI_SPILELApplication.Controllers
             model.Stories = storiesAvailable;
             return View(model);
         }
-        
+
+		public ActionResult BrowseSuggestions(int storyID) {
+			StorySuggestionsModel model = new StorySuggestionsModel();
+			model.CurrentStory = new GetStories().GetStoryByID(storyID);
+			List<SuggestionModel> suggestionsAvailable = new List<SuggestionModel>();
+			if (Session["username"] == null) {
+				return RedirectToAction("Index");
+			}
+			var username = Session["username"].ToString();
+			
+			GetSuggestions suggestionobj = new GetSuggestions();
+
+			var results = suggestionobj.ReturnSuggestions(storyID);
+			for (int i = 0; i < results.Count; i++) {
+				SuggestionModel s = new SuggestionModel();
+				s.DatePosted = results[i].DatePosted;
+				s.Content = results[i].Content;
+				s.OwningStoryID = results[i].OwningStoryID;
+				s.SuggestionID = results[i].SuggestionID;
+				suggestionsAvailable.Add(s);
+			}
+
+			model.Suggestions = suggestionsAvailable;
+			return View(model);
+		}
 
 
 
 
-        public ActionResult FilterStories(string selectedGenre, string selectedType)
+
+		public ActionResult FilterStories(string selectedGenre, string selectedType)
         {
             BrowseStoryModel model = new BrowseStoryModel();
             storiesAvailable = new List<StoryModel>();

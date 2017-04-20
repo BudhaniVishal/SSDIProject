@@ -31,6 +31,8 @@ namespace SSDI_SPILELApplication.LogicLayer
             return list;
         }
 
+		
+
             public List<StoryModel> getCreatedStories(string username)
             {
                 List<StoryModel> storyObj = new List<StoryModel>();
@@ -67,7 +69,22 @@ namespace SSDI_SPILELApplication.LogicLayer
             return storyObj;
 
         }
-    }
+
+		public StoryModel GetStoryByID(int id) {
+			DatabaseAccess objDatabaseAccess = new DatabaseAccess();
+			var item = objDatabaseAccess.GetStoryByID(id);
+			StoryModel obj = new StoryModel();
+			obj.Content = item.Content;
+			obj.From = Convert.ToDateTime(item.From);
+			obj.Genre = item.Genre;
+			obj.Scenario = item.Scenario;
+			obj.StoryID = Convert.ToInt32(item.StoryID);
+			obj.Title = item.Title;
+			obj.To = Convert.ToDateTime(item.To);
+			obj.Type = item.Type;
+			return obj;
+		}
+	}
 
     
 }

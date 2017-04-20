@@ -7,6 +7,7 @@ using MongoDB.Bson;
 
 namespace DataBaseAccessLayer.ConnectionClass {
 	public class SuggestionTable {
+		public ObjectId _id { get; set; }
 		public String Content { get; set; }
         public int SuggestionID { get; set; }
 		public int OwningStoryID { get; set; }

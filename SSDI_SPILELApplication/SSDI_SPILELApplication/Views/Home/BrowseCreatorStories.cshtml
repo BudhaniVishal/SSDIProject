@@ -10,7 +10,7 @@
 @using (Html.BeginForm("FilterCreatorStories", "Home", FormMethod.Post))
 {
     <body>
-        <div ng-app="BrowseStory" ng-controller="BrowseStoryController">
+        <div ng-app="BrowseCreatorStories" ng-controller="BrowseStoryController">
             <form id="BrowseStories" name="BrowseStories">
                 <table class="table">
                     <tr>
@@ -33,25 +33,25 @@
                         <th style="text-align:center"></th>
                     </tr>
 
-                    @for (int i = 1; i <= Model.Stories.Count; i++)
-                    {
+                    @for (int i = 0; i < Model.Stories.Count; i++) {
                         <tr>
                             <td style="text-align:left">
-                                <label>@i.</label>
+                                @{var serialnum = i + 1;}
+                                <label>@serialnum.</label>
                             </td>
-                            <td style="text-align:left;">
+                            <td style="text-align:left">
                                 <div style="text-align:center; overflow:auto; min-width:250px; max-height:50px;">
-                                    @Html.DisplayFor(modelItem => Model.Stories[i - 1].Title)
+                                    @Html.DisplayFor(modelItem => Model.Stories[i].Title)
                                 </div>
                             </td>
 
                             <td style="text-align:center; overflow:auto">
                                 <div style="text-align:center; overflow:auto; max-height:50px;">
-                                    @Html.DisplayFor(modelItem => Model.Stories[i - 1].Content)
+                                    @Html.DisplayFor(modelItem => Model.Stories[i].Content)
                                 </div>
                             </td>
                             <td style="text-align:right">
-                                <input type="submit" value="Review Contributions" />
+                                <input type="button" value="Review Contributions" onclick="window.location.href='@Url.Action("BrowseSuggestions", "Home", new { storyID = Model.Stories[i].StoryID })'"/>
                             </td>
                             @*<td>
                                     @Html.DisplayFor(modelItem => item.Scenario)

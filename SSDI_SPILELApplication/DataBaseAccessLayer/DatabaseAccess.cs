@@ -226,6 +226,26 @@ namespace DataBaseAccessLayer
 
 		}
 
+		public ConnStoryTable GetStoryByID(int id) {
+			try {
+				IMongoCollection<ConnStoryTable> collection =
+					CreateDataConnection(new MongoClient()).GetCollection<ConnStoryTable>("StoryTable");
+				var results = collection.Find(new BsonDocument()).ToList();
+				for (int i = 0; i < results.Count; i++) {
+					if (results[i].StoryID == id) {
+						return results[i];
+					}
+				}
+
+				//if we're here, there were no stories with this id
+				return new ConnStoryTable();
+			}
+			catch (Exception ex) {
+				return new ConnStoryTable();
+			}
+
+		}
+
 
 		public ResultCode updatepassword(UpdatePasswordModelDLL data , string email)
 		{
@@ -280,18 +300,18 @@ namespace DataBaseAccessLayer
                     crtrStoryListObj[0].MessageString = "Data is null";
                 }
                 else { 
-                foreach (var story in results)
-                {
-                    var tableCollection2 = CreateDataConnection(new MongoClient())
-                    .GetCollection<ConnStoryTable>("StoryTable");
-                    var fields = Builders<ConnStoryTable>.Projection.Include(p => p.Title).Include(p => p.Content);
-                    var condition2 = Builders<ConnStoryTable>.Filter.Eq(p => p.StoryID, story.StoryID);
-                    var StoryResults = tableCollection2.Find(condition2).Project<ConnStoryTable>(fields).ToList();
-                    for (int i = 0; i < StoryResults.Count(); i++)
-                    {
-                        crtrStoryListObj.Add(StoryResults[i]);
-                    }
-                }
+					foreach (var story in results)
+					{
+						var tableCollection2 = CreateDataConnection(new MongoClient())
+						.GetCollection<ConnStoryTable>("StoryTable");
+						var fields = Builders<ConnStoryTable>.Projection.Include(p => p.Title).Include(p => p.Content).Include(p => p.StoryID).Include(p => p.Genre).Include(p => p.Scenario);
+						var condition2 = Builders<ConnStoryTable>.Filter.Eq(p => p.StoryID, story.StoryID);
+						var StoryResults = tableCollection2.Find(condition2).Project<ConnStoryTable>(fields).ToList();
+						for (int i = 0; i < StoryResults.Count(); i++)
+						{
+							crtrStoryListObj.Add(StoryResults[i]);
+						}
+					}
                 }
                 return crtrStoryListObj;
            

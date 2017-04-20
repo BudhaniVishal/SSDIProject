@@ -10,5 +10,6 @@ namespace SSDI_SPILELApplication.Interfaces
     interface IGetStories
     {
         List<StoryModel> GetAllStories();
+		StoryModel GetStoryByID(int id);
     }
 }
