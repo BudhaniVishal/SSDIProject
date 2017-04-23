@@ -147,7 +147,25 @@ namespace SSDI_SPILELApplication.Controllers
 			return View(model);
 		}
 
+		public ActionResult ViewSuggestion(int suggestionID) {
+			ViewSuggestionModel model = new ViewSuggestionModel();
+			SuggestionTable table = new GetSuggestions().ReturnSuggestionByID(suggestionID);
+			SuggestionModel sug = new SuggestionModel();
 
+			if (Session["username"] == null) {
+				return RedirectToAction("Index");
+			}
+
+			sug.Content = table.Content;
+			sug.DatePosted = table.DatePosted;
+			sug.OwningStoryID = table.OwningStoryID;
+			sug.SuggestionID = table.SuggestionID;
+
+			model.Suggestion = sug;
+			model.CurrentStory = new GetStories().GetStoryByID(sug.OwningStoryID);
+
+			return View(model);
+		}
 
 
 

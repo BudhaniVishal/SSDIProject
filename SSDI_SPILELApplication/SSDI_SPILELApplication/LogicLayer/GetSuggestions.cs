@@ -11,7 +11,12 @@ namespace SSDI_SPILELApplication.LogicLayer
 {
     public class GetSuggestions : IGetSuggestions
     {
-        public List<SuggestionTable> ReturnSuggestions(int storyID)
+		public SuggestionTable ReturnSuggestionByID(int suggestionID) {
+			DatabaseAccess objDatabaseAccess = new DatabaseAccess();
+			return objDatabaseAccess.GetSuggestionByID(suggestionID);
+		}
+
+		public List<SuggestionTable> ReturnSuggestions(int storyID)
         {
 			DatabaseAccess objDatabaseAccess = new DatabaseAccess();
 			List<SuggestionTable> result = new List<SuggestionTable>();

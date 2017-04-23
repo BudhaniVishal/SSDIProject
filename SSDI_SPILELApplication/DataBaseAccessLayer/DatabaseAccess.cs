@@ -341,6 +341,25 @@ namespace DataBaseAccessLayer
 			}
 		}
 
+		public SuggestionTable GetSuggestionByID(int suggestion_id) {
+			try {
+				IMongoCollection<SuggestionTable> collection =
+					CreateDataConnection(new MongoClient()).GetCollection<SuggestionTable>("SuggestionTable");
+				var results = collection.Find(new BsonDocument()).ToList();
+				for (int i = 0; i < results.Count; i++) {
+					if (results[i].SuggestionID == suggestion_id) {
+						return results[i];
+					}
+				}
+
+				//if we're here, there were no stories with this id
+				return null;
+			}
+			catch (Exception ex) {
+				return null;
+			}
+		}
+
 		public List<ContributorStoryModel> BrowseContributorStories(string username)
         {
             List<ContributorStoryModel> cntrStoryObj = new List<ContributorStoryModel>();

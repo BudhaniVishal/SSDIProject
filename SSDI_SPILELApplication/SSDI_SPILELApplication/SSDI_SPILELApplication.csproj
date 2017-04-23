@@ -252,6 +252,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SearchStoryByKeyModel.cs" />
     <Compile Include="Models\StoryModel.cs" />
+    <Compile Include="Models\ViewSuggestionModel.cs" />
     <Compile Include="Models\StorySuggestionsModel.cs" />
     <Compile Include="Models\SuggestionModel.cs" />
     <Compile Include="Models\UpdatepasswordModel.cs" />
@@ -338,6 +339,7 @@
     <Content Include="Views\Home\BrowseSuggestions.cshtml" />
     <Content Include="Views\Home\BrowseContributorStories.cshtml" />
     <Content Include="Views\Home\BrowseCreatorStories.cshtml" />
+    <Content Include="Views\Home\ViewSuggestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
