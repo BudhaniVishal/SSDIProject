@@ -250,6 +250,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SearchStoryByKeyModel.cs" />
     <Compile Include="Models\StoryModel.cs" />
     <Compile Include="Models\StorySuggestionsModel.cs" />
     <Compile Include="Models\SuggestionModel.cs" />
