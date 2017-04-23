@@ -168,21 +168,39 @@ namespace SSDI_SPILELApplication.Controllers
 		}
 
 
-
-		public ActionResult FilterStories(string selectedGenre, string selectedType)
+		
+		public ActionResult FilterStories(string selectedGenre, string selectedType,string filter , string filterbykey, BrowseStoryModel key)
         {
-            BrowseStoryModel model = new BrowseStoryModel();
-            storiesAvailable = new List<StoryModel>();
-            storiesAvailable = new GetStories().GetAllStories();
-            model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, selectedGenre, selectedType); ;
-            model.GenreValues = HomeControllerUtilities.GetGenres();
-            model.TypeValues = HomeControllerUtilities.GetTypes();
+	        BrowseStoryModel model = new BrowseStoryModel();
+			if (!string.IsNullOrEmpty(filter))
+	        {
+		        
+		        storiesAvailable = new List<StoryModel>();
+		        storiesAvailable = new GetStories().GetAllStories();
+		        model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, selectedGenre, selectedType);
+		        
+		        model.GenreValues = HomeControllerUtilities.GetGenres();
+		        model.TypeValues = HomeControllerUtilities.GetTypes();
+	        }
+	        if (!string.IsNullOrEmpty(filterbykey))
+	        {
+		        
 
-            return View("BrowseStories", model);
+		        storiesAvailable = new List<StoryModel>();
+		        
+		        storiesAvailable = new GetStories().GetAllStories();
+		        model.Stories = HomeControllerUtilities.FilterStoriesbySearchKey(storiesAvailable, key.SearchKey);
+		        model.GenreValues = HomeControllerUtilities.GetGenres();
+		        model.TypeValues = HomeControllerUtilities.GetTypes();
+			}
+			return View("BrowseStories", model);
 
         }
 
-        public ActionResult FilterCreatorStories(string selectedGenre, string selectedType)
+		
+
+
+		public ActionResult FilterCreatorStories(string selectedGenre, string selectedType)
         {
             BrowseStoryModel model = new BrowseStoryModel();
             storiesAvailable = new List<StoryModel>();

@@ -226,6 +226,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\BrowseStoryModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -246,11 +247,9 @@
     <Compile Include="LogicLayer\VerifyEmailLL.cs" />
     <Compile Include="LogicLayer\VerifyLogin.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BrowseStoryModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\SearchStoryByKeyModel.cs" />
     <Compile Include="Models\StoryModel.cs" />
     <Compile Include="Models\ViewSuggestionModel.cs" />
     <Compile Include="Models\StorySuggestionsModel.cs" />
@@ -285,9 +284,10 @@
     </Content>
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-1.11.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.11.1.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -354,7 +354,6 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataBaseAccessLayer\DataBaseAccessLayer.csproj">

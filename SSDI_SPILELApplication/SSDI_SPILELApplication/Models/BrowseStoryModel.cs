@@ -6,10 +6,11 @@ using System.Web.Mvc;
 
 namespace SSDI_SPILELApplication.Models
 {
-    public class BrowseStoryModel
-    {
-        public List<StoryModel> Stories;
-        public List<SelectListItem> GenreValues;
-        public List<SelectListItem> TypeValues;
-    }
+	public class BrowseStoryModel
+	{
+		public List<StoryModel> Stories;
+		public List<SelectListItem> GenreValues;
+		public List<SelectListItem> TypeValues;
+		public string SearchKey { get; set; }
+	}
 }
