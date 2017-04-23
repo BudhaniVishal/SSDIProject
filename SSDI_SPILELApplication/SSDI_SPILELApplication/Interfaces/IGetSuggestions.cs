@@ -11,5 +11,6 @@ namespace SSDI_SPILELApplication.Interfaces
     interface IGetSuggestions
     {
         List<SuggestionTable> ReturnSuggestions(int storyID);
+		SuggestionTable ReturnSuggestionByID(int suggestionID);
     }
 }
