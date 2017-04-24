@@ -69,8 +69,25 @@ namespace SSDI_SPILELApplication.LogicLayer
             return storyObj;
 
         }
+        public List<StoryModel> BrowseContributedStoriesForEditor(int storyID)
+        {
+            List<StoryModel> storyObj = new List<StoryModel>();
+            DatabaseAccess objDatabaseAccess = new DatabaseAccess();
+            var result = objDatabaseAccess.BrowseContributedStoriesForEditor(storyID);
+            foreach (var story in result)
+            {
+                StoryModel Obj = new StoryModel();
+                Obj.Content = story.Content;
+                Obj.StoryID = Convert.ToInt32(story.StoryID);
+                Obj.Title = story.Title;
+                storyObj.Add(Obj);
+            }
+            return storyObj;
 
-		public StoryModel GetStoryByID(int id) {
+        }
+        
+
+        public StoryModel GetStoryByID(int id) {
 			DatabaseAccess objDatabaseAccess = new DatabaseAccess();
 			var item = objDatabaseAccess.GetStoryByID(id);
 			StoryModel obj = new StoryModel();

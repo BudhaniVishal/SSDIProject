@@ -323,7 +323,29 @@ namespace DataBaseAccessLayer
             }
         }
 
-		public List<SuggestionTable> BrowseSuggestions(int story_id) {
+        public List<ContributorStoryModel> BrowseContributedStoriesForEditor(int storyID)
+        {
+            List<ContributorStoryModel> cntrStoryObj = new List<ContributorStoryModel>();
+            try
+            {
+                var tableCollection = CreateDataConnection(new MongoClient())
+                    .GetCollection<ContributorStoryModel>("ContributorStoryTable");
+                var condition = Builders<ContributorStoryModel>.Filter.Eq(p => p.StoryID, storyID );
+                var results = tableCollection.Find(condition).ToList().AsQueryable();
+                foreach (var story in results)
+                {
+                    cntrStoryObj.Add(story);
+                }
+                return cntrStoryObj;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+        public List<SuggestionTable> BrowseSuggestions(int story_id) {
 			List<SuggestionTable> crtrSuggestionListObj = new List<SuggestionTable>();
 			SuggestionTable crtrSuggestionObj = new SuggestionTable();
 			try {

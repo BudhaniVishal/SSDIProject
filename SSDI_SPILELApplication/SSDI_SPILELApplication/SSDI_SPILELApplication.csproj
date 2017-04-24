@@ -340,6 +340,7 @@
     <Content Include="Views\Home\BrowseContributorStories.cshtml" />
     <Content Include="Views\Home\BrowseCreatorStories.cshtml" />
     <Content Include="Views\Home\ViewSuggestion.cshtml" />
+    <Content Include="Views\Home\ApproveContributedStories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
