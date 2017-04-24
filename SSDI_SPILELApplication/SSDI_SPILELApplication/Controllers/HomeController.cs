@@ -138,6 +138,25 @@ namespace SSDI_SPILELApplication.Controllers
             return View("ApproveContributedStories", model);
         }
 
+        public ActionResult DeleteRestStories(int storyID, string ContributorID)
+        {
+            BrowseStoryModel model = new BrowseStoryModel();
+            bool storiesDeleted = false;
+
+            storiesDeleted = new DeleteStories().DeleteRestContributedStories(storyID, ContributorID);
+            storiesAvailable = new List<StoryModel>();
+            storiesAvailable = new GetStories().GetAllStories();
+
+            model.GenreValues = HomeControllerUtilities.GetGenres();
+            model.TypeValues = HomeControllerUtilities.GetTypes();
+
+            model.Stories = storiesAvailable;
+            
+
+            return View("BrowseStories", model);
+        }
+
+
         public ActionResult BrowseSuggestions(int storyID) {
 			StorySuggestionsModel model = new StorySuggestionsModel();
 			model.CurrentStory = new GetStories().GetStoryByID(storyID);
