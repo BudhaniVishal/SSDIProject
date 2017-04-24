@@ -343,7 +343,36 @@ namespace DataBaseAccessLayer
                 return null;
             }
         }
+        public bool DeleteRestContributedStories(int storyID, string ContributorID)
+        {
+            List<ContributorStoryModel> cntrStoryObj = new List<ContributorStoryModel>();
+            try
+            {
+                bool result = false;
+                var tableCollection = CreateDataConnection(new MongoClient())
+                    .GetCollection<ContributorStoryModel>("ContributorStoryTable");
+                var condition = Builders<ContributorStoryModel>.Filter.Eq(p => p.StoryID, storyID);
+                var results = tableCollection.Find(condition).ToList().AsQueryable();
+                foreach (var story in results)
+                {
+                    if (!story.ContributorID.Equals(ContributorID))
+                    {
+                        var story_id = story.StoryID;
+                        var Deleteone = tableCollection.DeleteOne(
+                            Builders<ContributorStoryModel>.Filter.Eq("StoryID", story_id));
+                        if (Deleteone != null) { result = true; }
+                    }
 
+                    
+                }
+                return ;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        
 
         public List<SuggestionTable> BrowseSuggestions(int story_id) {
 			List<SuggestionTable> crtrSuggestionListObj = new List<SuggestionTable>();
