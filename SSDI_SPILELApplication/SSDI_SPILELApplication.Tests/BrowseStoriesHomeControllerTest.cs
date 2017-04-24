@@ -76,7 +76,7 @@ namespace SSDI_SPILELApplication.Tests
 		{
 			HomeController obj = new HomeController();
 			BrowseStoryModel m = new BrowseStoryModel();
-			var result = obj.FilterStories(genreSearchText, typeSearchText, "filter", string.Empty, m);
+			var result = obj.FilterStories(genreSearchText, typeSearchText, "filter", string.Empty, m,0);
 
 			BrowseStoryModel model = ((ViewResultBase) result).Model as BrowseStoryModel;
 			Assert.IsNotNull(model);
@@ -96,7 +96,7 @@ namespace SSDI_SPILELApplication.Tests
 			HomeController obj = new HomeController();
 			BrowseStoryModel m = new BrowseStoryModel();
 			m.SearchKey = string.Empty;
-			var result = obj.FilterStories(string.Empty, string.Empty, "filter", string.Empty, m);
+			var result = obj.FilterStories(string.Empty, string.Empty, "filter", string.Empty, m,0);
 			BrowseStoryModel model = ((ViewResultBase) result).Model as BrowseStoryModel;
 			Assert.IsNotNull(model);
 

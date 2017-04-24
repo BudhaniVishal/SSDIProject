@@ -226,6 +226,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="LogicLayer\DeleteStories.cs" />
     <Compile Include="Models\BrowseStoryModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -342,6 +343,7 @@
     <Content Include="Views\Home\BrowseContributorStories.cshtml" />
     <Content Include="Views\Home\BrowseCreatorStories.cshtml" />
     <Content Include="Views\Home\ViewSuggestion.cshtml" />
+    <Content Include="Views\Home\ApproveContributedStories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />

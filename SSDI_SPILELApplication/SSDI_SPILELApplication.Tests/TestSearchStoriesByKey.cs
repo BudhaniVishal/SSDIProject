@@ -22,7 +22,7 @@ namespace SSDI_SPILELApplication.Tests
 			HomeController obj = new HomeController();
 			BrowseStoryModel m = new BrowseStoryModel();
 			m.SearchKey = "Del";
-			var result = obj.FilterStories(string.Empty, string.Empty, string.Empty,"filterbyKey",m);
+			var result = obj.FilterStories(string.Empty, string.Empty, string.Empty,"filterbyKey",m,0);
 			BrowseStoryModel model = ((ViewResultBase) result).Model as BrowseStoryModel;
 			Assert.IsNotNull(model);
 			int expected = model.Stories.Count;
@@ -44,7 +44,7 @@ namespace SSDI_SPILELApplication.Tests
 			HomeController obj = new HomeController();
 			BrowseStoryModel m = new BrowseStoryModel();
 			m.SearchKey = String.Empty;
-			var result = obj.FilterStories(string.Empty, string.Empty, string.Empty, "filterbyKey", m);
+			var result = obj.FilterStories(string.Empty, string.Empty, string.Empty, "filterbyKey", m,0);
 			BrowseStoryModel model = ((ViewResultBase)result).Model as BrowseStoryModel;
 		
 			DatabaseAccess objDatabaseAccess = new DatabaseAccess();
@@ -59,7 +59,7 @@ namespace SSDI_SPILELApplication.Tests
 			HomeController obj = new HomeController();
 			BrowseStoryModel m = new BrowseStoryModel();
 			m.SearchKey = "   ";
-			var result = obj.FilterStories(string.Empty, string.Empty, string.Empty, "filterbyKey", m);
+			var result = obj.FilterStories(string.Empty, string.Empty, string.Empty, "filterbyKey", m,0);
 			BrowseStoryModel model = ((ViewResultBase)result).Model as BrowseStoryModel;
 			Assert.AreEqual(model.Stories.Count, 0);
 

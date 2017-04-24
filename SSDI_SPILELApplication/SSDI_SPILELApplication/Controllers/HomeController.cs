@@ -58,7 +58,12 @@ namespace SSDI_SPILELApplication.Controllers
 
             model.GenreValues = HomeControllerUtilities.GetGenres();
             model.TypeValues = HomeControllerUtilities.GetTypes();
-
+            if (Session["username"] != null && Session["StoryID"] != null) // Logic is given for contribute user story when a site visitor is surfing the website!!
+            {
+                var item = storiesAvailable.FirstOrDefault(x => x.StoryID == Convert.ToInt32(Session["StoryID"]));
+                storiesAvailable.Clear();
+                storiesAvailable.Add(item);
+            }
             model.Stories = storiesAvailable;
             return View(model);
         }
@@ -122,7 +127,37 @@ namespace SSDI_SPILELApplication.Controllers
             return View(model);
         }
 
-		public ActionResult BrowseSuggestions(int storyID) {
+        public ActionResult ApproveContributedStories(int storyID)
+        {
+            BrowseStoryModel model = new BrowseStoryModel();
+            storiesAvailable = new List<StoryModel>();
+            
+            storiesAvailable = new GetStories().BrowseContributedStoriesForEditor(storyID);
+            model.Stories = storiesAvailable;
+
+            return View("ApproveContributedStories", model);
+        }
+
+        public ActionResult DeleteRestStories(int storyID, string ContributorID)
+        {
+            BrowseStoryModel model = new BrowseStoryModel();
+            bool storiesDeleted = false;
+
+            storiesDeleted = new DeleteStories().DeleteRestContributedStories(storyID, ContributorID);
+            storiesAvailable = new List<StoryModel>();
+            storiesAvailable = new GetStories().GetAllStories();
+
+            model.GenreValues = HomeControllerUtilities.GetGenres();
+            model.TypeValues = HomeControllerUtilities.GetTypes();
+
+            model.Stories = storiesAvailable;
+            
+
+            return View("BrowseStories", model);
+        }
+
+
+        public ActionResult BrowseSuggestions(int storyID) {
 			StorySuggestionsModel model = new StorySuggestionsModel();
 			model.CurrentStory = new GetStories().GetStoryByID(storyID);
 			List<SuggestionModel> suggestionsAvailable = new List<SuggestionModel>();
@@ -169,31 +204,37 @@ namespace SSDI_SPILELApplication.Controllers
 
 
 		
-		public ActionResult FilterStories(string selectedGenre, string selectedType,string filter , string filterbykey, BrowseStoryModel key)
+		public ActionResult FilterStories(string selectedGenre, string selectedType,string filter , string filterbykey, BrowseStoryModel key, int? storyID)
         {
 	        BrowseStoryModel model = new BrowseStoryModel();
-			if (!string.IsNullOrEmpty(filter))
-	        {
-		        
-		        storiesAvailable = new List<StoryModel>();
-		        storiesAvailable = new GetStories().GetAllStories();
-		        model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, selectedGenre, selectedType);
-		        
-		        model.GenreValues = HomeControllerUtilities.GetGenres();
-		        model.TypeValues = HomeControllerUtilities.GetTypes();
-	        }
-	        if (!string.IsNullOrEmpty(filterbykey))
-	        {
-		        
+			
+            if (storyID == null)
+            {
+                if (!string.IsNullOrEmpty(filter))
+                {
 
-		        storiesAvailable = new List<StoryModel>();
-		        
-		        storiesAvailable = new GetStories().GetAllStories();
-		        model.Stories = HomeControllerUtilities.FilterStoriesbySearchKey(storiesAvailable, key.SearchKey);
-		        model.GenreValues = HomeControllerUtilities.GetGenres();
-		        model.TypeValues = HomeControllerUtilities.GetTypes();
-			}
-			return View("BrowseStories", model);
+                    storiesAvailable = new List<StoryModel>();
+                    storiesAvailable = new GetStories().GetAllStories();
+                    model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, selectedGenre, selectedType);
+
+                    model.GenreValues = HomeControllerUtilities.GetGenres();
+                    model.TypeValues = HomeControllerUtilities.GetTypes();
+                }
+                if (!string.IsNullOrEmpty(filterbykey))
+                {
+
+
+                    storiesAvailable = new List<StoryModel>();
+
+                    storiesAvailable = new GetStories().GetAllStories();
+                    model.Stories = HomeControllerUtilities.FilterStoriesbySearchKey(storiesAvailable, key.SearchKey);
+                    model.GenreValues = HomeControllerUtilities.GetGenres();
+                    model.TypeValues = HomeControllerUtilities.GetTypes();
+                }
+                return View("BrowseStories", model);
+            }
+            Session["StoryID"] = storyID;
+            return RedirectToAction("Login", "Account");
 
         }
 
