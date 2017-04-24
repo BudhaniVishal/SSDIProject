@@ -127,7 +127,18 @@ namespace SSDI_SPILELApplication.Controllers
             return View(model);
         }
 
-		public ActionResult BrowseSuggestions(int storyID) {
+        public ActionResult ApproveContributedStories(int storyID)
+        {
+            BrowseStoryModel model = new BrowseStoryModel();
+            storiesAvailable = new List<StoryModel>();
+            
+            storiesAvailable = new GetStories().BrowseContributedStoriesForEditor(storyID);
+            model.Stories = storiesAvailable;
+
+            return View("ApproveContributedStories", model);
+        }
+
+        public ActionResult BrowseSuggestions(int storyID) {
 			StorySuggestionsModel model = new StorySuggestionsModel();
 			model.CurrentStory = new GetStories().GetStoryByID(storyID);
 			List<SuggestionModel> suggestionsAvailable = new List<SuggestionModel>();
