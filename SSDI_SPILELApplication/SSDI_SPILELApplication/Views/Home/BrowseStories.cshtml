@@ -20,17 +20,20 @@
                             </h4>
                         </td>
                     </tr>
-                    <tr>
+                    @*<tr>
                         <td style="text-align: center">
                         <label>Min 3 Characters </label>
                             @Html.TextBoxFor(model => model.SearchKey) 
                            <input type="submit" name="filterbykey" value="Search Stories"/>
                         
-                    </tr>
+                    </tr>*@
                     
                     
                     <tr>
-                        
+                        <td style="text-align: left">
+                        <label>Min 3 Characters </label>
+                        @Html.TextBoxFor(model => model.SearchKey) 
+                        <input type="submit" name="filterbykey" value="Search Stories"/>
                         
                         <td style="text-align: right">
                             

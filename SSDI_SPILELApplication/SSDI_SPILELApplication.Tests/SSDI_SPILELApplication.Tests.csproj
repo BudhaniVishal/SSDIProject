@@ -114,6 +114,7 @@
     <Compile Include="RegisterUserDataBaseAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterUserHomeControllerTest.cs" />
+    <Compile Include="TestSearchStoriesByKey.cs" />
     <Compile Include="TestUpdatepasswordDataBaseAccess.cs" />
     <Compile Include="TestUpdatePasswordHomeController.cs" />
     <Compile Include="VerifyUserEmailexistsHomeControllerTests.cs" />

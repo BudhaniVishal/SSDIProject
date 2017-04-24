@@ -128,8 +128,8 @@ namespace SSDI_SPILELApplication.Utilities
 			{
 				if (searchkey != string.Empty)
 				{
-					string key = searchkey.Substring(0, 3);
-					storiesAvailable = storiesAvailable.FindAll(x => x.Title.ToLower().Contains(key.ToLower())).ToList();
+					//string key = searchkey.Substring(0, 3);
+					storiesAvailable = storiesAvailable.FindAll(x => x.Title.ToLower().Contains(searchkey.ToLower())).ToList();
 
 				}
 
