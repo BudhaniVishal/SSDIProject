@@ -364,9 +364,11 @@ namespace DataBaseAccessLayer
                     }
                     else
                     {
+                        var StoryCollection = GetStoryByID(storyID);
+                        StoryCollection.Content += story.Content;
                         var collection = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("StoryTable");
                         var filter = Builders<BsonDocument>.Filter.Eq("StoryID", story.StoryID);
-                        var update = Builders<BsonDocument>.Update.Set("Content", story.Content);
+                        var update = Builders<BsonDocument>.Update.Set("Content", StoryCollection.Content);
                         var Updateone = collection.UpdateOneAsync(filter, update);
                     }
 
