@@ -42,7 +42,7 @@
                         </div>
                     </td>
                     <td style="text-align:right">
-                        <input type="button" value="Approve" onclick="window.location.href='@Url.Action("DeleteRestStories", "Home", new { storyID = Model.Stories[i].StoryID})'" />
+                        <input type="button" value="Approve" onclick="window.location.href='@Url.Action("DeleteRestStories", "Home", new { storyID = Model.Stories[i].StoryID, ContributorID = Model.Stories[i].ContributorID})'" />
                     </td>
 
 

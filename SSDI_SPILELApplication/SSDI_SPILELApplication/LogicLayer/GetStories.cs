@@ -80,6 +80,7 @@ namespace SSDI_SPILELApplication.LogicLayer
                 Obj.Content = story.Content;
                 Obj.StoryID = Convert.ToInt32(story.StoryID);
                 Obj.Title = story.Title;
+                Obj.ContributorID = story.ContributorID;
                 storyObj.Add(Obj);
             }
             return storyObj;
