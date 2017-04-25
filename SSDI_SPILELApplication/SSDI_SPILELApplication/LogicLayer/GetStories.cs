@@ -26,6 +26,7 @@ namespace SSDI_SPILELApplication.LogicLayer
                 obj.Title = item.Title;
                 obj.To = Convert.ToDateTime(item.To);
                 obj.Type = item.Type;
+                obj.EditorID = item.EditorID;
                 list.Add(obj);
             }
             return list;

@@ -18,11 +18,7 @@
                     </div>
                     </div>
                     <table class="table table-striped table-hover ">
-                        
-
                         <tr>
-
-
                             <td style="text-align: right">
                                 @*<label>Search Stories </label>*@
                                 @Html.TextBoxFor(model => model.SearchKey, new { placeholder = "Min 3 Characters", style = "margin - top: 500px" })
@@ -76,9 +72,18 @@
                                 </td>
 
                                 @*@Html.HiddenFor(modelItem => Model.Stories[i - 1].StoryID)*@
+                                @if (Model.Stories[i - 1].EditorID==null || !HttpContext.Current.Session["username"].Equals(Model.Stories[i - 1].EditorID))
+                                {
                                 <td style="text-align: right">
-                                    <input type="button" class="btn" value="Contribute" onclick="window.location.href='@Url.Action("FilterStories", "Home", new { storyID = Model.Stories[i-1].StoryID})'" />
+                                    <input type="button" class="btn" value="Contribute"  onclick="window.location.href='@Url.Action("FilterStories", "Home", new { storyID = Model.Stories[i - 1].StoryID })'" />
                                 </td>
+                                }
+                                else
+                                {
+                                    <td style="text-align: right">
+                                        <input type="button" class="btn" value="Contribute" disabled onclick="window.location.href='@Url.Action("FilterStories", "Home", new { storyID = Model.Stories[i - 1].StoryID })'" />
+                                    </td>
+                                }
                             </tr>
                         }
 

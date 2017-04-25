@@ -217,7 +217,19 @@ namespace DataBaseAccessLayer
 				IMongoCollection<ConnStoryTable> collection =
 					CreateDataConnection(new MongoClient()).GetCollection<ConnStoryTable>("StoryTable");
 				var results = collection.Find(new BsonDocument()).ToList();
-				return (results != null) ? results : new List<ConnStoryTable>();
+                var i = 0;
+                foreach (var story in results)
+                {
+                    var tableCollection2 = CreateDataConnection(new MongoClient())
+                    .GetCollection<CreatorStoryModel>("CreatorStoryTable");
+                    var fields = Builders<CreatorStoryModel>.Projection.Include(p => p.EditorID);
+                    var condition2 = Builders<CreatorStoryModel>.Filter.Eq(p => p.StoryID, story.StoryID);
+                    var editorID = tableCollection2.Find(condition2).Project<CreatorStoryModel>(fields).ToList();
+                    if (editorID.Count==0 || editorID[0].EditorID==null) { i++; continue; }
+                    else { results[i].EditorID = editorID[0].EditorID; }
+                    i++;
+                }
+                return (results != null) ? results : new List<ConnStoryTable>();
 			}
 			catch (Exception ex)
 			{

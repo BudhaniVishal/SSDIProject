@@ -11,7 +11,7 @@ validationApp.controller('ContributeToStoryController', function ($scope, $http)
     };
     // function to submit the form after all validation has occurred            
     $scope.submitForm = function (isValid) {
-        debugger;
+        
         // check to make sure the form is completely valid
         if (isValid) {
             
