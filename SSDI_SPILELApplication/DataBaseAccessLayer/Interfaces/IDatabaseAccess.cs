@@ -10,6 +10,7 @@ namespace DataBaseAccessLayer.Interfaces
         ResultCode RegisterUser(UserRegistrationModel modelData);
         List<ConnStoryTable> GetAllStories();
 		ResultCode VerifyEmail(VerifyEmailDLLModel email);
-		ResultCode updatepassword(UpdatePasswordModelDLL data, string email);
-	}
+		ResultCode UpdatePassword(UpdatePasswordModelDLL data, string email);
+        bool SaveContributionForStory(ContributorStoryModel model);
+    }
 }

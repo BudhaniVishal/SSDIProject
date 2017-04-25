@@ -51,7 +51,7 @@
                                     </div>
                                 </td>
                                 <td style="text-align:right">
-                                    <input type="button" value="View" onclick="window.location.href='@Url.Action("ViewSuggestion", "Home", new { suggestionID = Model.Suggestions[i].SuggestionID })'"/>
+                                    <input type="button" value="View" class="btn" onclick="window.location.href='@Url.Action("ViewSuggestion", "Home", new { suggestionID = Model.Suggestions[i].SuggestionID })'"/>
                                 </td>
                                 @*<td>
                                         @Html.DisplayFor(modelItem => item.Scenario)

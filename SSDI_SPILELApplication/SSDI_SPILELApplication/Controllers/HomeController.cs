@@ -52,17 +52,17 @@ namespace SSDI_SPILELApplication.Controllers
         public ActionResult BrowseStories()
         {
             BrowseStoryModel model = new BrowseStoryModel();
-            
+
             storiesAvailable = new List<StoryModel>();
             storiesAvailable = new GetStories().GetAllStories();
 
             model.GenreValues = HomeControllerUtilities.GetGenres();
             model.TypeValues = HomeControllerUtilities.GetTypes();
-            if (Session["username"] != null && Session["StoryID"] != null) // Logic is given for contribute user story when a site visitor is surfing the website!!
+            if (Session["username"] != null && Session["StoryID"] != null && Session["StoryIDViewBag"] != null) // Logic is given for contribute user story when a site visitor is surfing the website!!
             {
-                var item = storiesAvailable.FirstOrDefault(x => x.StoryID == Convert.ToInt32(Session["StoryID"]));
-                storiesAvailable.Clear();
-                storiesAvailable.Add(item);
+                ContributeStoryModel storyDetails = HomeControllerUtilities.GetContributeStoryData(Convert.ToInt32(Session["StoryID"]));
+                Session["StoryIDViewBag"] = null;
+                return View("ContributeToStory", storyDetails);
             }
             model.Stories = storiesAvailable;
             return View(model);
@@ -233,8 +233,15 @@ namespace SSDI_SPILELApplication.Controllers
                 }
                 return View("BrowseStories", model);
             }
-            Session["StoryID"] = storyID;
-            return RedirectToAction("Login", "Account");
+            if (Session["username"] == null)
+            {
+                Session["StoryID"] = storyID;
+                Session["StoryIDViewBag"] = storyID;
+                return RedirectToAction("Login", "Account");
+            }
+            Session["StoryID"] = storyID;  //GetStoryBased on the story ID
+            ContributeStoryModel storyDetails = HomeControllerUtilities.GetContributeStoryData(Convert.ToInt32(storyID));
+            return View("ContributeToStory", storyDetails);
 
         }
 
@@ -340,7 +347,7 @@ namespace SSDI_SPILELApplication.Controllers
 
 
 		[HttpPost]
-		public JsonResult updatepassword(UpdatepasswordModel v)
+		public JsonResult UpdatePassword(UpdatepasswordModel v)
 		{
 			if (v != null)
 			{
@@ -350,15 +357,30 @@ namespace SSDI_SPILELApplication.Controllers
 				}
 				String email = Session["email"].ToString();
 				UpdatePasswordLL obj = new UpdatePasswordLL();
-				ResultCode result = obj.updatepassword(v, email); 
+				ResultCode result = obj.UpdatePassword(v, email); 
 
 				return Json(result.Message);
 			}
 			return Json("Error !! Data is null.");
 		}
 
+        public ActionResult ContributeToStory(int? storyID, ContributeStoryModel obj)
+        {
+            return View();
+        }
+        public ActionResult ContributeStorySave(string[] textAnswer)
+        {
+            ContributeStoryModel obj = new ContributeStoryModel();
+            obj.StoryID = Convert.ToInt32(Session["StoryID"]);
+            obj.ContributorID = Session["username"].ToString();
+            obj.ContributionText = textAnswer[0];
+            //Save the data
+            var result = new CreateStory().SaveContributionForStory(obj);
+            //Retrieve the data
+            obj = HomeControllerUtilities.GetContributeStoryData(Convert.ToInt32(Session["StoryID"]));
+            return View("ContributeToStory", obj);
+        }
 
 
-
-	}
+    }
 }

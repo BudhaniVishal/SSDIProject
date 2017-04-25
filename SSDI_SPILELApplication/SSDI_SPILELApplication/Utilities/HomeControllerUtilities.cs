@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SSDI_SPILELApplication.LogicLayer;
 using SSDI_SPILELApplication.Models;
 
 namespace SSDI_SPILELApplication.Utilities
@@ -142,5 +143,16 @@ namespace SSDI_SPILELApplication.Utilities
 			}
 
 		}
-	}
+
+	    public static ContributeStoryModel GetContributeStoryData(int storyID)
+	    {
+	        ContributeStoryModel obj = new ContributeStoryModel();
+	        var data = new GetStories().GetStoryByID(Convert.ToInt32(storyID));
+	        obj.StoryID = data.StoryID;
+	        obj.Content = data.Content;
+	        obj.ContributorID = "";
+	        obj.Title = data.Title;
+	        return obj;
+	    }
+    }
 }

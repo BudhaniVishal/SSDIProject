@@ -11,7 +11,7 @@ namespace SSDI_SPILELApplication.LogicLayer
 {
 	public class MockUpdatePasswordLL
 	{
-		public ResultCode updatepassword(UpdatepasswordModel model, string email)
+		public ResultCode UpdatePassword(UpdatepasswordModel model, string email)
 		{
 
 			MockDataBaseAccess objDatabaseAccess = new MockDataBaseAccess();
@@ -21,7 +21,7 @@ namespace SSDI_SPILELApplication.LogicLayer
 			string emailLL = email;
 
 
-			return objDatabaseAccess.updatepassword(obj, emailLL);
+			return objDatabaseAccess.UpdatePassword(obj, emailLL);
 		}
 	}
 }

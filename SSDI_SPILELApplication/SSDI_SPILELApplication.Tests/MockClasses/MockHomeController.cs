@@ -29,7 +29,7 @@ namespace SSDI_SPILELApplication.Tests.MockClasses
 			return Json("Error !! Data is null.");
 		}
 		[HttpPost]
-		public JsonResult updatepassword(UpdatepasswordModel v,string e )
+		public JsonResult UpdatePassword(UpdatepasswordModel v,string e )
 		{
 			if (v != null)
 			{
@@ -39,7 +39,7 @@ namespace SSDI_SPILELApplication.Tests.MockClasses
 				}
 				String email = e;
 				UpdatePasswordLL obj = new UpdatePasswordLL();
-				ResultCode result = obj.updatepassword(v, email);
+				ResultCode result = obj.UpdatePassword(v, email);
 
 				return Json(result.Message);
 			}

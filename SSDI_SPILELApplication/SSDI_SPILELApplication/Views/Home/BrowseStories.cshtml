@@ -27,8 +27,8 @@
                         
                         <td style="text-align: right">
                             @*<label>Search Stories </label>*@
-                            @Html.TextBoxFor(model => model.SearchKey, new { placeholder = "Enter Text Here" }) 
-                            <input type="submit" name="filterbykey" value="Search Stories"/>
+                            @Html.TextBoxFor(model => model.SearchKey, new { placeholder = "Min 3 Characters" }) 
+                            <input type="submit" class="btn" name="filterbykey" value="Search Stories"/>
 
                             <label> Genre </label>
                             @Html.DropDownList("SelectedGenre", Model.GenreValues, "Select Genre")
@@ -36,7 +36,7 @@
                             <label> Type </label>
                             @Html.DropDownList("SelectedType", Model.TypeValues, "Select Type")
 
-                            <input type="submit" name="filter" value="Filter Stories"/>
+                            <input type="submit" class="btn" name="filter" value="Filter Stories"/>
                         </td>
                     </tr>
                 </table>
@@ -68,36 +68,10 @@
                                     @Html.DisplayFor(modelItem => Model.Stories[i - 1].Content)
                                 </div>
                             </td>
-
-                            @*@Html.HiddenFor(modelItem => Model.Stories[i - 1].StoryID)*@
                             <td style="text-align: right">
                                 @*<input type="submit" name="Contribute" value="Contribute"/>*@
-                                @Html.ActionLink("Contribute", "FilterStories", new { storyID = Model.Stories[i - 1].StoryID, @class = "classname" })
+                                <input type="button" class="btn" value="Contribute" onclick="window.location.href='@Url.Action("FilterStories", "Home", new { storyID = Model.Stories[i-1].StoryID})'" />
                             </td>
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.Scenario)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Content)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.StoryID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Type)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Genre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.To)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.From)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MessageString)
-                                </td>*@
                         </tr>
                     }
 

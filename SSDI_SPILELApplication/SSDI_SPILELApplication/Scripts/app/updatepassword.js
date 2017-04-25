@@ -1,4 +1,4 @@
-﻿var module = angular.module("updatepassword", []);
+﻿var module = angular.module("UpdatePassword", []);
 
 var logincontrol = module.controller("resetpasswordController", function ($scope, $http, $window) {
     $scope.mydata = null;
@@ -8,7 +8,7 @@ var logincontrol = module.controller("resetpasswordController", function ($scope
             var myobj = $scope.mydata;
             var post = $http({
                 method: "POST",
-                url: "/Home/updatepassword",
+                url: "/Home/UpdatePassword",
                 dataType: 'json/text',
                 data: myobj,
                 headers: { "Content-Type": "application/json" }
