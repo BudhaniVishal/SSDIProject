@@ -75,7 +75,7 @@
                                 </td>
 
                                 @*@Html.HiddenFor(modelItem => Model.Stories[i - 1].StoryID)*@
-                                @if (Model.Stories[i - 1].EditorID==null || !HttpContext.Current.Session["username"].Equals(Model.Stories[i - 1].EditorID))
+                                @if (Model.Stories[i - 1].EditorID==null || HttpContext.Current.Session["username"]==null || !HttpContext.Current.Session["username"].Equals(Model.Stories[i - 1].EditorID))
                                 {
                                 <td style="text-align: right">
                                     <input type="button" class="btn" value="Contribute"  onclick="window.location.href='@Url.Action("FilterStories", "Home", new { storyID = Model.Stories[i - 1].StoryID })'" />
