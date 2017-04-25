@@ -4,76 +4,71 @@
     ViewBag.Title = "Contribute To Story";
 }
 
-<h3>Contribute To Story</h3>
+
 <head>
     <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/app/ContributeStory.js"></script>
 </head>
-@using (Html.BeginForm("ContributeStorySave", "Home", FormMethod.Post))
-{
 <body>
     <div ng-app="ContributeToStory" ng-controller="ContributeToStoryController">
-        <form id="ContributeToStory" name="ContributeToStory">
-            <table class="table">
-                <tr>
-                    <td>
-                        @*<h3 style="text-align: center">Story Title: @Model.Title</h3>*@
-                        <h3 style="text-align: center">Story Title - @Model.Title </h3>
-                    </td>
-                </tr>
-                <tr>
-                    @if (!string.IsNullOrEmpty(Model.Content))
-                    {
-                        <td style="text-align: center">
-                            <div>
-                                <Label>Existing Content</Label>
-                            </div>
-                            @Html.TextArea("myExistingContent", Model.Content, new {@style = "min-width: 100%; min-height: 115px", @readonly = true})
-                        </td>
-                    }
-                    else
-                    {
-                        <td style="text-align: center">
-                            <div>
-                                <Label>No Approved Content Yet</Label>
-                            </div>
-                        </td>
-                    }
-                    
-                </tr>
-                <tr>
-                    <td style="text-align: center">
-                        <div>
-                            <Label>Story Scenario</Label>
-                        </div>
-                        @Html.TextArea("storyScenario", Model.Scenario, new { @style = "min-width: 100%; min-height: 115px", @readonly = true })
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div style="text-align: center">
-                            <Label style="text-align: center;">Content to Add</Label>
-                        </div>
-                        <div>
+        <form id="ContributeToStory" name="ContributeToStory" ng-submit="submitForm(ContributeToStory.$valid)">
+            <div class="form-group">
+                <div style="text-align:center">
+                    <h2>Contribute To Story</h2>
+                </div>
+                <label style="text-align: center">Story Title - @Model.Title </label>
 
-                            <textarea rows="10" style="min-width: 100%; min-height: 75px" id="textAnswer" name="textAnswer"></textarea>
+                @if (!string.IsNullOrEmpty(Model.Content))
+                {
 
-                            @*@Html.TextAreaFor(m => m.ContributionText, new { @style = "min-width: 100%; min-width: 100%" })*@
-                        </div>
-                        <div style="margin-top: 10px;">
+                    <div style="text-align: center" class="form-group">
+                        <Label>Existing Content</Label>
 
-                        </div>
-                        <div style="margin-top: 10px;">
-                            @*@Html.ActionLink("ContributeStorySave", "ContributeStorySave", Model)*@
-                            <input type="submit" class="btn" value="Save" />
-                        </div>
-                    </td>
-                </tr>
-            </table>
+                        @Html.TextArea("myExistingContent", Model.Content, new { @style = "min-width: 100%; min-height: 115px", @readonly = true, @class = "form-control" })
+                    </div>
+                }
+                else
+                {
+                    <div style="text-align: center" class="form-group">
+                        <Label>No Approved Content Yet</Label>
+                    </div>
+                }
 
 
+                <div class="form-group">
+                    <Label style="text-align: center">Story Scenario</Label>
+                    @Html.TextArea("storyScenario", Model.Scenario, new { @style = "min-width: 100%; min-height: 115px", @readonly = true, @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <Label style="text-align: center">Content to Add</Label>
+                    <div ng-class="{ 'has-error' : ContributeToStory.textAnswer.$invalid && !ContributeToStory.textAnswer.$pristine }">
+                        <textarea rows="10" style="min-width: 100%; min-height: 100px" id="textAnswer" name="textAnswer" ng-model="mydata.textAnswer" required></textarea>
+                        @*@Html.TextAreaFor(m => m.ContributionText, new { @style = "min-width: 100%; min-width: 100%" })*@
+                        <p ng-cloak ng-show="ContributeToStory.textAnswer.$invalid && !ContributeToStory.textAnswer.$pristine" class="help-block">Content is required.</p>
+                    </div>
+                </div>
 
+                <div style="margin-top: 10px;">
+
+                </div>
+                <div style="margin-top: 10px;">
+                    @*@Html.ActionLink("ContributeStorySave", "ContributeStorySave", Model)*@
+                    <input type="submit" class="btn" value="Save" ng-disabled="ContributeToStory.$invalid" />
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <label ng-model="mydata.MessageString" ng-bind="MessageString"></label>
+                    </div>
+
+                </div>
+
+
+            </div>
 
         </form>
     </div>
 </body>
-}
+
+
+
+
