@@ -1,0 +1,45 @@
+﻿@*@model IEnumerable<SSDI_SPILELApplication.Models.StoryModel>*@
+@model SSDI_SPILELApplication.Models.ViewSuggestionModel
+
+@{
+    ViewBag.Title = Model.CurrentStory.Title + " | " + Model.Suggestion.Content.PadRight(16).Substring(0,16) + "...";
+}
+<head>
+    <script src="~/Scripts/angular.min.js"></script>
+</head>
+@using (Html.BeginForm("ViewSuggestion", "Home", FormMethod.Post))
+{
+    <body>
+        <div ng-app="ViewSuggestion" ng-controller="BrowseSuggestionsController">
+            <form id="BrowseStories" name="BrowseStories">
+                <table class="table">
+                    <tr>
+                        <td style="text-align:center">
+                            <h2>
+                                @Html.DisplayFor(modelItem => Model.CurrentStory.Title)
+                            </h2>
+                            <h3>
+                                @(Html.DisplayFor(modelItem => Model.CurrentStory.Scenario) + "\n\n" + Html.DisplayFor(modelItem => Model.CurrentStory.Content))
+                            </h3>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align:left">
+                            <input type="button" value="Back" onclick="window.location.href='@Url.Action("BrowseSuggestions", "Home", new { storyID = Model.Suggestion.OwningStoryID })'" />
+                            <h4>
+                                @("\n" + Html.DisplayFor(modelItem => Model.Suggestion.Content))
+                            </h4>
+                        </td>
+                    </tr>
+                </table>
+
+            </form>
+        </div>
+    </body>
+}
+
+
+
+
+
