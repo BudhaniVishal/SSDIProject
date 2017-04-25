@@ -358,7 +358,7 @@ namespace DataBaseAccessLayer
                     if (story.ContributorID.Equals(ContributorID))
                     {
                         var StoryCollection = GetStoryByID(storyID);
-                        StoryCollection.Content += story.Content;
+                        StoryCollection.Content += "\r\n" +story.Content;
                         var collection = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("StoryTable");
                         var filter = Builders<BsonDocument>.Filter.Eq("StoryID", story.StoryID);
                         var update = Builders<BsonDocument>.Update.Set("Content", StoryCollection.Content);
