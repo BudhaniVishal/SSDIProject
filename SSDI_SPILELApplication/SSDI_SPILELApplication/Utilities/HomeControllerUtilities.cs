@@ -97,19 +97,6 @@ namespace SSDI_SPILELApplication.Utilities
 			return items;
 		}
 
-        internal static List<StoryModel> ValidateStoryDates(List<StoryModel> list)
-        {
-            List<StoryModel> listOfStories = new List<StoryModel>();
-            foreach (var item in list)
-            {
-                if (item.To.AddDays(1).AddSeconds(-1) >= DateTime.Now)
-                {
-                    listOfStories.Add(item);
-                }
-            }
-            return listOfStories;
-        }
-
         public static List<StoryModel> FilterStories(List<StoryModel> storiesAvailable, string selectedGenre,
 			string selectedType)
 		{
