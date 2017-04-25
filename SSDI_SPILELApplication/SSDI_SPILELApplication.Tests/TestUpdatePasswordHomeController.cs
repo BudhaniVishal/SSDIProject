@@ -18,7 +18,7 @@ namespace SSDI_SPILELApplication.Tests
 		public void UpdatePasswordNullValues()
 		{
 			MockHomeController obj = new MockHomeController();
-			JsonResult result = obj.updatepassword(null, "");
+			JsonResult result = obj.UpdatePassword(null, "");
 			Assert.AreEqual(result.Data.ToString(), errorMessage);
 		}
 
@@ -31,7 +31,7 @@ namespace SSDI_SPILELApplication.Tests
 			model.Password = "testpassword";
 			model.ConfirmPassword = "testpassword124";
 			string s = "vbudhani@uncc.edu";
-			JsonResult result = obj.updatepassword(model, s);
+			JsonResult result = obj.UpdatePassword(model, s);
 			Assert.AreEqual(result.Data.ToString(), "Password and Confirm Password doesn't match !!");
 		}
 	}

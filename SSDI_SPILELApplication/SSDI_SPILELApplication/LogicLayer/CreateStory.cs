@@ -25,5 +25,15 @@ namespace SSDI_SPILELApplication.LogicLayer
 
             return objDatabaseAccess.CreateStory(obj, username); ;
         }
+
+        public bool SaveContributionForStory(ContributeStoryModel model)
+        {
+            ContributorStoryModel obj = new ContributorStoryModel();
+            obj.StoryID = model.StoryID;
+            obj.Content = model.ContributionText;
+            obj.ContributorID = model.ContributorID;
+            DatabaseAccess objDatabaseAccess = new DatabaseAccess();
+            return (objDatabaseAccess.SaveContributionForStory(obj));
+        }
     }
 }
