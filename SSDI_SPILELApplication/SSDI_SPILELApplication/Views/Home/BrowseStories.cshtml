@@ -21,9 +21,9 @@
                         <tr>
 
 
-                            <td style="text-align: right; min-height: 30px">
+                            <td style="text-align: right;">
                                 @*<label>Search Stories </label>*@
-                                @Html.TextBoxFor(model => model.SearchKey, new { placeholder = "   Search Text", style = "height:35px; margin-top: 5px;" })
+                                @Html.TextBoxFor(model => model.SearchKey, new { placeholder = "Search Text", @class = "form-control" })
                             </td>
                             <td style="text-align: right;">  <input type="submit" maxlength="20" name="filterbykey" class="btn" value="Search Stories" /></td>
 
