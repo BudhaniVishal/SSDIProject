@@ -347,6 +347,7 @@
     <Content Include="Views\Home\ViewSuggestion.cshtml" />
     <Content Include="Views\Home\ApproveContributedStories.cshtml" />
     <Content Include="Views\Home\ContributeToStory.cshtml" />
+    <Content Include="Views\Home\StoryDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
