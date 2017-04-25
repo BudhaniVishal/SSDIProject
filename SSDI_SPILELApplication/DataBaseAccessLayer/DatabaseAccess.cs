@@ -355,14 +355,7 @@ namespace DataBaseAccessLayer
                 var results = tableCollection.Find(condition).ToList().AsQueryable();
                 foreach (var story in results)
                 {
-                    if (!story.ContributorID.Equals(ContributorID))
-                    {
-                        var story_id = story.StoryID;
-                        var Deleteone = tableCollection.DeleteOne(
-                            Builders<ContributorStoryModel>.Filter.Eq("StoryID", story_id));
-                        if (Deleteone != null) { result = true; }
-                    }
-                    else
+                    if (story.ContributorID.Equals(ContributorID))
                     {
                         var StoryCollection = GetStoryByID(storyID);
                         StoryCollection.Content += story.Content;
@@ -372,7 +365,12 @@ namespace DataBaseAccessLayer
                         var Updateone = collection.UpdateOneAsync(filter, update);
                     }
 
-                    
+                    var story_id = story.StoryID;
+                    var Deleteone = tableCollection.DeleteOne(
+                        Builders<ContributorStoryModel>.Filter.Eq("StoryID", story_id));
+                    if (Deleteone != null) { result = true; }
+
+
                 }
                 return result;
             }
