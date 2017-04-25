@@ -248,6 +248,7 @@
     <Compile Include="LogicLayer\VerifyEmailLL.cs" />
     <Compile Include="LogicLayer\VerifyLogin.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ContributeStoryModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -344,6 +345,7 @@
     <Content Include="Views\Home\BrowseCreatorStories.cshtml" />
     <Content Include="Views\Home\ViewSuggestion.cshtml" />
     <Content Include="Views\Home\ApproveContributedStories.cshtml" />
+    <Content Include="Views\Home\ContributeToStory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />

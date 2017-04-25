@@ -21,7 +21,7 @@ namespace SSDI_SPILELApplication.Tests
 			UpdatePasswordModelDLL obj = new UpdatePasswordModelDLL();
 			obj.Password = "abcd123";
 			obj.ConfirmPassword = "abcd123";
-			result = new MockDataBaseAccess().updatepassword(obj, "vbudhani@uncc.edu");
+			result = new MockDataBaseAccess().UpdatePassword(obj, "vbudhani@uncc.edu");
 			Assert.AreEqual(result.Message, "Password Updated Successfully !!");
 		}
 		[Test]
@@ -31,7 +31,7 @@ namespace SSDI_SPILELApplication.Tests
 			UpdatePasswordModelDLL obj = new UpdatePasswordModelDLL();
 			obj.Password = "abcd123";
 			obj.ConfirmPassword = "abcdef123";
-			result = new MockDataBaseAccess().updatepassword(obj, "vbudhani@uncc.edu");
+			result = new MockDataBaseAccess().UpdatePassword(obj, "vbudhani@uncc.edu");
 			Assert.AreEqual(result.Message, "Password and Confirm Password does not match !!");
 		}
 		

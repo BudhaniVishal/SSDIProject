@@ -11,7 +11,7 @@ namespace SSDI_SPILELApplication.LogicLayer
 {
 	public class UpdatePasswordLL
 	{
-		public ResultCode updatepassword(UpdatepasswordModel model, string email)
+		public ResultCode UpdatePassword(UpdatepasswordModel model, string email)
 		{
 
 			DatabaseAccess objDatabaseAccess = new DatabaseAccess();
@@ -21,7 +21,7 @@ namespace SSDI_SPILELApplication.LogicLayer
 			string emailLL = email;
 			
 
-			return objDatabaseAccess.updatepassword(obj,emailLL);
+			return objDatabaseAccess.UpdatePassword(obj,emailLL);
 		}
 	}
 }

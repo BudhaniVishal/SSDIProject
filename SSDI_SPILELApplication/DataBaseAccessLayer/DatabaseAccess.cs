@@ -247,7 +247,7 @@ namespace DataBaseAccessLayer
 		}
 
 
-		public ResultCode updatepassword(UpdatePasswordModelDLL data , string email)
+		public ResultCode UpdatePassword(UpdatePasswordModelDLL data , string email)
 		{
 			ResultCode resultCode = new ResultCode();
 			try
@@ -440,5 +440,45 @@ namespace DataBaseAccessLayer
                 return null;
             }
         }
+
+	    public bool SaveContributionForStory(ContributorStoryModel modelData)
+	    {
+	        bool result = false;
+	        try
+	        {
+	            if (modelData.Content != string.Empty)
+	            {
+	                modelData.Title = GetTitle(modelData.StoryID);
+	                var collectionName =
+	                    CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("ContributorStoryTable");
+	                var document = modelData.ToBsonDocument();
+	                collectionName.InsertOne(document);
+	                result = true;
+	            }
+	            return result;
+	        }
+	        catch (Exception ex)
+	        {
+	            return false;
+	        }
+
+	    }
+
+	    private string GetTitle(int storyID)
+	    {
+	        string title = string.Empty;
+	        IMongoCollection<ConnStoryTable> collection = CreateDataConnection(new MongoClient())
+	            .GetCollection<ConnStoryTable>("StoryTable");
+	        var condition = Builders<ConnStoryTable>.Filter.Eq(p => p.StoryID, storyID);
+
+	        var fields = Builders<ConnStoryTable>.Projection.Include(p => p.Title).Include(p => p.StoryID);
+	        var results = collection.Find(condition).Project<ConnStoryTable>(fields).ToList().AsQueryable();
+	        if (results.Any())
+	        {
+	            var data = results.FirstOrDefault();
+	            title = data.Title;
+	        }
+	        return title;
+	    }
     }
 }
