@@ -102,7 +102,7 @@ namespace SSDI_SPILELApplication.Utilities
             List<StoryModel> listOfStories = new List<StoryModel>();
             foreach (var item in list)
             {
-                if (item.To >= DateTime.Now)
+                if (item.To.AddDays(1).AddSeconds(-1) >= DateTime.Now)
                 {
                     listOfStories.Add(item);
                 }
