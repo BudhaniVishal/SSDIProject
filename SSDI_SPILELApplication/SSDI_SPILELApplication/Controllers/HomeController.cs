@@ -381,6 +381,15 @@ namespace SSDI_SPILELApplication.Controllers
             return View("ContributeToStory", obj);
         }
 
+        public ActionResult StoryDetails(int? storyID)
+        {
+            if (storyID != null)
+            {
+                StoryModel obj = new GetStories().GetStoryByID(Convert.ToInt32(storyID));
+                return View(obj);
+            }
+            return View();
+        }
 
     }
 }
