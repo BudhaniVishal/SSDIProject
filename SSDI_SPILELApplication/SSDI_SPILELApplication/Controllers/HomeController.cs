@@ -54,7 +54,7 @@ namespace SSDI_SPILELApplication.Controllers
             BrowseStoryModel model = new BrowseStoryModel();
 
             storiesAvailable = new List<StoryModel>();
-            storiesAvailable = new GetStories().GetAllStories();
+            storiesAvailable = HomeControllerUtilities.ValidateStoryDates(new GetStories().GetAllStories());
 
             model.GenreValues = HomeControllerUtilities.GetGenres();
             model.TypeValues = HomeControllerUtilities.GetTypes();
@@ -145,7 +145,7 @@ namespace SSDI_SPILELApplication.Controllers
 
             storiesDeleted = new DeleteStories().DeleteRestContributedStories(storyID, ContributorID);
             storiesAvailable = new List<StoryModel>();
-            storiesAvailable = new GetStories().GetAllStories();
+            storiesAvailable = HomeControllerUtilities.ValidateStoryDates(new GetStories().GetAllStories());
 
             model.GenreValues = HomeControllerUtilities.GetGenres();
             model.TypeValues = HomeControllerUtilities.GetTypes();
@@ -214,7 +214,7 @@ namespace SSDI_SPILELApplication.Controllers
                 {
 
                     storiesAvailable = new List<StoryModel>();
-                    storiesAvailable = new GetStories().GetAllStories();
+                    storiesAvailable = HomeControllerUtilities.ValidateStoryDates(new GetStories().GetAllStories());
                     model.Stories = HomeControllerUtilities.FilterStories(storiesAvailable, selectedGenre, selectedType);
 
                     model.GenreValues = HomeControllerUtilities.GetGenres();
@@ -226,7 +226,7 @@ namespace SSDI_SPILELApplication.Controllers
 
                     storiesAvailable = new List<StoryModel>();
 
-                    storiesAvailable = new GetStories().GetAllStories();
+                    storiesAvailable = HomeControllerUtilities.ValidateStoryDates(new GetStories().GetAllStories());
                     model.Stories = HomeControllerUtilities.FilterStoriesbySearchKey(storiesAvailable, key.SearchKey);
                     model.GenreValues = HomeControllerUtilities.GetGenres();
                     model.TypeValues = HomeControllerUtilities.GetTypes();

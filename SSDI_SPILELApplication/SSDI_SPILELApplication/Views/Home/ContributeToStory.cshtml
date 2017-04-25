@@ -21,11 +21,31 @@
                     </td>
                 </tr>
                 <tr>
+                    @if (!string.IsNullOrEmpty(Model.Content))
+                    {
+                        <td style="text-align: center">
+                            <div>
+                                <Label>Existing Content</Label>
+                            </div>
+                            @Html.TextArea("myExistingContent", Model.Content, new {@style = "min-width: 100%; min-height: 115px", @readonly = true})
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="text-align: center">
+                            <div>
+                                <Label>No Approved Content Yet</Label>
+                            </div>
+                        </td>
+                    }
+                    
+                </tr>
+                <tr>
                     <td style="text-align: center">
                         <div>
-                            <Label>Existing Content</Label>
+                            <Label>Story Scenario</Label>
                         </div>
-                        @Html.TextArea("myExistingContent", Model.Content, new { @style = "min-width: 100%; min-height: 230px", @readonly =true })
+                        @Html.TextArea("storyScenario", Model.Scenario, new { @style = "min-width: 100%; min-height: 115px", @readonly = true })
                     </td>
                 </tr>
                 <tr>
@@ -35,7 +55,7 @@
                         </div>
                         <div>
 
-                            <textarea rows="10" style="min-width: 100%; min-height: 100px" id="textAnswer" name="textAnswer"></textarea>
+                            <textarea rows="10" style="min-width: 100%; min-height: 75px" id="textAnswer" name="textAnswer"></textarea>
 
                             @*@Html.TextAreaFor(m => m.ContributionText, new { @style = "min-width: 100%; min-width: 100%" })*@
                         </div>
