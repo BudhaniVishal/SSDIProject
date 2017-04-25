@@ -13,5 +13,7 @@ namespace SSDI_SPILELApplication.Models
         public string ContributorID { get; set; }
         public string ContributionText { get; set; }
         public string ErrorMessage { get; set; }
+
+        public string Scenario { get; set; }
     }
 }
