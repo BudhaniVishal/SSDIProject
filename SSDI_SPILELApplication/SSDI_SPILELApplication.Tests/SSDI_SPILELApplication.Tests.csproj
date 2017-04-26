@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="ApproveContributedStoriesTest.cs" />
     <Compile Include="BrowseContributorStoryTest.cs" />
+    <Compile Include="ApproveContributedStoryTest.cs" />
     <Compile Include="BrowseCreatorContributorStoriesControllerTest.cs" />
     <Compile Include="BrowseStoriesHomeControllerTest.cs" />
     <Compile Include="CreateEditorStoryHomeControllerTest.cs" />

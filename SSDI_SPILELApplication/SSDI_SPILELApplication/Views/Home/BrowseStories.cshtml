@@ -21,9 +21,9 @@
                         <tr>
 
 
-                            <td style="text-align: right; min-height: 30px">
+                            <td style="text-align: right;">
                                 @*<label>Search Stories </label>*@
-                                @Html.TextBoxFor(model => model.SearchKey, new { placeholder = "   Search Text", style = "height:35px; margin-top: 5px;" })
+                                @Html.TextBoxFor(model => model.SearchKey, new { placeholder = "Search Text", @class = "form-control" })
                             </td>
                             <td style="text-align: right;">  <input type="submit" maxlength="20" name="filterbykey" class="btn" value="Search Stories" /></td>
 
@@ -78,7 +78,7 @@
                                 @if(!(Model.Stories[i - 1].To.AddDays(1).AddSeconds(-1) >= DateTime.Now))
                                 {
                                 <td style="text-align: right">
-                                    <input type="button" class="btn" value="Contribute" disabled onclick="window.location.href='@Url.Action("FilterStories", "Home", new { storyID = Model.Stories[i - 1].StoryID })'" />
+                                    <input type="button" class="btn" title="Cannot Contribute. Story editing is closed." value="Contribute" disabled onclick="window.location.href='@Url.Action("FilterStories", "Home", new { storyID = Model.Stories[i - 1].StoryID })'" />
                                 </td>
                                 }
                                 else if (Model.Stories[i - 1].EditorID==null || HttpContext.Current.Session["username"]==null || !HttpContext.Current.Session["username"].Equals(Model.Stories[i - 1].EditorID))
@@ -91,7 +91,7 @@
                                 else
                                 {
                                     <td style="text-align: right">
-                                        <input type="button" title="TestTitle" class="btn" value="Contribute" disabled onclick="window.location.href = '@Url.Action("FilterStories", "Home", new {storyID = Model.Stories[i - 1].StoryID})'" />
+                                        <input type="button" title="Cannot contribute. Editing for story creator is closed." class="btn" value="Contribute" disabled onclick="window.location.href = '@Url.Action("FilterStories", "Home", new {storyID = Model.Stories[i - 1].StoryID})'" />
                                     </td>
                                 }
                             </tr>
