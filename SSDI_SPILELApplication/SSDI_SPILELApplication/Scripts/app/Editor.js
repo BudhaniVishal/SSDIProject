@@ -37,6 +37,10 @@ var myController2 = module.controller("EditorController", function ($scope, $htt
                 headers: { "Content-Type": "application/json" }
             });
             post.then(function successCallback(response) {
+                $scope.mydata.Title = "";
+                $scope.mydata.Scenario = "";
+                $scope.mydata.From = "";
+                $scope.mydata.To = "";
                 $scope.MessageString = response.data;
             }), function errorCallback(response) {
                 $scope.MessageString = "An error occured, Please try again.";

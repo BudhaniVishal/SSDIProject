@@ -203,8 +203,92 @@ namespace DataBaseAccessLayer
 
 			}
 		}
+        public ConnStoryTable GetStoryByID(int id)
+        {
+            try
+            {
+                IMongoCollection<ConnStoryTable> collection =
+                    CreateDataConnection(new MongoClient()).GetCollection<ConnStoryTable>("StoryTable");
+                var results = collection.Find(new BsonDocument()).ToList();
+                for (int i = 0; i < results.Count; i++)
+                {
+                    if (results[i].StoryID == id)
+                    {
+                        return results[i];
+                    }
+                }
 
-		public List<ConnStoryTable> GetAllStories()
+                //if we're here, there were no stories with this id
+                return new ConnStoryTable();
+            }
+            catch (Exception ex)
+            {
+                return new ConnStoryTable();
+            }
+
+        }
+
+        public List<ContributorStoryModel> BrowseContributedStoriesForEditor(int storyID)
+        {
+            List<ContributorStoryModel> cntrStoryObj = new List<ContributorStoryModel>();
+            try
+            {
+                var tableCollection = CreateDataConnection(new MongoClient())
+                    .GetCollection<ContributorStoryModel>("ContributorStoryTable");
+                var condition = Builders<ContributorStoryModel>.Filter.Eq(p => p.StoryID, storyID);
+                var results = tableCollection.Find(condition).ToList().AsQueryable();
+                foreach (var story in results)
+                {
+                    cntrStoryObj.Add(story);
+                }
+                return cntrStoryObj;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public bool DeleteRestContributedStories(int storyID, string ContributorID)
+        {
+            List<ContributorStoryModel> cntrStoryObj = new List<ContributorStoryModel>();
+            try
+            {
+                bool result = false;
+                var tableCollection = CreateDataConnection(new MongoClient())
+                    .GetCollection<ContributorStoryModel>("ContributorStoryTable");
+                var condition = Builders<ContributorStoryModel>.Filter.Eq(p => p.StoryID, storyID);
+                var results = tableCollection.Find(condition).ToList().AsQueryable();
+                foreach (var story in results)
+                {
+                    if (story.ContributorID.Equals(ContributorID))
+                    {
+                        var StoryCollection = GetStoryByID(storyID);
+                        StoryCollection.Content += "\r\n" + story.Content;
+                        var collection = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("StoryTable");
+                        var filter = Builders<BsonDocument>.Filter.Eq("StoryID", story.StoryID);
+                        var update = Builders<BsonDocument>.Update.Set("Content", StoryCollection.Content);
+                        var Updateone = collection.UpdateOneAsync(filter, update);
+                    }
+
+                    var story_id = story.StoryID;
+                    var Deleteone = tableCollection.DeleteOne(
+                        Builders<ContributorStoryModel>.Filter.Eq("StoryID", story_id));
+                    if (Deleteone != null) { result = true; }
+
+
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
+
+
+        public List<ConnStoryTable> GetAllStories()
 		{
 			try
 			{

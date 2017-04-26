@@ -12,24 +12,17 @@
     <body>
         <div ng-app="BrowseCreatorStories" ng-controller="BrowseStoryController">
             <form id="BrowseStories" name="BrowseStories">
-                <table class="table">
-                    <tr>
-                        <td style="text-align:center">
-                            <h4>
-                                My Stories
-                            </h4>
-                        </td>
-                    </tr>
-                </table>
-
-
-
-                <table class="table">
+                <div class="form-group">
+                    <div style="text-align:center">
+                        <h2>My Stories</h2>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
 
                     <tr>
                         <th style="text-align:center">Serial No.</th>
-                        <th style="text-align:center">Title</th>
-                        <th style="text-align:center">Content</th>
+                        <th style="text-align:center">Story Title</th>
+                        <th style="text-align:center">Story Content</th>
                         <th style="text-align:center"></th>
                     </tr>
 
@@ -50,38 +43,12 @@
                                     @Html.DisplayFor(modelItem => Model.Stories[i].Content)
                                 </div>
                             </td>
-                            <td style="text-align:right">
-                                <input type="button" class="btn" value="Review Contributions" onclick="window.location.href='@Url.Action("ApproveContributedStories", "Home", new { storyID = Model.Stories[i].StoryID })'"/>
-                                <input type="button" class="btn" value="Review Suggestions" onclick="window.location.href='@Url.Action("BrowseSuggestions", "Home", new { storyID = Model.Stories[i].StoryID })'" />
-
+                            <td style="text-align: right">
+                                <input type="button" class="btn" style="width: 170px" value="Review Contributions" onclick="window.location.href = '@Url.Action("ApproveContributedStories", "Home", new {storyID = Model.Stories[i].StoryID})'" />
+                                <input type="button" class="btn" style="width: 170px; margin-top: 2px" value="Review Suggestions" onclick="window.location.href = '@Url.Action("BrowseSuggestions", "Home", new {storyID = Model.Stories[i].StoryID})'" />
                             </td>
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.Scenario)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Content)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.StoryID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Type)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Genre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.To)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.From)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MessageString)
-                                </td>*@
                         </tr>
                     }
-
                 </table>
             </form>
         </div>

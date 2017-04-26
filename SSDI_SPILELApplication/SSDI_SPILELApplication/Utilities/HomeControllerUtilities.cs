@@ -97,7 +97,7 @@ namespace SSDI_SPILELApplication.Utilities
 			return items;
 		}
 
-		public static List<StoryModel> FilterStories(List<StoryModel> storiesAvailable, string selectedGenre,
+        public static List<StoryModel> FilterStories(List<StoryModel> storiesAvailable, string selectedGenre,
 			string selectedType)
 		{
 			try
@@ -152,6 +152,7 @@ namespace SSDI_SPILELApplication.Utilities
 	        obj.Content = data.Content;
 	        obj.ContributorID = "";
 	        obj.Title = data.Title;
+	        obj.Scenario = data.Scenario;
 	        return obj;
 	    }
     }

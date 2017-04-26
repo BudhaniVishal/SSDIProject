@@ -271,9 +271,11 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\608924_e590.jpg" />
+    <Content Include="Images\a-book-a-week-image.jpg" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\ContributeStory.js" />
     <Content Include="Scripts\app\Editor.js" />
     <Content Include="Scripts\app\login.js" />
     <Content Include="Scripts\app\Registration.js" />
@@ -346,6 +348,7 @@
     <Content Include="Views\Home\ViewSuggestion.cshtml" />
     <Content Include="Views\Home\ApproveContributedStories.cshtml" />
     <Content Include="Views\Home\ContributeToStory.cshtml" />
+    <Content Include="Views\Home\StoryDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />

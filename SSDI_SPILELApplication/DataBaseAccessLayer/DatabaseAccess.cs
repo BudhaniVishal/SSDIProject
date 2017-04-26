@@ -217,7 +217,19 @@ namespace DataBaseAccessLayer
 				IMongoCollection<ConnStoryTable> collection =
 					CreateDataConnection(new MongoClient()).GetCollection<ConnStoryTable>("StoryTable");
 				var results = collection.Find(new BsonDocument()).ToList();
-				return (results != null) ? results : new List<ConnStoryTable>();
+                var i = 0;
+                foreach (var story in results)
+                {
+                    var tableCollection2 = CreateDataConnection(new MongoClient())
+                    .GetCollection<CreatorStoryModel>("CreatorStoryTable");
+                    var fields = Builders<CreatorStoryModel>.Projection.Include(p => p.EditorID);
+                    var condition2 = Builders<CreatorStoryModel>.Filter.Eq(p => p.StoryID, story.StoryID);
+                    var editorID = tableCollection2.Find(condition2).Project<CreatorStoryModel>(fields).ToList();
+                    if (editorID.Count==0 || editorID[0].EditorID==null) { i++; continue; }
+                    else { results[i].EditorID = editorID[0].EditorID; }
+                    i++;
+                }
+                return (results != null) ? results : new List<ConnStoryTable>();
 			}
 			catch (Exception ex)
 			{
@@ -355,24 +367,22 @@ namespace DataBaseAccessLayer
                 var results = tableCollection.Find(condition).ToList().AsQueryable();
                 foreach (var story in results)
                 {
-                    if (!story.ContributorID.Equals(ContributorID))
-                    {
-                        var story_id = story.StoryID;
-                        var Deleteone = tableCollection.DeleteOne(
-                            Builders<ContributorStoryModel>.Filter.Eq("StoryID", story_id));
-                        if (Deleteone != null) { result = true; }
-                    }
-                    else
+                    if (story.ContributorID.Equals(ContributorID))
                     {
                         var StoryCollection = GetStoryByID(storyID);
-                        StoryCollection.Content += story.Content;
+                        StoryCollection.Content += "\r\n" +story.Content;
                         var collection = CreateDataConnection(new MongoClient()).GetCollection<BsonDocument>("StoryTable");
                         var filter = Builders<BsonDocument>.Filter.Eq("StoryID", story.StoryID);
                         var update = Builders<BsonDocument>.Update.Set("Content", StoryCollection.Content);
                         var Updateone = collection.UpdateOneAsync(filter, update);
                     }
 
-                    
+                    var story_id = story.StoryID;
+                    var Deleteone = tableCollection.DeleteOne(
+                        Builders<ContributorStoryModel>.Filter.Eq("StoryID", story_id));
+                    if (Deleteone != null) { result = true; }
+
+
                 }
                 return result;
             }

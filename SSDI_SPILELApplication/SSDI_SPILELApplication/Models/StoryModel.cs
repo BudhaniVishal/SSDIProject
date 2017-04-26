@@ -15,6 +15,7 @@ namespace SSDI_SPILELApplication.Models
         public String Genre { get; set; }
         public DateTime To { get; set; }
         public DateTime From {get; set;}
+        public string EditorID { get; set; }
         public string ContributorID { get; set; }
         public string MessageString { get; set; }
     }
