@@ -78,7 +78,7 @@
                                 @if(!(Model.Stories[i - 1].To.AddDays(1).AddSeconds(-1) >= DateTime.Now))
                                 {
                                 <td style="text-align: right">
-                                    <input type="button" class="btn" value="Contribute" disabled onclick="window.location.href='@Url.Action("FilterStories", "Home", new { storyID = Model.Stories[i - 1].StoryID })'" />
+                                    <input type="button" class="btn" title="Cannot Contribute. Story editing is closed." value="Contribute" disabled onclick="window.location.href='@Url.Action("FilterStories", "Home", new { storyID = Model.Stories[i - 1].StoryID })'" />
                                 </td>
                                 }
                                 else if (Model.Stories[i - 1].EditorID==null || HttpContext.Current.Session["username"]==null || !HttpContext.Current.Session["username"].Equals(Model.Stories[i - 1].EditorID))
@@ -91,7 +91,7 @@
                                 else
                                 {
                                     <td style="text-align: right">
-                                        <input type="button" title="TestTitle" class="btn" value="Contribute" disabled onclick="window.location.href = '@Url.Action("FilterStories", "Home", new {storyID = Model.Stories[i - 1].StoryID})'" />
+                                        <input type="button" title="Cannot contribute. Editing for story creator is closed." class="btn" value="Contribute" disabled onclick="window.location.href = '@Url.Action("FilterStories", "Home", new {storyID = Model.Stories[i - 1].StoryID})'" />
                                     </td>
                                 }
                             </tr>
