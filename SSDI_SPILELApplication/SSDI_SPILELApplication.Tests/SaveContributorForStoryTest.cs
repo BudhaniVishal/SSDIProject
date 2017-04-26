@@ -20,9 +20,10 @@ namespace SSDI_SPILELApplication.Tests
         [Test]
         public void TestSaveContributionForStory()
         {
+            int randomID = GetRandomID();
             string content = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             ContributorStoryModel model = new ContributorStoryModel();
-            model.StoryID = 22;
+            model.StoryID = randomID;
             model.Content = content;
             model.ContributorID = "test@testmail.com";
             model.Title = "Testing Content For Save Contribution Story";
@@ -31,7 +32,7 @@ namespace SSDI_SPILELApplication.Tests
             Assert.IsTrue(result);
 
             var tableCollection = dataBase.GetCollection<ContributorStoryModel>("ContributorStoryTable");
-            var condition = Builders<ContributorStoryModel>.Filter.Eq(p => p.StoryID, 22);
+            var condition = Builders<ContributorStoryModel>.Filter.Eq(p => p.StoryID, randomID);
             var fields = Builders<ContributorStoryModel>.Projection.Include(p => p.Content).Include(p => p.StoryID);
             var results = tableCollection.Find(condition).Project<ContributorStoryModel>(fields).ToList().AsQueryable();
             if (results.Any())
@@ -40,15 +41,23 @@ namespace SSDI_SPILELApplication.Tests
             }
         }
 
+        private int GetRandomID()
+        {
+            Random random = new Random();
+            return random.Next(0, 1000000);
+        }
+
+        [Test]
         public void TestSaveContributionHomeController()
         {
+            int randomID = GetRandomID();
             string content = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             string[] array = { content };
 
-            Assert.IsTrue(MockHomeController.ContributeStorySave(array, 123456));
+            Assert.IsTrue(MockHomeController.ContributeStorySave(array, randomID));
 
             var tableCollection = dataBase.GetCollection<ContributorStoryModel>("ContributorStoryTable");
-            var condition = Builders<ContributorStoryModel>.Filter.Eq(p => p.StoryID, 123456);
+            var condition = Builders<ContributorStoryModel>.Filter.Eq(p => p.StoryID, randomID);
             var fields = Builders<ContributorStoryModel>.Projection.Include(p => p.Content).Include(p => p.StoryID);
             var results = tableCollection.Find(condition).Project<ContributorStoryModel>(fields).ToList().AsQueryable();
             if (results.Any())

@@ -27,7 +27,7 @@ namespace SSDI_SPILELApplication.Tests
             ResultCode result = new ResultCode();
             UserRegistrationModel obj = new UserRegistrationModel();
             obj.IsUserVerified = BsonBoolean.True;
-            obj.EmailAddress = "vishal@uncc.edu";
+            obj.EmailAddress = "vbudhani@uncc.edu";
             obj.Password = "14";
             obj.UserType = "WRITER";
             result = new MockDataBaseAccess().LoginUser(obj);
