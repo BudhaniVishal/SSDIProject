@@ -119,6 +119,16 @@ namespace SSDI_SPILELApplication.Tests.MockClasses
             return Json("Error !! Data is null.");
         }
 
+	    public static bool ContributeStorySave(string[] textAnswer, int id)
+	    {
+	        ContributeStoryModel obj = new ContributeStoryModel();
+	        obj.StoryID = id;
+	        obj.ContributorID = "a@amail.com";
+	        obj.ContributionText = textAnswer[0];
+	        //Save the data
+	        return new CreateStory().SaveContributionForStory(obj);
+
+	    }
 
 
 
