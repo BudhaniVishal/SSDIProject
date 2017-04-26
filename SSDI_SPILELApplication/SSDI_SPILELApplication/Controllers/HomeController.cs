@@ -58,7 +58,7 @@ namespace SSDI_SPILELApplication.Controllers
 
             model.GenreValues = HomeControllerUtilities.GetGenres();
             model.TypeValues = HomeControllerUtilities.GetTypes();
-            if (Session["username"] != null && Session["StoryID"] != null && Session["StoryIDViewBag"] != null) // Logic is given for contribute user story when a site visitor is surfing the website!!
+            if (Session != null && (Session["username"] != null && Session["StoryID"] != null && Session["StoryIDViewBag"] != null)) // Logic is given for contribute user story when a site visitor is surfing the website!!
             {
                 ContributeStoryModel storyDetails = HomeControllerUtilities.GetContributeStoryData(Convert.ToInt32(Session["StoryID"]));
                 Session["StoryIDViewBag"] = null;
