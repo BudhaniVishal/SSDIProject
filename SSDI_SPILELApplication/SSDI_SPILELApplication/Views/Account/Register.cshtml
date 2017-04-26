@@ -24,17 +24,17 @@
 
                     <div class="form-group" ng-class="{ 'has-error' : formRegister.FirstName.$invalid && !formRegister.FirstName.$pristine }">
 
-                        <label class="col-md-2 control-label">First Name</label>
+                        <label class="col-md-2 control-label" style="min-width: 180px">First Name</label>
                         <div class="col-md-10">
-                            <input type="text" name="FirstName" pattern="[a-zA-Z]+" ng-pattern-restrict  ng-model="mydata.FirstName" id="FirstName" ng-minlength="6" ng-maxlength="21" class="form-control input-sm" placeholder="First Name" required />
+                            <input type="text" style="margin-left: 180px; margin-top: -25px" name="FirstName" pattern="[a-zA-Z]+" ng-pattern-restrict  ng-model="mydata.FirstName" id="FirstName" ng-minlength="6" ng-maxlength="21" class="form-control input-sm" placeholder="First Name" required />
                         </div>
                         <p ng-cloak ng-show="formRegister.FirstName.$invalid && !formRegister.FirstName.$pristine" class="help-block">First Name should only contain characters & should be greater than 5 and less than 20 characters.</p>
                     </div>
 
                     <div class="form-group" required ng-class="{ 'has-error' : formRegister.LastName.$invalid && !formRegister.LastName.$pristine }">
-                        <label class="col-md-2 control-label">Last Name</label>
+                        <label class="col-md-2 control-label" style="min-width: 180px">Last Name</label>
                         <div class="col-md-10">
-                            <input type="text" name="LastName" pattern="[a-zA-Z]+" ng-pattern-restrict  id="LastName" ng-minlength="6" ng-maxlength="21" ng-model="mydata.LastName" class="form-control input-sm" placeholder="Last Name" required />
+                            <input type="text" style="margin-left: 180px; margin-top: -25px" name="LastName" pattern="[a-zA-Z]+" ng-pattern-restrict  id="LastName" ng-minlength="6" ng-maxlength="21" ng-model="mydata.LastName" class="form-control input-sm" placeholder="Last Name" required />
                         </div>
                         <p ng-cloak ng-show="formRegister.LastName.$invalid && !formRegister.LastName.$pristine" class="help-block">Last Name should only contain characters & should be greater than 5 and less than 20 characters.</p>
                     </div>
@@ -42,18 +42,18 @@
 
                     <div class="form-group" required ng-class="{ 'has-error' : formRegister.EmailAddress.$invalid && !formRegister.EmailAddress.$pristine }">
 
-                        <label class="col-md-2 control-label">EmailAddress</label>
+                        <label class="col-md-2 control-label" style="min-width: 180px">Email Address</label>
                         <div class="col-md-10">
-                            <input type="email" name="EmailAddress" id="EmailAddress" ng-minlength="7" ng-maxlength="21" ng-model="mydata.EmailAddress" class="form-control input-sm" placeholder="Email address" required />
+                            <input type="email" style="margin-left: 180px; margin-top: -25px" name="EmailAddress" id="EmailAddress" ng-minlength="7" ng-maxlength="21" ng-model="mydata.EmailAddress" class="form-control input-sm" placeholder="Email address" required />
                         </div>
                         <p ng-cloak ng-show="formRegister.EmailAddress.$invalid && !formRegister.EmailAddress.$pristine" class="help-block">Email address should be greater than 6 and less than 20 characters
                          and in correct email format.</p>
                     </div>
 
                     <div class="form-group" required ng-class="{ 'has-error' : formRegister.Password.$invalid && !formRegister.Password.$pristine }">
-                        <label class="col-md-2 control-label">Password</label>
+                        <label class="col-md-2 control-label" style="min-width: 180px">Password</label>
                         <div class="col-md-10">
-                            <input type="password" name="Password" id="Password" ng-minlength="6" ng-maxlength="21" password-verify="{{mydata.ConfirmPassword}}"
+                            <input type="password" style="margin-left: 180px; margin-top: -25px" name="Password" id="Password" ng-minlength="6" ng-maxlength="21" password-verify="{{mydata.ConfirmPassword}}"
                                    ng-model="mydata.Password" class="form-control input-sm" placeholder="Passsword" required />
                         </div>
                         <p ng-cloak ng-show="formRegister.Password.$invalid && !formRegister.Password.$pristine" class="help-block">Password should be greater than 5 and less than 20 characters.</p>
@@ -61,9 +61,9 @@
 
                     <div class="form-group" required ng-class="{ 'has-error' : formRegister.ConfirmPassword.$invalid && !formRegister.ConfirmPassword.$pristine }">
 
-                        <label class="col-md-2 control-label">Confirm Password</label>
+                        <label class="col-md-2 control-label" style="min-width: 180px">Confirm Password</label>
                         <div class="col-md-10">
-                            <input type="password" compare-to="mydata.Password" password-verify="{{mydata.Password}}"
+                            <input type="password" style="margin-left: 180px; margin-top: -25px" compare-to="mydata.Password" password-verify="{{mydata.Password}}"
                                    name="ConfirmPassword" id="ConfirmPassword" ng-minlength="6" ng-maxlength="21" ng-model="mydata.ConfirmPassword" class="form-control input-sm" placeholder="Confirm Password" required />
                         </div>
                         <p ng-cloak ng-show="formRegister.ConfirmPassword.$invalid && !formRegister.ConfirmPassword.$pristine" class="help-block">Confirm Password should be greater than 5 and less than 20 characters.</p>
@@ -87,7 +87,7 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" class="btn btn-default" value="Register"
+                            <input type="submit" class="btn btn-default" style="margin-left: 78px" value="Register"
                                    ng-disabled="formRegister.$invalid" />
                         </div>
                     </div>
