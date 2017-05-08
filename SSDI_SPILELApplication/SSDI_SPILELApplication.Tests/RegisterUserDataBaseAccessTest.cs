@@ -24,7 +24,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.UserType = "WRITER";
             obj.IsUserVerified = obj.UserType.Equals("WRITER");
             obj.EmailAddress = "vbudhani@uncc.edu"; // email id exists
-            result = new MockDataBaseAccess().RegisterUser(obj);
+            result = new DatabaseAccess().RegisterUser(obj);
             Assert.IsFalse(result.Result); // value exists
 
         }
@@ -40,7 +40,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.UserType = "WRITER";
             obj.IsUserVerified = obj.UserType.Equals("WRITER");
             obj.EmailAddress = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ","") +"test@uncc.edu"; // new email id
-            result = new MockDataBaseAccess().RegisterUser(obj);
+            result = new DatabaseAccess().RegisterUser(obj);
             Assert.IsTrue(result.Result); // value added
 
         }
@@ -66,7 +66,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.IsUserVerified = obj.UserType.Equals("WRITER");
             Thread.Sleep(1000); // Given for synchronization
             obj.EmailAddress = DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(" ", "") + "test@uncc.edu"; // new email id          
-            result = new MockDataBaseAccess().RegisterUser(obj);
+            result = new DatabaseAccess().RegisterUser(obj);
             Assert.IsTrue(result.Result); // value added
 
             int countNew = collection.Find(condition).ToList().Count; // new count
@@ -92,7 +92,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.UserType = "WRITER";
             obj.IsUserVerified = obj.UserType.Equals("WRITER");
             obj.EmailAddress = "vbudhani@uncc.edu"; // email id exists
-            result = new MockDataBaseAccess().RegisterUser(obj);
+            result = new DatabaseAccess().RegisterUser(obj);
             Assert.IsFalse(result.Result); // value exists
 
             int countNew = collection.Find(condition).ToList().Count; // new count

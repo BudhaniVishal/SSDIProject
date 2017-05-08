@@ -17,7 +17,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.EmailAddress = "mdeshpa3@gmail.com";
             obj.Password = "123456";
             obj.UserType = "WRITER";
-            result = new MockDataBaseAccess().LoginUser(obj);
+            result = new DatabaseAccess().LoginUser(obj);
             Assert.AreEqual(result.Message, "Writer Login Successful !!");
         }
 
@@ -30,7 +30,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.EmailAddress = "vbudhani@uncc.edu";
             obj.Password = "14";
             obj.UserType = "WRITER";
-            result = new MockDataBaseAccess().LoginUser(obj);
+            result = new DatabaseAccess().LoginUser(obj);
             Assert.AreEqual(result.Message, "Incorrect Password !!");
         }
 
@@ -43,34 +43,8 @@ namespace SSDI_SPILELApplication.Tests
             obj.EmailAddress = "aa@uncc.edu";
             obj.Password = "1234";
             obj.UserType = "WRITER";
-            result = new MockDataBaseAccess().LoginUser(obj);
+            result = new DatabaseAccess().LoginUser(obj);
             Assert.AreEqual(result.Message, "Invalid Email Address");
         }
-
-        //[Test]
-        //public void TestLoginEditorwithValidDetailsAndApproved()
-        //{
-        //    ResultCode result = new ResultCode();
-        //    UserRegistrationModel obj = new UserRegistrationModel();
-        //    obj.IsUserVerified = BsonBoolean.True;
-        //    obj.EmailAddress = "editor@uncc.edu";
-        //    obj.Password = "123456";
-        //    obj.UserType = "EDITOR";
-        //    result = new MockDataBaseAccess().LoginUser(obj);
-        //    Assert.AreEqual(result.Message, "Editor Login Successful !!");
-        //}
-
-        //[Test]
-        //public void TestLoginEditorwithValidDetailsAndNotApproved()
-        //{
-        //    ResultCode result = new ResultCode();
-        //    UserRegistrationModel obj = new UserRegistrationModel();
-        //    obj.IsUserVerified = BsonBoolean.False;
-        //    obj.EmailAddress = "edit@uncc.edu";
-        //    obj.Password = "123456";
-        //    obj.UserType = "EDITOR";
-        //    result = new MockDataBaseAccess().LoginUser(obj);
-        //    Assert.AreEqual(result.Message, "Editor not verified yet !!");
-        //}
     }
 }

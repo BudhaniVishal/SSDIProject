@@ -18,7 +18,7 @@ namespace SSDI_SPILELApplication.Tests
 			ResultCode result = new ResultCode();
 			VerifyEmailDLLModel obj = new VerifyEmailDLLModel();
 			obj.Email = "vbudhani@uncc.edu";
-			result = new MockDataBaseAccess().VerifyEmail(obj);
+			result = new DatabaseAccess().VerifyEmail(obj);
 			Assert.AreEqual(result.Message, "Registered User !!");
 		}
 
@@ -28,7 +28,7 @@ namespace SSDI_SPILELApplication.Tests
 			ResultCode result = new ResultCode();
 			VerifyEmailDLLModel obj = new VerifyEmailDLLModel();
 			obj.Email = "vishal123@uncc.edu";
-			result = new MockDataBaseAccess().VerifyEmail(obj);
+			result = new DatabaseAccess().VerifyEmail(obj);
 			Assert.AreEqual(result.Message, "User does not exists !!");
 		}
 		[Test]
@@ -37,7 +37,7 @@ namespace SSDI_SPILELApplication.Tests
 			ResultCode result = new ResultCode();
 			VerifyEmailDLLModel obj = new VerifyEmailDLLModel();
 			obj.Email =String.Empty;
-			result = new MockDataBaseAccess().VerifyEmail(obj);
+			result = new DatabaseAccess().VerifyEmail(obj);
 			Assert.AreEqual(result.Message, "User does not exists !!");
 		}
 

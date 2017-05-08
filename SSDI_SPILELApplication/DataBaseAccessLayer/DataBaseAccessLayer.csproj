@@ -96,7 +96,6 @@
     <Compile Include="ConnectionClass\VerifyEmailDLLModel.cs" />
     <Compile Include="DatabaseAccess.cs" />
     <Compile Include="Interfaces\IDatabaseAccess.cs" />
-    <Compile Include="MockDataBaseAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

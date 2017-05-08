@@ -9,8 +9,8 @@ namespace SSDI_SPILELApplication.LogicLayer
 		public ResultCode VerifyEmail(VerifyEmailModel model)
 		{
 
-			MockDataBaseAccess objDatabaseAccess = new MockDataBaseAccess();
-			DataBaseAccessLayer.ConnectionClass.VerifyEmailDLLModel obj = new DataBaseAccessLayer.ConnectionClass.VerifyEmailDLLModel();
+		    DatabaseAccess objDatabaseAccess = new DatabaseAccess();
+			VerifyEmailDLLModel obj = new VerifyEmailDLLModel();
 			obj.Email = model.Email;
 
 			return objDatabaseAccess.VerifyEmail(obj);

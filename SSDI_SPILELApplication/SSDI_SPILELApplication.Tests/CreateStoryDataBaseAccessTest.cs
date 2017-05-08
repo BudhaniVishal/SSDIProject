@@ -29,7 +29,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.Type = "Test";
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
-            result = new MockDataBaseAccess().CreateStory(obj, username);
+            result = new DatabaseAccess().CreateStory(obj, username);
             Assert.IsTrue(result.Result); // value saved
         }
 
@@ -45,7 +45,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.Type = "Test";
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
-            result = new MockDataBaseAccess().CreateStory(obj, username);
+            result = new DatabaseAccess().CreateStory(obj, username);
             Assert.IsFalse(result.Result); // value not saved
         }
 
@@ -67,7 +67,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.Type = "Test";
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
-            result = new MockDataBaseAccess().CreateStory(obj,username);
+            result = new DatabaseAccess().CreateStory(obj,username);
             Assert.IsTrue(result.Result); // value saved
 
             int countNew = collection.Find(condition).ToList().Count; // new count
@@ -92,7 +92,7 @@ namespace SSDI_SPILELApplication.Tests
             obj.Type = "Test";
             obj.To = "01/01/2017";
             obj.From = "01/02/2017";
-            result = new MockDataBaseAccess().CreateStory(obj, username);
+            result = new DatabaseAccess().CreateStory(obj, username);
             Assert.IsFalse(result.Result); // value not saved
 
             int countNew = collection.Find(condition).ToList().Count; // new count

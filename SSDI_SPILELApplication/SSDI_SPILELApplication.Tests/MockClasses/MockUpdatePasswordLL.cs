@@ -14,8 +14,8 @@ namespace SSDI_SPILELApplication.LogicLayer
 		public ResultCode UpdatePassword(UpdatepasswordModel model, string email)
 		{
 
-			MockDataBaseAccess objDatabaseAccess = new MockDataBaseAccess();
-			DataBaseAccessLayer.ConnectionClass.UpdatePasswordModelDLL obj = new DataBaseAccessLayer.ConnectionClass.UpdatePasswordModelDLL();
+		    DatabaseAccess objDatabaseAccess = new DatabaseAccess();
+			UpdatePasswordModelDLL obj = new UpdatePasswordModelDLL();
 			obj.Password = model.Password;
 			obj.ConfirmPassword = model.ConfirmPassword;
 			string emailLL = email;
